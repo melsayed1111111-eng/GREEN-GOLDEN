@@ -14,11 +14,17 @@
 
     <style>
         :root {
+            /* ألوان GREEN GOLDEN */
             --primary: #2e7d32;
+            /* أخضر زراعي قوي */
             --secondary: #b7950b;
+            /* لون ذهبي داكن */
             --accent: #f1c40f;
+            /* أصفر ذهبي فاتح */
             --light: #f1f8e9;
+            /* خلفية فاتحة جداً مائلة للأخضر */
             --dark: #1b5e20;
+            /* أخضر غامق جداً للنصوص */
             --danger: #c62828;
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
@@ -31,6 +37,7 @@
         }
 
         body {
+            /* خلفية بنمط زراعي خفيف */
             background-image: url("https://images.pexels.com/photos/5231086/pexels-photo-5231086.jpeg");
             background-size: cover;
             background-repeat: no-repeat;
@@ -43,6 +50,7 @@
             flex-direction: column;
         }
 
+        /* تأثير الشعار في الخلفية */
         body::before {
             content: "";
             position: fixed;
@@ -50,6 +58,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            /* يمكنك وضع رابط شعار شركتك هنا */
             background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20220910/pngtree-vegetable-display-at-market-prices-shop-agriculture-photo-image_3089795.jpg');
             background-repeat: no-repeat;
             background-position: center center;
@@ -175,6 +184,7 @@
             color: #555;
         }
 
+        /* --- تصميم العناوين --- */
         .section-title {
             text-align: center;
             margin: 50px auto 30px;
@@ -190,37 +200,19 @@
             border: 2px solid var(--secondary);
         }
 
-        /* --- (تعديل 2) الفلاتر والقوائم: سكرول أفقي وعدد غير محدود --- */
+        /* --- الفلاتر والقوائم --- */
         .filters {
             text-align: center;
             margin-bottom: 30px;
             display: flex;
             justify-content: center;
             gap: 10px;
-            flex-wrap: nowrap;
-            /* منع النزول لسطر جديد */
-            overflow-x: auto;
-            /* السماح بالسكرول */
-            padding-bottom: 10px;
-            scrollbar-width: thin;
-            /* للفايرفوكس */
-        }
-
-        /* سكرول بار لكروم */
-        .filters::-webkit-scrollbar {
-            height: 6px;
-        }
-
-        .filters::-webkit-scrollbar-thumb {
-            background: var(--secondary);
-            border-radius: 10px;
+            flex-wrap: wrap;
         }
 
         .filter-group {
             position: relative;
             display: inline-block;
-            flex-shrink: 0;
-            /* منع انكماش الأزرار */
         }
 
         .filter-btn {
@@ -236,7 +228,6 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            white-space: nowrap;
         }
 
         .filter-btn.active,
@@ -247,6 +238,57 @@
             box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
         }
 
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+            border: 1px solid var(--secondary);
+        }
+
+        .filter-group:hover .dropdown-menu {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .dropdown-item {
+            color: var(--dark);
+            padding: 12px 15px;
+            text-decoration: none;
+            display: block;
+            text-align: right;
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 1px solid #f5f5f5;
+            transition: 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light);
+            color: var(--primary);
+            padding-right: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- البطاقات والمنتجات --- */
         .offers-grid,
         .products-grid {
             display: grid;
@@ -256,7 +298,6 @@
             margin-bottom: 50px;
         }
 
-        /* --- (تعديل 3) كارد المنتج والصورة والوصف --- */
         .card {
             background: white;
             border-radius: 15px;
@@ -267,7 +308,6 @@
             position: relative;
             display: flex;
             flex-direction: column;
-            height: 100%;
         }
 
         .card:hover {
@@ -275,12 +315,10 @@
             border-color: var(--secondary);
         }
 
-        /* الصورة تظهر بالكامل */
         .card-img {
-            width: 100%;
             height: 220px;
-            object-fit: contain;
-            background: #fff;
+            width: 100%;
+            object-fit: cover;
         }
 
         .card-body {
@@ -304,7 +342,6 @@
             font-weight: bold;
         }
 
-        /* الوصف المختصر الظاهر */
         .card-desc {
             font-size: 1rem;
             color: #666;
@@ -331,45 +368,6 @@
             font-size: 0.9rem;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            z-index: 2;
-        }
-
-        /* (تعديل 4) طبقة الوصف الشفافة */
-        .desc-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.96);
-            /* شفافية عالية */
-            color: #333;
-            padding: 20px;
-            transform: translateY(100%);
-            transition: 0.4s ease-in-out;
-            overflow-y: auto;
-            z-index: 5;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .card:hover .desc-overlay {
-            transform: translateY(0);
-        }
-
-        .desc-overlay h4 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            border-bottom: 2px solid var(--secondary);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-
-        .desc-overlay p {
-            font-size: 1.1rem;
-            line-height: 1.8;
         }
 
         .card-actions {
@@ -425,6 +423,7 @@
             color: white;
         }
 
+        /* --- النوافذ المنبثقة --- */
         .modal {
             display: none;
             position: fixed;
@@ -563,6 +562,7 @@
             border: 1px solid var(--secondary);
         }
 
+        /* --- الفوتر --- */
         footer {
             background: #1a1a1a;
             color: #eee;
@@ -610,6 +610,7 @@
     <!-- Navbar -->
     <header>
         <div class="logo-container">
+            <!-- يمكنك تغيير رابط الأيقونة هنا -->
             <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" alt="شعار" class="logo-img">
             <div class="logo-text">GREEN GOLDEN</div>
         </div>
@@ -626,6 +627,7 @@
 
     <!-- Slider -->
     <div class="hero-slider" id="slider">
+        <!-- صور زراعية جديدة -->
         <div class="slide active"
             style="background-image: url('https://mashhourseeds.com/wp-content/uploads/2023/11/%D8%B7%D9%84%D8%A7%D8%A1-%D8%A8%D8%B0%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D9%88%D9%8A-1140x570-1.jpg');">
             <div class="slide-content">
@@ -656,8 +658,6 @@
         <div class="admin-header">
             <h2><i class="fas fa-tachometer-alt"></i> لوحة تحكم - GREEN GOLDEN</h2>
             <div>
-                <button class="btn" onclick="openModal('catManagerModal')"
-                    style="width:auto; background:#007bff; margin-left:5px;">إدارة الفئات</button>
                 <button class="btn btn-danger" onclick="logoutAdmin()" style="width:auto">خروج</button>
                 <button class="btn" onclick="exportToExcel()" style="width:auto; background:green"><i
                         class="fas fa-file-excel"></i> تصدير المبيعات</button>
@@ -683,9 +683,17 @@
                 <div class="form-group"><label>رابط الصورة</label><input type="text" id="pImg" placeholder="https://..."
                         required></div>
                 <div class="form-group">
-                    <label>الفئة (اكتب اسم الفئة)</label>
-                    <input type="text" id="pCat" placeholder="مثال: بذور، مبيدات، تمور..." required>
+                    <label>الفئة الرئيسية</label>
+                    <div style="display:flex; gap:5px;">
+                        <select id="pCat" required style="flex:1"></select>
+                        <button type="button" onclick="addNewCategory()" class="btn-outline" style="width:auto;"
+                            title="إضافة فئة جديدة">+</button>
+                        <button type="button" onclick="removeCategory()" class="btn-danger" style="width:auto;"
+                            title="حذف فئة">-</button>
+                    </div>
                 </div>
+                <div class="form-group"><label>فئة فرعية (للقائمة المنسدلة)</label><input type="text" id="pSubCat"
+                        placeholder="مثال: بذور خضروات، أسمدة سائلة..."></div>
                 <div class="form-group">
                     <label>نوع العرض</label>
                     <select id="pOffer">
@@ -724,10 +732,7 @@
     <div class="offers-grid" id="offersContainer"></div>
 
     <h2 class="section-title">جميع المنتجات</h2>
-    <!-- شريط الفئات الديناميكي -->
-    <div class="filters" id="categoryFilters">
-        <!-- سيتم الملء تلقائياً -->
-    </div>
+    <div class="filters" id="categoryFilters"></div>
     <div class="products-grid" id="productsContainer"></div>
 
     <!-- Footer -->
@@ -735,13 +740,18 @@
         <div class="footer-content">
             <div class="footer-title">GREEN GOLDEN - للإنتاج الزراعي</div>
             <div class="footer-info">
-                <i class="fas fa-map-marker-alt"></i> العنوان: القاهرة
+                <i class="fas fa-map-marker-alt"></i>
+                العنوان: القاهرة
             </div>
             <div class="footer-info">
-                <i class="fas fa-phone"></i> المبيعات: 01150009852 <br>
-                <i class="fas fa-mobile-alt"></i> الإدارة: 01000602170
+                <i class="fas fa-phone"></i>
+                المبيعات: 01150009852 <br>
+                <i class="fas fa-mobile-alt"></i>
+                الإدارة: 01150009852
             </div>
-            <div class="footer-copyright">جميع الحقوق محفوظة &copy; 2025 GREEN GOLDEN</div>
+            <div class="footer-copyright">
+                جميع الحقوق محفوظة &copy; 2025 GREEN GOLDEN
+            </div>
         </div>
     </footer>
 
@@ -778,30 +788,13 @@
         </div>
     </div>
 
-    <!-- (تعديل 1) نافذة إدارة الفئات -->
-    <div id="catManagerModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('catManagerModal')">&times;</span>
-            <h2 style="color:var(--primary);">إدارة الفئات</h2>
-            <p style="color:#666; margin-bottom:15px">لتغيير اسم فئة، اكتب الاسم القديم والجديد. سيتم تحديث جميع
-                المنتجات المرتبطة.</p>
-            <div class="form-group">
-                <label>اسم الفئة الحالية (التي تريد تغييرها أو حذفها)</label>
-                <input type="text" id="oldCatName" placeholder="مثلاً: بزور">
-            </div>
-            <div class="form-group">
-                <label>الاسم الجديد (اتركه فارغاً للحذف)</label>
-                <input type="text" id="newCatName" placeholder="مثلاً: بذور">
-            </div>
-            <div style="display:flex; gap:10px">
-                <button class="btn" onclick="updateCategoryName()">تحديث الاسم</button>
-                <button class="btn btn-danger" onclick="deleteCategoryRef()">حذف الفئة ومنتجاتها</button>
-            </div>
-        </div>
-    </div>
-
     <!-- JavaScript -->
     <script>
+        // ---------------------------------------------------------
+        // --- 1. إعدادات فيرباس (ضع الكود الخاص بك هنا) ---
+        // ---------------------------------------------------------
+
+        // >>>> انسخ الـ firebaseConfig من موقع فيرباس وضعه بدلاً من هذا الجزء <<<<
         const firebaseConfig = {
             apiKey: "AIzaSyBMuFJ5U_rYLrB5M3Y-_n_QFF4rJ3zSNLU",
             authDomain: "green-golden-dad1c.firebaseapp.com",
@@ -813,10 +806,21 @@
             measurementId: "G-TJNV6E7LQG"
         };
 
-        if (!firebase.apps.length) { try { firebase.initializeApp(firebaseConfig); } catch (e) { console.error("Config Error", e); } }
+        // تهيئة التطبيق
+        if (!firebase.apps.length) {
+            try {
+                firebase.initializeApp(firebaseConfig);
+            } catch (e) {
+                console.error("تأكد من وضع إعدادات فيرباس الصحيحة في الكود", e);
+            }
+        }
         const db = firebase.database();
 
+        // ---------------------------------------------------------
+        // --- 2. المتغيرات الأساسية ---
+        // ---------------------------------------------------------
         let products = [];
+        let categories = [];
         let cart = [];
         let orders = [];
         let settings = { adminPhone: "201000000000", lastInvoice: 1000 };
@@ -825,13 +829,22 @@
 
         const governorates = ["القاهرة", "الجيزة", "الإسكندرية", "الدقهلية", "الشرقية", "المنوفية", "القليوبية", "البحيرة", "الخربية", "كفر الشيخ", "دمياط", "بورسعيد", "الإسماعيلية", "السويس", "مطروح", "شمال سيناء", "جنوب سيناء", "بني سويف", "الفيوم", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "أسوان", "البحر الأحمر", "الوادي الجديد"];
 
+        // ---------------------------------------------------------
+        // --- 3. تشغيل التطبيق وجلب البيانات ---
+        // ---------------------------------------------------------
         document.addEventListener("DOMContentLoaded", () => {
             initSlider();
             populateGovernorates();
 
-            if (firebaseConfig.apiKey === "DUMMY_API_KEY_PASTE_YOURS_HERE") { alert("Check Config"); return; }
+            // التحقق من وجود إعدادات فيرباس
+            if (firebaseConfig.apiKey === "DUMMY_API_KEY_PASTE_YOURS_HERE") {
+                alert("تنبيه هام: يرجى وضع كود firebaseConfig الخاص بمشروعك في الكود لكي يعمل الموقع.");
+                return;
+            }
+
             document.getElementById('loader').style.display = 'block';
 
+            // جلب المنتجات
             db.ref('products').on('value', (snapshot) => {
                 const data = snapshot.val();
                 products = data ? Object.values(data) : [];
@@ -841,17 +854,33 @@
                 document.getElementById('loader').style.display = 'none';
             });
 
+            // جلب الفئات
+            db.ref('categories').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (Array.isArray(data)) categories = data;
+                else if (data) categories = Object.values(data);
+                else categories = ["بذور", "أسمدة", "مبيدات", "معدات"]; // فئات افتراضية للزراعة
+                populateCategories();
+            });
+
+            // جلب الإعدادات
             db.ref('settings').on('value', (snapshot) => {
                 const data = snapshot.val();
-                if (data) settings = data; else db.ref('settings').set(settings);
+                if (data) settings = data;
+                else db.ref('settings').set(settings);
                 document.getElementById('adminPhone').value = settings.adminPhone;
             });
+
+            // جلب الطلبات (للأدمن)
             db.ref('orders').on('value', (snapshot) => {
                 const data = snapshot.val();
                 orders = data ? Object.values(data) : [];
             });
         });
 
+        // ---------------------------------------------------------
+        // --- 4. دوال الواجهة والعرض ---
+        // ---------------------------------------------------------
         function openModal(id) { document.getElementById(id).style.display = 'flex'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         window.onclick = function (event) { if (event.target.classList.contains('modal')) event.target.style.display = 'none'; }
@@ -865,25 +894,47 @@
             });
         }
 
-        // (تعديل 2: تحسين عرض الفئات)
         function populateCategories() {
             const filterContainer = document.getElementById('categoryFilters');
-            // زر الكل
-            let html = `<div class="filter-group"><button class="filter-btn ${currentFilter.cat === 'all' ? 'active' : ''}" onclick="filterProducts('all')">عرض الكل</button></div>`;
-
-            // استخراج الفئات الفريدة من المنتجات الموجودة فعلياً
-            const uniqueCats = [...new Set(products.map(p => p.cat))].filter(c => c); // filter(c => c) لإزالة القيم الفارغة
-
-            uniqueCats.forEach(cat => {
-                html += `
+            filterContainer.innerHTML = `
                 <div class="filter-group">
-                    <button class="filter-btn ${currentFilter.cat === cat ? 'active' : ''}" onclick="filterProducts('${cat}')">
-                        ${cat}
-                    </button>
-                </div>`;
-            });
+                    <button class="filter-btn ${currentFilter.cat === 'all' ? 'active' : ''}" onclick="filterProducts('all')">عرض الكل</button>
+                </div>
+            `;
 
-            filterContainer.innerHTML = html;
+            const select = document.getElementById('pCat');
+            select.innerHTML = '';
+            if (categories.length === 0) {
+                let option = document.createElement('option'); option.text = "لا توجد فئات"; select.appendChild(option);
+            }
+
+            categories.forEach(cat => {
+                let option = document.createElement('option'); option.value = cat; option.textContent = cat; select.appendChild(option);
+
+                const subCats = [...new Set(products.filter(p => p.cat === cat && p.sub && p.sub.trim() !== '').map(p => p.sub))];
+
+                let dropdownHtml = '';
+                let hasDropdown = subCats.length > 0;
+                let arrowIcon = hasDropdown ? '<i class="fas fa-chevron-down" style="font-size:0.8rem; margin-right:5px;"></i>' : '';
+
+                if (hasDropdown) {
+                    dropdownHtml = `<div class="dropdown-menu">`;
+                    subCats.forEach(sub => {
+                        dropdownHtml += `<div class="dropdown-item" onclick="filterProducts('${cat}', '${sub}')">${sub}</div>`;
+                    });
+                    dropdownHtml += `</div>`;
+                }
+
+                filterContainer.innerHTML += `
+                    <div class="filter-group">
+                        <button class="filter-btn ${currentFilter.cat === cat ? 'active' : ''}" onclick="filterProducts('${cat}')">
+                            ${cat} ${arrowIcon}
+                        </button>
+                        ${dropdownHtml}
+                    </div>
+                `;
+            });
+            if (categories.length > 0 && select.value === '') select.value = categories[0];
         }
 
         function initSlider() {
@@ -902,7 +953,6 @@
             renderProducts(cat, sub);
         }
 
-        // (تعديل 3 و 4: تحسين الكارد والوصف)
         function renderProducts(cat, sub) {
             const offersContainer = document.getElementById('offersContainer');
             const productsContainer = document.getElementById('productsContainer');
@@ -913,9 +963,9 @@
                 const cardHTML = `
                     <div class="card">
                         ${p.offer ? '<span class="offer-tag">عرض ذهبي</span>' : ''}
-                        <img src="${p.img}" class="card-img" alt="${p.name}" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+                        <img src="${p.img}" class="card-img" alt="${p.name}">
                         <div class="card-body">
-                            <div class="card-cat">${p.cat}</div>
+                            <div class="card-cat">${p.cat} ${p.sub ? ' > ' + p.sub : ''}</div>
                             <h3 class="card-title">${p.name}</h3>
                             <p class="card-desc">${p.desc}</p>
                             <div class="card-price">${p.price} جنيه</div>
@@ -924,11 +974,6 @@
                                 <button class="btn" onclick="addToCart(${p.id})">إضافة للسلة <i class="fas fa-cart-plus"></i></button>
                             </div>
                         </div>
-                        <!-- طبقة الوصف الشفافة -->
-                        <div class="desc-overlay">
-                            <h4>${p.name}</h4>
-                            <p>${p.desc || 'لا يوجد وصف تفصيلي.'}</p>
-                        </div>
                     </div>
                 `;
 
@@ -936,57 +981,16 @@
 
                 let shouldShow = false;
                 if (cat === 'all') shouldShow = true;
+                else if (sub) shouldShow = (p.cat === cat && p.sub === sub);
                 else shouldShow = (p.cat === cat);
 
                 if (shouldShow) productsContainer.innerHTML += cardHTML;
             });
         }
 
-        // (تعديل 1: منطق إدارة الفئات)
-        function updateCategoryName() {
-            const oldName = document.getElementById('oldCatName').value.trim();
-            const newName = document.getElementById('newCatName').value.trim();
-
-            if (!oldName || !newName) { alert("يرجى كتابة الاسم القديم والجديد"); return; }
-
-            // البحث عن كل المنتجات التي تحمل الاسم القديم وتحديثها
-            const updates = {};
-            let count = 0;
-
-            products.forEach(p => {
-                if (p.cat === oldName) {
-                    updates['/products/' + p.id + '/cat'] = newName;
-                    count++;
-                }
-            });
-
-            if (count > 0) {
-                db.ref().update(updates).then(() => {
-                    alert(`تم تحديث الفئة في ${count} منتجات بنجاح!`);
-                    closeModal('catManagerModal');
-                });
-            } else {
-                alert("لم يتم العثور على منتجات بهذه الفئة");
-            }
-        }
-
-        function deleteCategoryRef() {
-            const catToDelete = document.getElementById('oldCatName').value.trim();
-            if (!catToDelete) { alert("اكتب اسم الفئة للحذف"); return; }
-
-            if (confirm(`هل أنت متأكد؟ سيتم حذف جميع المنتجات في فئة "${catToDelete}"!`)) {
-                let count = 0;
-                products.forEach(p => {
-                    if (p.cat === catToDelete) {
-                        db.ref('products/' + p.id).remove();
-                        count++;
-                    }
-                });
-                alert(`تم حذف ${count} منتجات.`);
-                closeModal('catManagerModal');
-            }
-        }
-
+        // ---------------------------------------------------------
+        // --- 5. السلة والشراء ---
+        // ---------------------------------------------------------
         function addToCart(id) {
             const qtyInput = document.getElementById(`qty-${id}`);
             const qty = parseInt(qtyInput.value) || 1;
@@ -995,6 +999,7 @@
             if (existing) existing.qty += qty;
             else cart.push({ ...product, qty: qty });
             updateCartUI();
+
             const btn = event.target.tagName === 'BUTTON' ? event.target : event.target.parentElement;
             const originalHTML = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-check"></i> تم الإضافة';
@@ -1031,22 +1036,34 @@
         function checkout(e) {
             e.preventDefault();
             if (cart.length === 0) { alert("السلة فارغة!"); return; }
+
             const newInvId = (settings.lastInvoice || 1000) + 1;
             db.ref('settings/lastInvoice').set(newInvId);
+
             const name = document.getElementById('cName').value;
             const phone = document.getElementById('cPhone').value;
             const gov = document.getElementById('cGov').value;
             const address = document.getElementById('cAddress').value;
             const total = document.getElementById('cartTotal').textContent;
+
             const orderData = { invId: newInvId, date: new Date().toLocaleDateString(), name, phone, gov, address, total, items: cart };
+
             db.ref('orders/' + newInvId).set(orderData)
                 .then(() => {
                     let msgText = `*طلب جديد - GREEN GOLDEN*\n`;
-                    msgText += `*فاتورة رقم:* #${newInvId}\n------------------\n👤 *العميل:* ${name}\n📱 *هاتف:* ${phone}\n📍 *عنوان:* ${gov} - ${address}\n------------------\n🌱 *المنتجات:*\n`;
+                    msgText += `*فاتورة رقم:* #${newInvId}\n`;
+                    msgText += `------------------\n`;
+                    msgText += `👤 *العميل:* ${name}\n`;
+                    msgText += `📱 *هاتف:* ${phone}\n`;
+                    msgText += `📍 *عنوان:* ${gov} - ${address}\n`;
+                    msgText += `------------------\n`;
+                    msgText += `🌱 *المنتجات:*\n`;
                     cart.forEach(item => {
                         msgText += `- ${item.name} (عدد ${item.qty})\n`;
                     });
-                    msgText += `------------------\n💰 *الإجمالي: ${total} جنيه*`;
+                    msgText += `------------------\n`;
+                    msgText += `💰 *الإجمالي: ${total} جنيه*`;
+
                     const encodedMsg = encodeURIComponent(msgText);
                     cart = []; updateCartUI(); closeModal('cartModal');
                     window.open(`https://wa.me/${settings.adminPhone}?text=${encodedMsg}`, '_blank');
@@ -1054,9 +1071,13 @@
                 .catch(err => alert("خطأ: " + err.message));
         }
 
+        // ---------------------------------------------------------
+        // --- 6. لوحة التحكم ---
+        // ---------------------------------------------------------
         function loginAdmin() {
             const u = document.getElementById('adminUser').value;
             const p = document.getElementById('adminPass').value;
+            // يمكنك تغيير كلمة المرور من هنا
             if (u === 'admin' && p === 'gold123') {
                 closeModal('adminLoginModal');
                 document.getElementById('adminDashboard').style.display = 'block';
@@ -1076,7 +1097,7 @@
             const newProdData = {
                 name: document.getElementById('pName').value,
                 img: document.getElementById('pImg').value,
-                cat: document.getElementById('pCat').value, // Text Input
+                cat: document.getElementById('pCat').value,
                 sub: document.getElementById('pSubCat').value,
                 price: Number(document.getElementById('pPrice').value),
                 offer: document.getElementById('pOffer').value === 'true',
@@ -1108,6 +1129,7 @@
             document.getElementById('pPrice').value = p.price;
             document.getElementById('pOffer').value = p.offer.toString();
             document.getElementById('pDesc').value = p.desc;
+
             editingProductId = id;
             document.getElementById('formTitle').textContent = "تعديل: " + p.name;
             const btn = document.getElementById('submitBtn');
@@ -1129,8 +1151,26 @@
             const tbody = document.getElementById('adminProductTableBody');
             tbody.innerHTML = '';
             products.forEach(p => {
-                tbody.innerHTML += `<tr><td><img src="${p.img}" alt="img"></td><td>${p.name}</td><td>${p.price}</td><td>${p.cat}</td><td><div class="action-btns"><button class="btn-warning" onclick="startEditProduct(${p.id})"><i class="fas fa-edit"></i></button><button class="btn-danger" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button></div></td></tr>`;
+                tbody.innerHTML += `
+                    <tr>
+                        <td><img src="${p.img}" alt="img"></td><td>${p.name}</td><td>${p.price}</td><td>${p.cat}</td>
+                        <td><div class="action-btns"><button class="btn-warning" onclick="startEditProduct(${p.id})"><i class="fas fa-edit"></i></button><button class="btn-danger" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button></div></td>
+                    </tr>`;
             });
+        }
+
+        function addNewCategory() {
+            const newCat = prompt("اسم الفئة الجديدة (مثل: بذور، أسمدة):");
+            if (newCat && !categories.includes(newCat)) {
+                db.ref('categories').set([...categories, newCat]).then(() => alert("تمت الإضافة"));
+            }
+        }
+
+        function removeCategory() {
+            const cat = document.getElementById('pCat').value;
+            if (confirm("حذف الفئة؟")) {
+                db.ref('categories').set(categories.filter(c => c !== cat)).then(() => alert("تم الحذف"));
+            }
         }
 
         function exportToExcel() {
@@ -1143,5 +1183,3 @@
         }
     </script>
 </body>
-
-</html>
