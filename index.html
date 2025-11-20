@@ -864,16 +864,35 @@
         }
 
         function exportToExcel() {
-        if (orders.length === 0) { alert("لا توجد طلبات مسجلة"); return; }
-        
-        const data = orders.map(o => {
-            // تحويل قائمة المنتجات إلى نص مفهوم
-            const itemsString = (o.items || []).map(i => {
-                const iName = i.name || "غير معروف";
-                const iQty = i.qty || 0;
-                const iSub = i.sub ? `-${i.sub}` : "";
-                return `${iName}${iSub} (عدد ${iQty})`;
-            }).join(' ، ');
+        // التأكد من وجود طلبات
+        if (!orders || orders.length === 0) { 
+            alert("لا توجد طلبات مسجلة في قاعدة البيانات"); 
+            return; 
+        }
+
+        // 1. ترتيب الطلبات: الأحدث يظهر في الأول (عشان تشوف شغلك الجديد)
+        // بنعمل نسخة من المصفوفة [...orders] عشان منلخبطش الترتيب الأصلي
+        const sortedOrders = [...orders].sort((a, b) => b.invId - a.invId);
+
+        // 2. تنظيف البيانات وتجهيزها
+        const data = sortedOrders.map(o => {
+            // معالجة المنتجات (لو الطلب قديم ومفيهوش منتجات سليمة)
+            let productsText = "";
+            if (o.items && Array.isArray(o.items) && o.items.length > 0) {
+                productsText = o.items.map(i => {
+                    const pName = i.name || "منتج غير معروف";
+                    const pQty = i.qty || 0;
+                    return `${pName} (عدد ${pQty})`;
+                }).join(" ، ");
+            } else {
+                productsText = "--- بيانات قديمة تالفة ---";
+            }
+
+            // معالجة الإجمالي (لو NaN خليه 0)
+            let safeTotal = o.total;
+            if (!safeTotal || isNaN(safeTotal)) {
+                safeTotal = 0;
+            }
 
             return {
                 "رقم الفاتورة": o.invId || "---",
@@ -881,19 +900,29 @@
                 "اسم العميل": o.name || "---",
                 "رقم الهاتف": o.phone || "---",
                 "العنوان": (o.gov || "") + " - " + (o.address || ""),
-                "الإجمالي (جنيه)": o.total || 0, // لو NaN حط صفر
-                "المنتجات المطلوبة": itemsString
+                "الإجمالي (جنيه)": safeTotal,
+                "المنتجات المطلوبة": productsText
             };
         });
 
+        // 3. إنشاء ملف الإكسيل
         const ws = XLSX.utils.json_to_sheet(data);
-        // تنسيق عرض الأعمدة (اختياري لتحسين الشكل)
-        const wscols = [{wch:10}, {wch:15}, {wch:20}, {wch:15}, {wch:30}, {wch:10}, {wch:50}];
+        
+        // تنسيق عرض الأعمدة (اختياري لشكل أفضل)
+        const wscols = [
+            {wch:10}, // الفاتورة
+            {wch:15}, // التاريخ
+            {wch:20}, // العميل
+            {wch:15}, // الهاتف
+            {wch:40}, // العنوان
+            {wch:10}, // الإجمالي
+            {wch:60}  // المنتجات
+        ];
         ws['!cols'] = wscols;
 
         const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, "Sales");
-        XLSX.writeFile(wb, "GreenGolden_Sales.xlsx");
+        XLSX.utils.book_append_sheet(wb, ws, "Mabe3at"); // Sales
+        XLSX.writeFile(wb, "GreenGolden_Orders.xlsx");
     }
     </script>
 </body>
