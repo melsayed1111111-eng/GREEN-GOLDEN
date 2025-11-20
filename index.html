@@ -642,10 +642,7 @@
 
         // --- دالة إتمام الطلب (إصلاح نهائي للزرار) ---
         function checkout(e) {
-        // 1. منع إعادة تحميل الصفحة
         e.preventDefault();
-
-        // 2. التأكد من السلة والبيانات
         if (cart.length === 0) { alert("السلة فارغة!"); return; }
 
         const name = document.getElementById('cName').value.trim();
@@ -654,25 +651,37 @@
         const address = document.getElementById('cAddress').value.trim();
 
         if (!name || !phone || !address || gov === "") {
-            alert("يرجى ملء جميع البيانات (الاسم، الهاتف، المحافظة، العنوان)");
+            alert("يرجى ملء جميع البيانات");
             return;
         }
 
-        // 3. حساب الإجمالي وتجهيز الرسالة
+        // 1. حساب الإجمالي وتجهيز النص
         let total = 0;
         let itemsText = "";
         
-        cart.forEach(item => {
-            const itemTotal = Number(item.price) * Number(item.qty);
-            total += itemTotal;
+        const cleanCart = cart.map(item => {
+            const pPrice = Number(item.price) || 0;
+            const pQty = Number(item.qty) || 1;
+            const pName = item.name || "منتج";
+            // const pMerchant = item.shopName || ""; // تم إلغاء استخدامه في الرسالة
             const subText = item.sub ? `(${item.sub})` : '';
-            // إضافة التاجر للفاتورة
-            const merchantName = item.shopName || "غير محدد";
-            itemsText += `- ${item.name} ${subText}\n   الكمية: ${item.qty} | السعر: ${item.price} | التاجر: [${merchantName}]\n`;
+            
+            total += (pPrice * pQty);
+            
+            // >>> التعديل هنا: شيلنا كلمة التاجر خالص من الرسالة <<<
+            itemsText += `- ${pName} ${subText}\n   الكمية: ${pQty} | السعر: ${pPrice} ج.م\n`;
+
+            return item;
         });
 
-        // 4. بناء رسالة الواتساب
+        // 2. ضبط رقم الفاتورة (يبدأ من 3000)
+        let currentLastInv = settings.lastInvoice || 2999;
+        if (currentLastInv < 2999) currentLastInv = 2999;
+        const newInvId = currentLastInv + 1;
+
+        // 3. بناء رسالة الواتساب
         let msg = `*طلب جديد - GREEN GOLDEN*\n`;
+        msg += `*رقم الفاتورة:* #${newInvId}\n`;
         msg += `------------------\n`;
         msg += `👤 *العميل:* ${name}\n`;
         msg += `📱 *هاتف:* ${phone}\n`;
@@ -683,37 +692,32 @@
         msg += `------------------\n`;
         msg += `💰 *الإجمالي:* ${total} جنيه`;
 
-        // 5. فتح الواتساب فورااااااً (قبل الحفظ في القاعدة لتجنب التعليق)
-        const adminNum = (settings.adminPhone || "01120194940").replace(/\D/g, ''); // تنظيف الرقم
-        const whatsappUrl = `https://wa.me/${adminNum}?text=${encodeURIComponent(msg)}`;
-        
-        // فتح في نافذة جديدة
-        window.open(whatsappUrl, '_blank');
+        // فتح الواتساب
+        const adminNum = (settings.adminPhone || "01120194940").replace(/\D/g, '');
+        window.open(`https://wa.me/${adminNum}?text=${encodeURIComponent(msg)}`, '_blank');
 
-        // 6. حفظ نسخة في الفيرباس (في الخلفية)
-        // حتى لو النت فصل، الواتساب هيكون فتح خلاص
+        // 4. الحفظ في الفيرباس
         try {
             if (typeof db !== 'undefined') {
-                const newInvId = (settings.lastInvoice || 1000) + 1;
-                db.ref('settings/lastInvoice').set(newInvId); // تحديث رقم الفاتورة
+                db.ref('settings/lastInvoice').set(newInvId);
 
                 const orderData = {
                     invId: newInvId,
                     date: new Date().toLocaleDateString(),
-                    name, phone, gov, address, total, items: cart
+                    name, phone, gov, address, 
+                    total: total,
+                    items: cleanCart
                 };
 
                 db.ref('orders/' + newInvId).set(orderData);
             }
-        } catch (err) {
-            console.log("لم يتم الحفظ في القاعدة ولكن الواتساب عمل: " + err.message);
-        }
+        } catch (err) { console.log(err); }
 
-        // 7. تنظيف السلة وإغلاق النافذة
+        // تنظيف
         cart = [];
         updateCartUI();
         closeModal('cartModal');
-
+    
             // فتح الرابط
             window.open(`https://wa.me/${adminNum}?text=${encodedMsg}`, '_blank');
 
@@ -860,16 +864,39 @@
         }
 
         function exportToExcel() {
-            if (orders.length === 0) { alert("لا توجد طلبات"); return; }
-            const data = orders.map(o => ({ "فاتورة": o.invId, "تاريخ": o.date, "عميل": o.name, "هاتف": o.phone, "عنوان": o.gov + ' ' + o.address, "إجمالي": o.total, "أصناف": o.items ? o.items.map(i => `${i.name}(${i.qty})`).join(', ') : '' }));
-            const ws = XLSX.utils.json_to_sheet(data);
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Sales");
-            XLSX.writeFile(wb, "GreenGolden_Sales.xlsx");
-        }
+        if (orders.length === 0) { alert("لا توجد طلبات مسجلة"); return; }
+        
+        const data = orders.map(o => {
+            // تحويل قائمة المنتجات إلى نص مفهوم
+            const itemsString = (o.items || []).map(i => {
+                const iName = i.name || "غير معروف";
+                const iQty = i.qty || 0;
+                const iSub = i.sub ? `-${i.sub}` : "";
+                return `${iName}${iSub} (عدد ${iQty})`;
+            }).join(' ، ');
+
+            return {
+                "رقم الفاتورة": o.invId || "---",
+                "التاريخ": o.date || "---",
+                "اسم العميل": o.name || "---",
+                "رقم الهاتف": o.phone || "---",
+                "العنوان": (o.gov || "") + " - " + (o.address || ""),
+                "الإجمالي (جنيه)": o.total || 0, // لو NaN حط صفر
+                "المنتجات المطلوبة": itemsString
+            };
+        });
+
+        const ws = XLSX.utils.json_to_sheet(data);
+        // تنسيق عرض الأعمدة (اختياري لتحسين الشكل)
+        const wscols = [{wch:10}, {wch:15}, {wch:20}, {wch:15}, {wch:30}, {wch:10}, {wch:50}];
+        ws['!cols'] = wscols;
+
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Sales");
+        XLSX.writeFile(wb, "GreenGolden_Sales.xlsx");
+    }
     </script>
 </body>
 
 
 </html>
-
