@@ -14,17 +14,11 @@
 
     <style>
         :root {
-            /* ألوان GREEN GOLDEN */
             --primary: #2e7d32;
-            /* أخضر زراعي قوي */
             --secondary: #b7950b;
-            /* لون ذهبي داكن */
             --accent: #f1c40f;
-            /* أصفر ذهبي فاتح */
             --light: #f1f8e9;
-            /* خلفية فاتحة جداً مائلة للأخضر */
             --dark: #1b5e20;
-            /* أخضر غامق جداً للنصوص */
             --danger: #c62828;
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
@@ -37,7 +31,6 @@
         }
 
         body {
-            /* خلفية بنمط زراعي خفيف */
             background-image: url("https://images.pexels.com/photos/5231086/pexels-photo-5231086.jpeg");
             background-size: cover;
             background-repeat: no-repeat;
@@ -50,7 +43,6 @@
             flex-direction: column;
         }
 
-        /* تأثير الشعار في الخلفية */
         body::before {
             content: "";
             position: fixed;
@@ -58,7 +50,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* يمكنك وضع رابط شعار شركتك هنا */
             background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20220910/pngtree-vegetable-display-at-market-prices-shop-agriculture-photo-image_3089795.jpg');
             background-repeat: no-repeat;
             background-position: center center;
@@ -184,7 +175,6 @@
             color: #555;
         }
 
-        /* --- تصميم العناوين --- */
         .section-title {
             text-align: center;
             margin: 50px auto 30px;
@@ -200,19 +190,34 @@
             border: 2px solid var(--secondary);
         }
 
-        /* --- الفلاتر والقوائم --- */
+        /* --- الفلاتر (تعديل: عدد غير محدود وسكرول) --- */
         .filters {
             text-align: center;
             margin-bottom: 30px;
             display: flex;
             justify-content: center;
             gap: 10px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            /* منع نزول السطر */
+            overflow-x: auto;
+            /* سكرول أفقي */
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+        }
+
+        .filters::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .filters::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 10px;
         }
 
         .filter-group {
             position: relative;
             display: inline-block;
+            flex-shrink: 0;
         }
 
         .filter-btn {
@@ -228,6 +233,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            white-space: nowrap;
         }
 
         .filter-btn.active,
@@ -238,57 +244,6 @@
             box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
         }
 
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            min-width: 180px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            z-index: 100;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 8px;
-            border: 1px solid var(--secondary);
-        }
-
-        .filter-group:hover .dropdown-menu {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        .dropdown-item {
-            color: var(--dark);
-            padding: 12px 15px;
-            text-decoration: none;
-            display: block;
-            text-align: right;
-            cursor: pointer;
-            font-size: 1rem;
-            border-bottom: 1px solid #f5f5f5;
-            transition: 0.2s;
-        }
-
-        .dropdown-item:hover {
-            background-color: var(--light);
-            color: var(--primary);
-            padding-right: 20px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- البطاقات والمنتجات --- */
         .offers-grid,
         .products-grid {
             display: grid;
@@ -298,6 +253,7 @@
             margin-bottom: 50px;
         }
 
+        /* --- الكارد (تعديل: الصورة والوصف) --- */
         .card {
             background: white;
             border-radius: 15px;
@@ -308,6 +264,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
 
         .card:hover {
@@ -315,10 +272,67 @@
             border-color: var(--secondary);
         }
 
-        .card-img {
-            height: 220px;
+        /* حاوية الصورة */
+        .img-wrapper {
+            position: relative;
             width: 100%;
-            object-fit: cover;
+            height: 250px;
+            background: #fff;
+            overflow: hidden;
+            cursor: help;
+        }
+
+        /* الصورة تظهر بالكامل */
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        /* طبقة الوصف الشفافة */
+        .desc-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            /* شفافية عالية */
+            color: #333;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: right;
+            pointer-events: none;
+        }
+
+        /* التفاعل مع الوصف */
+        .img-wrapper:hover .desc-overlay,
+        .img-wrapper.active .desc-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .desc-overlay h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 5px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .desc-overlay p {
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
         }
 
         .card-body {
@@ -326,13 +340,21 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
+            background: white;
+            position: relative;
+            z-index: 10;
         }
 
-        .card-cat {
-            font-size: 0.85rem;
-            color: var(--secondary);
-            font-weight: bold;
+        /* عرض الفئة والفئة الفرعية */
+        .cat-badge {
+            font-size: 0.8rem;
+            background: #f0f0f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            color: #555;
+            display: inline-block;
             margin-bottom: 5px;
+            width: fit-content;
         }
 
         .card-title {
@@ -340,14 +362,6 @@
             margin: 5px 0;
             color: var(--primary);
             font-weight: bold;
-        }
-
-        .card-desc {
-            font-size: 1rem;
-            color: #666;
-            margin-bottom: 15px;
-            height: 45px;
-            overflow: hidden;
         }
 
         .card-price {
@@ -368,6 +382,7 @@
             font-size: 0.9rem;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 6;
         }
 
         .card-actions {
@@ -423,7 +438,6 @@
             color: white;
         }
 
-        /* --- النوافذ المنبثقة --- */
         .modal {
             display: none;
             position: fixed;
@@ -562,7 +576,6 @@
             border: 1px solid var(--secondary);
         }
 
-        /* --- الفوتر --- */
         footer {
             background: #1a1a1a;
             color: #eee;
@@ -610,7 +623,6 @@
     <!-- Navbar -->
     <header>
         <div class="logo-container">
-            <!-- يمكنك تغيير رابط الأيقونة هنا -->
             <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" alt="شعار" class="logo-img">
             <div class="logo-text">GREEN GOLDEN</div>
         </div>
@@ -627,7 +639,6 @@
 
     <!-- Slider -->
     <div class="hero-slider" id="slider">
-        <!-- صور زراعية جديدة -->
         <div class="slide active"
             style="background-image: url('https://mashhourseeds.com/wp-content/uploads/2023/11/%D8%B7%D9%84%D8%A7%D8%A1-%D8%A8%D8%B0%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D9%88%D9%8A-1140x570-1.jpg');">
             <div class="slide-content">
@@ -658,6 +669,8 @@
         <div class="admin-header">
             <h2><i class="fas fa-tachometer-alt"></i> لوحة تحكم - GREEN GOLDEN</h2>
             <div>
+                <button class="btn" onclick="openModal('catManagerModal')"
+                    style="width:auto; background:#007bff; margin-left:5px;">إدارة الفئات</button>
                 <button class="btn btn-danger" onclick="logoutAdmin()" style="width:auto">خروج</button>
                 <button class="btn" onclick="exportToExcel()" style="width:auto; background:green"><i
                         class="fas fa-file-excel"></i> تصدير المبيعات</button>
@@ -682,18 +695,19 @@
                 </div>
                 <div class="form-group"><label>رابط الصورة</label><input type="text" id="pImg" placeholder="https://..."
                         required></div>
-                <div class="form-group">
-                    <label>الفئة الرئيسية</label>
-                    <div style="display:flex; gap:5px;">
-                        <select id="pCat" required style="flex:1"></select>
-                        <button type="button" onclick="addNewCategory()" class="btn-outline" style="width:auto;"
-                            title="إضافة فئة جديدة">+</button>
-                        <button type="button" onclick="removeCategory()" class="btn-danger" style="width:auto;"
-                            title="حذف فئة">-</button>
+
+                <!-- (تعديل) إضافة حقل الفئة الفرعية مرة أخرى -->
+                <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                    <div>
+                        <label>الفئة الرئيسية</label>
+                        <input type="text" id="pCat" placeholder="مثال: بذور" required>
+                    </div>
+                    <div>
+                        <label>الفئة الفرعية (اختياري)</label>
+                        <input type="text" id="pSubCat" placeholder="مثال: طماطم">
                     </div>
                 </div>
-                <div class="form-group"><label>فئة فرعية (للقائمة المنسدلة)</label><input type="text" id="pSubCat"
-                        placeholder="مثال: بذور خضروات، أسمدة سائلة..."></div>
+
                 <div class="form-group">
                     <label>نوع العرض</label>
                     <select id="pOffer">
@@ -731,7 +745,7 @@
     <h2 class="section-title">عروض GREEN GOLDEN</h2>
     <div class="offers-grid" id="offersContainer"></div>
 
-    <h2 class="section-title">جميع المنتجات</h2>
+    <h2 class="section-title" id="productsTitle">جميع المنتجات</h2>
     <div class="filters" id="categoryFilters"></div>
     <div class="products-grid" id="productsContainer"></div>
 
@@ -747,7 +761,7 @@
                 <i class="fas fa-phone"></i>
                 المبيعات: 01150009852 <br>
                 <i class="fas fa-mobile-alt"></i>
-                الإدارة: 01150009852
+                الإدارة: 01000602170
             </div>
             <div class="footer-copyright">
                 جميع الحقوق محفوظة &copy; 2025 GREEN GOLDEN
@@ -788,13 +802,31 @@
         </div>
     </div>
 
+    <!-- Category Manager Modal (تعديل: نافذة إدارة الفئات) -->
+    <div id="catManagerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('catManagerModal')">&times;</span>
+            <h2 style="color:var(--primary);">إدارة الفئات</h2>
+            <p style="color:#666; margin-bottom:15px">لتغيير اسم فئة، اكتب الاسم القديم والجديد. سيتم تحديث جميع
+                المنتجات.</p>
+            <div class="form-group">
+                <label>اسم الفئة الحالية</label>
+                <input type="text" id="oldCatName" placeholder="مثلاً: بزور">
+            </div>
+            <div class="form-group">
+                <label>الاسم الجديد</label>
+                <input type="text" id="newCatName" placeholder="مثلاً: بذور">
+            </div>
+            <div style="display:flex; gap:10px">
+                <button class="btn" onclick="updateCategoryName()">تحديث الاسم</button>
+                <button class="btn btn-danger" onclick="deleteCategoryRef()">حذف الفئة</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
-        // ---------------------------------------------------------
-        // --- 1. إعدادات فيرباس (ضع الكود الخاص بك هنا) ---
-        // ---------------------------------------------------------
-
-        // >>>> انسخ الـ firebaseConfig من موقع فيرباس وضعه بدلاً من هذا الجزء <<<<
+        // --- إعدادات فيرباس ---
         const firebaseConfig = {
             apiKey: "AIzaSyBMuFJ5U_rYLrB5M3Y-_n_QFF4rJ3zSNLU",
             authDomain: "green-golden-dad1c.firebaseapp.com",
@@ -806,7 +838,6 @@
             measurementId: "G-TJNV6E7LQG"
         };
 
-        // تهيئة التطبيق
         if (!firebase.apps.length) {
             try {
                 firebase.initializeApp(firebaseConfig);
@@ -835,13 +866,6 @@
         document.addEventListener("DOMContentLoaded", () => {
             initSlider();
             populateGovernorates();
-
-            // التحقق من وجود إعدادات فيرباس
-            if (firebaseConfig.apiKey === "DUMMY_API_KEY_PASTE_YOURS_HERE") {
-                alert("تنبيه هام: يرجى وضع كود firebaseConfig الخاص بمشروعك في الكود لكي يعمل الموقع.");
-                return;
-            }
-
             document.getElementById('loader').style.display = 'block';
 
             // جلب المنتجات
@@ -859,7 +883,7 @@
                 const data = snapshot.val();
                 if (Array.isArray(data)) categories = data;
                 else if (data) categories = Object.values(data);
-                else categories = ["بذور", "أسمدة", "مبيدات", "معدات"]; // فئات افتراضية للزراعة
+                else categories = ["بذور", "أسمدة", "مبيدات", "معدات"];
                 populateCategories();
             });
 
@@ -894,47 +918,23 @@
             });
         }
 
+        // (تعديل) عرض الفئات بشكل ديناميكي وغير محدود
         function populateCategories() {
             const filterContainer = document.getElementById('categoryFilters');
-            filterContainer.innerHTML = `
+            // زر عرض الكل
+            let html = `<div class="filter-group"><button class="filter-btn ${currentFilter.cat === 'all' ? 'active' : ''}" onclick="filterProducts('all')">عرض الكل</button></div>`;
+
+            // جلب الفئات الفريدة من المنتجات مباشرة
+            const uniqueCategories = [...new Set(products.map(p => p.cat))].filter(c => c);
+
+            uniqueCategories.forEach(cat => {
+                html += `
                 <div class="filter-group">
-                    <button class="filter-btn ${currentFilter.cat === 'all' ? 'active' : ''}" onclick="filterProducts('all')">عرض الكل</button>
-                </div>
-            `;
-
-            const select = document.getElementById('pCat');
-            select.innerHTML = '';
-            if (categories.length === 0) {
-                let option = document.createElement('option'); option.text = "لا توجد فئات"; select.appendChild(option);
-            }
-
-            categories.forEach(cat => {
-                let option = document.createElement('option'); option.value = cat; option.textContent = cat; select.appendChild(option);
-
-                const subCats = [...new Set(products.filter(p => p.cat === cat && p.sub && p.sub.trim() !== '').map(p => p.sub))];
-
-                let dropdownHtml = '';
-                let hasDropdown = subCats.length > 0;
-                let arrowIcon = hasDropdown ? '<i class="fas fa-chevron-down" style="font-size:0.8rem; margin-right:5px;"></i>' : '';
-
-                if (hasDropdown) {
-                    dropdownHtml = `<div class="dropdown-menu">`;
-                    subCats.forEach(sub => {
-                        dropdownHtml += `<div class="dropdown-item" onclick="filterProducts('${cat}', '${sub}')">${sub}</div>`;
-                    });
-                    dropdownHtml += `</div>`;
-                }
-
-                filterContainer.innerHTML += `
-                    <div class="filter-group">
-                        <button class="filter-btn ${currentFilter.cat === cat ? 'active' : ''}" onclick="filterProducts('${cat}')">
-                            ${cat} ${arrowIcon}
-                        </button>
-                        ${dropdownHtml}
-                    </div>
-                `;
+                    <button class="filter-btn ${currentFilter.cat === cat ? 'active' : ''}" onclick="filterProducts('${cat}')">${cat}</button>
+                </div>`;
             });
-            if (categories.length > 0 && select.value === '') select.value = categories[0];
+
+            filterContainer.innerHTML = html;
         }
 
         function initSlider() {
@@ -951,8 +951,12 @@
             currentFilter = { cat, sub };
             populateCategories();
             renderProducts(cat, sub);
+
+            if (cat === 'all') document.getElementById('productsTitle').innerText = "أحدث المنتجات";
+            else document.getElementById('productsTitle').innerText = "تصنيف: " + cat;
         }
 
+        // (تعديل) عرض المنتجات مع طبقة الوصف الذكية
         function renderProducts(cat, sub) {
             const offersContainer = document.getElementById('offersContainer');
             const productsContainer = document.getElementById('productsContainer');
@@ -960,31 +964,43 @@
             productsContainer.innerHTML = '';
 
             products.forEach(p => {
+                // عرض الفئة الفرعية إن وجدت
+                const subCatText = p.sub ? ` > ${p.sub}` : '';
+
                 const cardHTML = `
                     <div class="card">
                         ${p.offer ? '<span class="offer-tag">عرض ذهبي</span>' : ''}
-                        <img src="${p.img}" class="card-img" alt="${p.name}">
+                        
+                        <!-- حاوية الصورة مع الوصف (Touch/Hover) -->
+                        <div class="img-wrapper" onclick="this.classList.toggle('active')">
+                            <img src="${p.img}" class="card-img" alt="${p.name}" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+                            <div class="desc-overlay">
+                                <h4>${p.name}</h4>
+                                <p>${p.desc || 'لا يوجد وصف تفصيلي.'}</p>
+                            </div>
+                        </div>
+
                         <div class="card-body">
-                            <div class="card-cat">${p.cat} ${p.sub ? ' > ' + p.sub : ''}</div>
-                            <h3 class="card-title">${p.name}</h3>
-                            <p class="card-desc">${p.desc}</p>
-                            <div class="card-price">${p.price} جنيه</div>
+                            <div class="card-cat">${p.cat}${subCatText}</div>
+                            <div class="card-title">${p.name}</div>
+                            <div class="price">${p.price} <span>ج.م</span></div>
                             <div class="card-actions">
                                 <input type="number" id="qty-${p.id}" class="qty-input" value="1" min="1">
-                                <button class="btn" onclick="addToCart(${p.id})">إضافة للسلة <i class="fas fa-cart-plus"></i></button>
+                                <button class="btn" onclick="addToCart('${p.id}')">إضافة للسلة <i class="fas fa-cart-plus"></i></button>
                             </div>
                         </div>
                     </div>
                 `;
 
-                if (p.offer) offersContainer.innerHTML += cardHTML;
-
+                // منطق الفلترة
                 let shouldShow = false;
                 if (cat === 'all') shouldShow = true;
-                else if (sub) shouldShow = (p.cat === cat && p.sub === sub);
                 else shouldShow = (p.cat === cat);
 
-                if (shouldShow) productsContainer.innerHTML += cardHTML;
+                if (shouldShow) {
+                    if (p.offer) offersContainer.innerHTML += cardHTML;
+                    productsContainer.innerHTML += cardHTML;
+                }
             });
         }
 
@@ -1097,8 +1113,8 @@
             const newProdData = {
                 name: document.getElementById('pName').value,
                 img: document.getElementById('pImg').value,
-                cat: document.getElementById('pCat').value,
-                sub: document.getElementById('pSubCat').value,
+                cat: document.getElementById('pCat').value, // حقل نصي (مفتوح)
+                sub: document.getElementById('pSubCat').value, // (تعديل) حقل الفئة الفرعية
                 price: Number(document.getElementById('pPrice').value),
                 offer: document.getElementById('pOffer').value === 'true',
                 desc: document.getElementById('pDesc').value
@@ -1114,6 +1130,43 @@
             }
         }
 
+        // (تعديل) دالة تحديث اسم الفئة
+        function updateCategoryName() {
+            const oldName = document.getElementById('oldCatName').value.trim();
+            const newName = document.getElementById('newCatName').value.trim();
+            if (!oldName || !newName) { alert("اكتب الاسم القديم والجديد"); return; }
+
+            let updates = {};
+            let count = 0;
+            products.forEach(p => {
+                if (p.cat === oldName) {
+                    updates['/products/' + p.id + '/cat'] = newName;
+                    count++;
+                }
+            });
+
+            if (count > 0) {
+                db.ref().update(updates).then(() => {
+                    alert(`تم تحديث ${count} منتجات`);
+                    closeModal('catManagerModal');
+                });
+            } else {
+                alert("لا توجد منتجات بهذا الاسم");
+            }
+        }
+
+        // (تعديل) دالة حذف الفئة
+        function deleteCategoryRef() {
+            const cat = document.getElementById('oldCatName').value.trim();
+            if (!cat) return;
+            if (confirm("حذف جميع المنتجات في هذه الفئة؟")) {
+                products.forEach(p => {
+                    if (p.cat === cat) db.ref('products/' + p.id).remove();
+                });
+                closeModal('catManagerModal');
+            }
+        }
+
         function deleteProduct(id) {
             if (confirm("هل أنت متأكد من حذف هذا المنتج؟")) db.ref('products/' + id).remove().then(() => alert("تم الحذف"));
         }
@@ -1125,7 +1178,7 @@
             document.getElementById('pName').value = p.name;
             document.getElementById('pImg').value = p.img;
             document.getElementById('pCat').value = p.cat;
-            document.getElementById('pSubCat').value = p.sub || "";
+            document.getElementById('pSubCat').value = p.sub || ""; // (تعديل) تحميل الفئة الفرعية
             document.getElementById('pPrice').value = p.price;
             document.getElementById('pOffer').value = p.offer.toString();
             document.getElementById('pDesc').value = p.desc;
@@ -1183,3 +1236,6 @@
         }
     </script>
 </body>
+
+
+</html>
