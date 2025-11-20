@@ -1049,42 +1049,98 @@
             updateCartUI();
         }
 
+        // --- دالة إتمام الطلب (إصلاح نهائي للزرار) ---
         function checkout(e) {
-            e.preventDefault();
-            if (cart.length === 0) { alert("السلة فارغة!"); return; }
+            // 1. منع تحديث الصفحة (أهم سطر)
+            if(e) e.preventDefault();
 
-            const newInvId = (settings.lastInvoice || 1000) + 1;
-            db.ref('settings/lastInvoice').set(newInvId);
+            // 2. التأكد إن السلة فيها حاجة
+            if (cart.length === 0) { 
+                alert("السلة فارغة يا هندسة!"); 
+                return; 
+            }
 
+            // 3. التأكد من البيانات
             const name = document.getElementById('cName').value;
             const phone = document.getElementById('cPhone').value;
             const gov = document.getElementById('cGov').value;
             const address = document.getElementById('cAddress').value;
-            const total = document.getElementById('cartTotal').textContent;
 
-            const orderData = { invId: newInvId, date: new Date().toLocaleDateString(), name, phone, gov, address, total, items: cart };
+            if(!name || !phone || !address) {
+                alert("من فضلك كمل بياناتك (الاسم، الهاتف، العنوان)");
+                return;
+            }
 
-            db.ref('orders/' + newInvId).set(orderData)
+            // 4. حساب الإجمالي (أمان ضد NaN)
+            const total = cart.reduce((acc, item) => acc + (Number(item.price) * Number(item.qty)), 0);
+
+            // 5. إنشاء رقم فاتورة جديد
+            const newInvId = (settings.lastInvoice || 1000) + 1;
+            
+            // تحديث رقم الفاتورة في قاعدة البيانات
+            if(typeof db !== 'undefined'){
+                db.ref('settings/lastInvoice').set(newInvId);
+            }
+
+            // 6. تجهيز بيانات الطلب
+            const orderData = { 
+                invId: newInvId, 
+                date: new Date().toLocaleDateString(), 
+                name: name, 
+                phone: phone, 
+                gov: gov, 
+                address: address, 
+                total: total, 
+                items: cart 
+            };
+
+            // 7. الحفظ في الفيرباس
+            if(typeof db !== 'undefined'){
+                db.ref('orders/' + newInvId).set(orderData)
                 .then(() => {
-                    let msgText = `*طلب جديد - GREEN GOLDEN*\n`;
-                    msgText += `*فاتورة رقم:* #${newInvId}\n`;
-                    msgText += `------------------\n`;
-                    msgText += `👤 *العميل:* ${name}\n`;
-                    msgText += `📱 *هاتف:* ${phone}\n`;
-                    msgText += `📍 *عنوان:* ${gov} - ${address}\n`;
-                    msgText += `------------------\n`;
-                    msgText += `🌱 *المنتجات:*\n`;
-                    cart.forEach(item => {
-                        msgText += `- ${item.name} (عدد ${item.qty})\n`;
-                    });
-                    msgText += `------------------\n`;
-                    msgText += `💰 *الإجمالي: ${total} جنيه*`;
-
-                    const encodedMsg = encodeURIComponent(msgText);
-                    cart = []; updateCartUI(); closeModal('cartModal');
-                    window.open(`https://wa.me/${settings.adminPhone}?text=${encodedMsg}`, '_blank');
+                    sendWhatsApp(newInvId, name, phone, gov, address, total);
                 })
-                .catch(err => alert("خطأ: " + err.message));
+                .catch(err => {
+                    alert("فيه مشكلة في النت أو السيرفر، بس هنحولك للواتساب حالاً: " + err.message);
+                    // حتى لو الحفظ فشل، وديه للواتساب عشان البيعة متموتش
+                    sendWhatsApp(newInvId, name, phone, gov, address, total);
+                });
+            } else {
+                // لو الفيرباس مش شغال، برضه وديه للواتساب
+                sendWhatsApp(newInvId, name, phone, gov, address, total);
+            }
+        }
+
+        // دالة مساعدة لفتح الواتساب (عشان الكود يبقى نضيف)
+        function sendWhatsApp(invId, name, phone, gov, address, total) {
+            let msg = `*طلب جديد - GREEN GOLDEN*\n`;
+            msg += `*فاتورة رقم:* #${invId}\n`;
+            msg += `------------------\n`;
+            msg += `👤 *العميل:* ${name}\n`;
+            msg += `📱 *هاتف:* ${phone}\n`;
+            msg += `📍 *العنوان:* ${gov} - ${address}\n`;
+            msg += `------------------\n`;
+            msg += `🛒 *الطلبات:*\n`;
+
+            cart.forEach(item => {
+                const subText = item.sub ? `(${item.sub})` : '';
+                msg += `- ${item.name} ${subText}\n`;
+                msg += `   (عدد ${item.qty}) | التاجر: [${item.shopName || 'غير محدد'}]\n`;
+            });
+
+            msg += `------------------\n`;
+            msg += `💰 *الإجمالي النهائي:* ${total} جنيه`;
+
+            const encodedMsg = encodeURIComponent(msg);
+            const adminNum = settings.adminPhone || "01120194940"; // رقمك الافتراضي
+            
+            // تفريغ السلة
+            cart = []; 
+            updateCartUI(); 
+            closeModal('cartModal');
+
+            // فتح الرابط
+            window.open(`https://wa.me/${adminNum}?text=${encodedMsg}`, '_blank');
         }
 
         // ---------------------------------------------------------
@@ -1239,3 +1295,4 @@
 
 
 </html>
+
