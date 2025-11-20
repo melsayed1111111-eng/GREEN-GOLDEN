@@ -14,17 +14,11 @@
 
     <style>
         :root {
-            /* ألوان GREEN GOLDEN */
             --primary: #2e7d32;
-            /* أخضر زراعي قوي */
             --secondary: #b7950b;
-            /* لون ذهبي داكن */
             --accent: #f1c40f;
-            /* أصفر ذهبي فاتح */
             --light: #f1f8e9;
-            /* خلفية فاتحة جداً مائلة للأخضر */
             --dark: #1b5e20;
-            /* أخضر غامق جداً للنصوص */
             --danger: #c62828;
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
@@ -37,7 +31,6 @@
         }
 
         body {
-            /* خلفية بنمط زراعي خفيف */
             background-image: url("https://images.pexels.com/photos/5231086/pexels-photo-5231086.jpeg");
             background-size: cover;
             background-repeat: no-repeat;
@@ -50,7 +43,6 @@
             flex-direction: column;
         }
 
-        /* تأثير الشعار في الخلفية */
         body::before {
             content: "";
             position: fixed;
@@ -58,7 +50,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* يمكنك وضع رابط شعار شركتك هنا */
             background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20220910/pngtree-vegetable-display-at-market-prices-shop-agriculture-photo-image_3089795.jpg');
             background-repeat: no-repeat;
             background-position: center center;
@@ -184,7 +175,6 @@
             color: #555;
         }
 
-        /* --- تصميم العناوين --- */
         .section-title {
             text-align: center;
             margin: 50px auto 30px;
@@ -200,19 +190,37 @@
             border: 2px solid var(--secondary);
         }
 
-        /* --- الفلاتر والقوائم --- */
+        /* --- (تعديل 2) الفلاتر والقوائم: سكرول أفقي وعدد غير محدود --- */
         .filters {
             text-align: center;
             margin-bottom: 30px;
             display: flex;
             justify-content: center;
             gap: 10px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            /* منع النزول لسطر جديد */
+            overflow-x: auto;
+            /* السماح بالسكرول */
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+            /* للفايرفوكس */
+        }
+
+        /* سكرول بار لكروم */
+        .filters::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .filters::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 10px;
         }
 
         .filter-group {
             position: relative;
             display: inline-block;
+            flex-shrink: 0;
+            /* منع انكماش الأزرار */
         }
 
         .filter-btn {
@@ -228,6 +236,7 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            white-space: nowrap;
         }
 
         .filter-btn.active,
@@ -238,57 +247,6 @@
             box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
         }
 
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            min-width: 180px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-            z-index: 100;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 8px;
-            border: 1px solid var(--secondary);
-        }
-
-        .filter-group:hover .dropdown-menu {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        .dropdown-item {
-            color: var(--dark);
-            padding: 12px 15px;
-            text-decoration: none;
-            display: block;
-            text-align: right;
-            cursor: pointer;
-            font-size: 1rem;
-            border-bottom: 1px solid #f5f5f5;
-            transition: 0.2s;
-        }
-
-        .dropdown-item:hover {
-            background-color: var(--light);
-            color: var(--primary);
-            padding-right: 20px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* --- البطاقات والمنتجات --- */
         .offers-grid,
         .products-grid {
             display: grid;
@@ -298,6 +256,7 @@
             margin-bottom: 50px;
         }
 
+        /* --- (تعديل 3) كارد المنتج والصورة والوصف --- */
         .card {
             background: white;
             border-radius: 15px;
@@ -308,6 +267,7 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
 
         .card:hover {
@@ -315,10 +275,12 @@
             border-color: var(--secondary);
         }
 
+        /* الصورة تظهر بالكامل */
         .card-img {
-            height: 220px;
             width: 100%;
-            object-fit: cover;
+            height: 220px;
+            object-fit: contain;
+            background: #fff;
         }
 
         .card-body {
@@ -342,6 +304,7 @@
             font-weight: bold;
         }
 
+        /* الوصف المختصر الظاهر */
         .card-desc {
             font-size: 1rem;
             color: #666;
@@ -368,6 +331,45 @@
             font-size: 0.9rem;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        /* (تعديل 4) طبقة الوصف الشفافة */
+        .desc-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            /* شفافية عالية */
+            color: #333;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: 0.4s ease-in-out;
+            overflow-y: auto;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .card:hover .desc-overlay {
+            transform: translateY(0);
+        }
+
+        .desc-overlay h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .desc-overlay p {
+            font-size: 1.1rem;
+            line-height: 1.8;
         }
 
         .card-actions {
@@ -423,7 +425,6 @@
             color: white;
         }
 
-        /* --- النوافذ المنبثقة --- */
         .modal {
             display: none;
             position: fixed;
@@ -562,7 +563,6 @@
             border: 1px solid var(--secondary);
         }
 
-        /* --- الفوتر --- */
         footer {
             background: #1a1a1a;
             color: #eee;
@@ -610,7 +610,6 @@
     <!-- Navbar -->
     <header>
         <div class="logo-container">
-            <!-- يمكنك تغيير رابط الأيقونة هنا -->
             <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" alt="شعار" class="logo-img">
             <div class="logo-text">GREEN GOLDEN</div>
         </div>
@@ -627,7 +626,6 @@
 
     <!-- Slider -->
     <div class="hero-slider" id="slider">
-        <!-- صور زراعية جديدة -->
         <div class="slide active"
             style="background-image: url('https://mashhourseeds.com/wp-content/uploads/2023/11/%D8%B7%D9%84%D8%A7%D8%A1-%D8%A8%D8%B0%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D9%88%D9%8A-1140x570-1.jpg');">
             <div class="slide-content">
@@ -658,6 +656,8 @@
         <div class="admin-header">
             <h2><i class="fas fa-tachometer-alt"></i> لوحة تحكم - GREEN GOLDEN</h2>
             <div>
+                <button class="btn" onclick="openModal('catManagerModal')"
+                    style="width:auto; background:#007bff; margin-left:5px;">إدارة الفئات</button>
                 <button class="btn btn-danger" onclick="logoutAdmin()" style="width:auto">خروج</button>
                 <button class="btn" onclick="exportToExcel()" style="width:auto; background:green"><i
                         class="fas fa-file-excel"></i> تصدير المبيعات</button>
@@ -683,17 +683,9 @@
                 <div class="form-group"><label>رابط الصورة</label><input type="text" id="pImg" placeholder="https://..."
                         required></div>
                 <div class="form-group">
-                    <label>الفئة الرئيسية</label>
-                    <div style="display:flex; gap:5px;">
-                        <select id="pCat" required style="flex:1"></select>
-                        <button type="button" onclick="addNewCategory()" class="btn-outline" style="width:auto;"
-                            title="إضافة فئة جديدة">+</button>
-                        <button type="button" onclick="removeCategory()" class="btn-danger" style="width:auto;"
-                            title="حذف فئة">-</button>
-                    </div>
+                    <label>الفئة (اكتب اسم الفئة)</label>
+                    <input type="text" id="pCat" placeholder="مثال: بذور، مبيدات، تمور..." required>
                 </div>
-                <div class="form-group"><label>فئة فرعية (للقائمة المنسدلة)</label><input type="text" id="pSubCat"
-                        placeholder="مثال: بذور خضروات، أسمدة سائلة..."></div>
                 <div class="form-group">
                     <label>نوع العرض</label>
                     <select id="pOffer">
@@ -732,7 +724,10 @@
     <div class="offers-grid" id="offersContainer"></div>
 
     <h2 class="section-title">جميع المنتجات</h2>
-    <div class="filters" id="categoryFilters"></div>
+    <!-- شريط الفئات الديناميكي -->
+    <div class="filters" id="categoryFilters">
+        <!-- سيتم الملء تلقائياً -->
+    </div>
     <div class="products-grid" id="productsContainer"></div>
 
     <!-- Footer -->
@@ -740,18 +735,13 @@
         <div class="footer-content">
             <div class="footer-title">GREEN GOLDEN - للإنتاج الزراعي</div>
             <div class="footer-info">
-                <i class="fas fa-map-marker-alt"></i>
-                العنوان: القاهرة
+                <i class="fas fa-map-marker-alt"></i> العنوان: القاهرة
             </div>
             <div class="footer-info">
-                <i class="fas fa-phone"></i>
-                المبيعات: 01150009852 <br>
-                <i class="fas fa-mobile-alt"></i>
-                الإدارة: 01150009852
+                <i class="fas fa-phone"></i> المبيعات: 01150009852 <br>
+                <i class="fas fa-mobile-alt"></i> الإدارة: 01000602170
             </div>
-            <div class="footer-copyright">
-                جميع الحقوق محفوظة &copy; 2025 GREEN GOLDEN
-            </div>
+            <div class="footer-copyright">جميع الحقوق محفوظة &copy; 2025 GREEN GOLDEN</div>
         </div>
     </footer>
 
@@ -788,9 +778,370 @@
         </div>
     </div>
 
+    <!-- (تعديل 1) نافذة إدارة الفئات -->
+    <div id="catManagerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('catManagerModal')">&times;</span>
+            <h2 style="color:var(--primary);">إدارة الفئات</h2>
+            <p style="color:#666; margin-bottom:15px">لتغيير اسم فئة، اكتب الاسم القديم والجديد. سيتم تحديث جميع
+                المنتجات المرتبطة.</p>
+            <div class="form-group">
+                <label>اسم الفئة الحالية (التي تريد تغييرها أو حذفها)</label>
+                <input type="text" id="oldCatName" placeholder="مثلاً: بزور">
+            </div>
+            <div class="form-group">
+                <label>الاسم الجديد (اتركه فارغاً للحذف)</label>
+                <input type="text" id="newCatName" placeholder="مثلاً: بذور">
+            </div>
+            <div style="display:flex; gap:10px">
+                <button class="btn" onclick="updateCategoryName()">تحديث الاسم</button>
+                <button class="btn btn-danger" onclick="deleteCategoryRef()">حذف الفئة ومنتجاتها</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script>
-        const _0x95d443=_0x36f1;(function(_0x362eb9,_0x4749e8){const _0x4bde97=_0x36f1,_0x415128=_0x362eb9();while(!![]){try{const _0x403cf8=-parseInt(_0x4bde97(0xf4))/0x1*(parseInt(_0x4bde97(0x173))/0x2)+parseInt(_0x4bde97(0x150))/0x3+-parseInt(_0x4bde97(0x184))/0x4+-parseInt(_0x4bde97(0x155))/0x5*(parseInt(_0x4bde97(0xe5))/0x6)+-parseInt(_0x4bde97(0x10d))/0x7*(parseInt(_0x4bde97(0x11e))/0x8)+parseInt(_0x4bde97(0x126))/0x9*(parseInt(_0x4bde97(0x186))/0xa)+-parseInt(_0x4bde97(0x161))/0xb*(-parseInt(_0x4bde97(0x124))/0xc);if(_0x403cf8===_0x4749e8)break;else _0x415128['push'](_0x415128['shift']());}catch(_0x2c3ae8){_0x415128['push'](_0x415128['shift']());}}}(_0xe283,0xc4b0a));const firebaseConfig={'apiKey':'AIzaSyBMuFJ5U_rYLrB5M3Y-_n_QFF4rJ3zSNLU','authDomain':_0x95d443(0x121),'databaseURL':_0x95d443(0x108),'projectId':_0x95d443(0x135),'storageBucket':_0x95d443(0x19c),'messagingSenderId':_0x95d443(0xfc),'appId':_0x95d443(0x14c),'measurementId':_0x95d443(0x190)};if(!firebase[_0x95d443(0x17b)][_0x95d443(0x144)])try{firebase[_0x95d443(0xe6)](firebaseConfig);}catch(_0x1314d8){console[_0x95d443(0x111)](_0x95d443(0x14d),_0x1314d8);}const db=firebase[_0x95d443(0x104)]();let products=[],categories=[],cart=[],orders=[],settings={'adminPhone':_0x95d443(0x154),'lastInvoice':0x3e8},editingProductId=null,currentFilter={'cat':_0x95d443(0x170),'sub':null};const governorates=[_0x95d443(0x107),_0x95d443(0x100),'الإسكندرية','الدقهلية',_0x95d443(0x182),_0x95d443(0xf9),_0x95d443(0x143),'البحيرة',_0x95d443(0x19b),'كفر\x20الشيخ',_0x95d443(0x16c),_0x95d443(0x10c),_0x95d443(0x174),'السويس',_0x95d443(0x191),_0x95d443(0x15d),_0x95d443(0xe2),_0x95d443(0x156),'الفيوم','المنيا','أسيوط',_0x95d443(0x133),'قنا',_0x95d443(0x188),_0x95d443(0x128),_0x95d443(0x17f),'الوادي\x20الجديد'];document[_0x95d443(0xff)](_0x95d443(0xd5),()=>{const _0x5c11d3=_0x95d443;initSlider(),populateGovernorates();if(firebaseConfig[_0x5c11d3(0xda)]===_0x5c11d3(0x13c)){alert('تنبيه\x20هام:\x20يرجى\x20وضع\x20كود\x20firebaseConfig\x20الخاص\x20بمشروعك\x20في\x20الكود\x20لكي\x20يعمل\x20الموقع.');return;}document['getElementById'](_0x5c11d3(0x130))[_0x5c11d3(0xfd)][_0x5c11d3(0x112)]=_0x5c11d3(0x17e),db[_0x5c11d3(0x164)](_0x5c11d3(0x163))['on']('value',_0x35b429=>{const _0x6c240e=_0x5c11d3,_0x3a3fec=_0x35b429[_0x6c240e(0x187)]();products=_0x3a3fec?Object[_0x6c240e(0x15b)](_0x3a3fec):[],populateCategories(),renderProducts(currentFilter[_0x6c240e(0x102)],currentFilter[_0x6c240e(0xe0)]),renderAdminProductsTable(),document[_0x6c240e(0x19a)](_0x6c240e(0x130))[_0x6c240e(0xfd)][_0x6c240e(0x112)]=_0x6c240e(0x181);}),db['ref'](_0x5c11d3(0x152))['on'](_0x5c11d3(0x17a),_0x21c2e1=>{const _0x4b85ff=_0x5c11d3,_0x310acf=_0x21c2e1[_0x4b85ff(0x187)]();if(Array[_0x4b85ff(0xd6)](_0x310acf))categories=_0x310acf;else{if(_0x310acf)categories=Object[_0x4b85ff(0x15b)](_0x310acf);else categories=['بذور','أسمدة',_0x4b85ff(0x11c),_0x4b85ff(0xdf)];}populateCategories();}),db[_0x5c11d3(0x164)]('settings')['on']('value',_0xd4cc9=>{const _0x18f30f=_0x5c11d3,_0x1632cf=_0xd4cc9[_0x18f30f(0x187)]();if(_0x1632cf)settings=_0x1632cf;else db['ref'](_0x18f30f(0x169))[_0x18f30f(0x15e)](settings);document[_0x18f30f(0x19a)](_0x18f30f(0x165))[_0x18f30f(0x17a)]=settings[_0x18f30f(0x165)];}),db[_0x5c11d3(0x164)](_0x5c11d3(0xd4))['on'](_0x5c11d3(0x17a),_0x3f1682=>{const _0x5448a8=_0x5c11d3,_0x305e5d=_0x3f1682[_0x5448a8(0x187)]();orders=_0x305e5d?Object[_0x5448a8(0x15b)](_0x305e5d):[];});});function openModal(_0x506a26){const _0x5f4901=_0x95d443;document[_0x5f4901(0x19a)](_0x506a26)[_0x5f4901(0xfd)][_0x5f4901(0x112)]='flex';}function closeModal(_0x179e08){const _0x23882c=_0x95d443;document[_0x23882c(0x19a)](_0x179e08)[_0x23882c(0xfd)][_0x23882c(0x112)]='none';}window[_0x95d443(0x146)]=function(_0x56ae91){const _0x4f346d=_0x95d443;if(_0x56ae91[_0x4f346d(0x113)][_0x4f346d(0xd7)][_0x4f346d(0x172)](_0x4f346d(0x12b)))_0x56ae91[_0x4f346d(0x113)]['style'][_0x4f346d(0x112)]=_0x4f346d(0x181);};function populateGovernorates(){const _0x3e9965=_0x95d443,_0x15423e=document[_0x3e9965(0x19a)](_0x3e9965(0x118));_0x15423e[_0x3e9965(0x10a)]='<option\x20value=\x22\x22>اختر\x20المحافظة</option>',governorates[_0x3e9965(0x13a)](_0x304ccf=>{const _0x2c58ab=_0x3e9965;let _0x259399=document[_0x2c58ab(0x17d)](_0x2c58ab(0x18a));_0x259399['value']=_0x304ccf,_0x259399[_0x2c58ab(0xee)]=_0x304ccf,_0x15423e['appendChild'](_0x259399);});}function populateCategories(){const _0x18fb53=_0x95d443,_0x50b8ff=document[_0x18fb53(0x19a)](_0x18fb53(0x18c));_0x50b8ff[_0x18fb53(0x10a)]='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22filter-group\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22filter-btn\x20'+(currentFilter[_0x18fb53(0x102)]==='all'?'active':'')+_0x18fb53(0x16f);const _0x1729b0=document[_0x18fb53(0x19a)](_0x18fb53(0x179));_0x1729b0['innerHTML']='';if(categories[_0x18fb53(0x144)]===0x0){let _0x26ed03=document['createElement'](_0x18fb53(0x18a));_0x26ed03[_0x18fb53(0xd8)]='لا\x20توجد\x20فئات',_0x1729b0[_0x18fb53(0xe4)](_0x26ed03);}categories[_0x18fb53(0x13a)](_0x549b26=>{const _0x2095e2=_0x18fb53;let _0x19fcab=document[_0x2095e2(0x17d)]('option');_0x19fcab[_0x2095e2(0x17a)]=_0x549b26,_0x19fcab[_0x2095e2(0xee)]=_0x549b26,_0x1729b0[_0x2095e2(0xe4)](_0x19fcab);const _0x4e724d=[...new Set(products[_0x2095e2(0xea)](_0x3af620=>_0x3af620[_0x2095e2(0x102)]===_0x549b26&&_0x3af620[_0x2095e2(0xe0)]&&_0x3af620[_0x2095e2(0xe0)][_0x2095e2(0xe1)]()!=='')[_0x2095e2(0x140)](_0x336fa5=>_0x336fa5['sub']))];let _0x49c7f2='',_0x3412da=_0x4e724d[_0x2095e2(0x144)]>0x0,_0x415c67=_0x3412da?_0x2095e2(0x196):'';_0x3412da&&(_0x49c7f2=_0x2095e2(0xeb),_0x4e724d[_0x2095e2(0x13a)](_0x589bae=>{const _0x24ed9c=_0x2095e2;_0x49c7f2+='<div\x20class=\x22dropdown-item\x22\x20onclick=\x22filterProducts(\x27'+_0x549b26+_0x24ed9c(0x15f)+_0x589bae+_0x24ed9c(0x175)+_0x589bae+_0x24ed9c(0x101);}),_0x49c7f2+=_0x2095e2(0x101)),_0x50b8ff[_0x2095e2(0x10a)]+=_0x2095e2(0x158)+(currentFilter[_0x2095e2(0x102)]===_0x549b26?_0x2095e2(0x18d):'')+_0x2095e2(0x151)+_0x549b26+_0x2095e2(0x137)+_0x549b26+'\x20'+_0x415c67+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+_0x49c7f2+_0x2095e2(0x189);});if(categories[_0x18fb53(0x144)]>0x0&&_0x1729b0[_0x18fb53(0x17a)]==='')_0x1729b0[_0x18fb53(0x17a)]=categories[0x0];}function initSlider(){const _0x2695de=document['querySelectorAll']('.slide');let _0x35ecbb=0x0;setInterval(()=>{const _0x382139=_0x36f1;_0x2695de[_0x35ecbb]['classList'][_0x382139(0x131)](_0x382139(0x18d)),_0x35ecbb=(_0x35ecbb+0x1)%_0x2695de['length'],_0x2695de[_0x35ecbb][_0x382139(0xd7)]['add']('active');},0x1388);}function filterProducts(_0x5040bb,_0x282b58=null){currentFilter={'cat':_0x5040bb,'sub':_0x282b58},populateCategories(),renderProducts(_0x5040bb,_0x282b58);}function renderProducts(_0x2183ee,_0x16e74a){const _0x4794b0=_0x95d443,_0x3952f4=document[_0x4794b0(0x19a)](_0x4794b0(0xdd)),_0x25d717=document[_0x4794b0(0x19a)](_0x4794b0(0xe9));_0x3952f4[_0x4794b0(0x10a)]='',_0x25d717[_0x4794b0(0x10a)]='',products[_0x4794b0(0x13a)](_0x2d6c29=>{const _0x219da2=_0x4794b0,_0x5db86f=_0x219da2(0x195)+(_0x2d6c29[_0x219da2(0x13e)]?_0x219da2(0xf8):'')+_0x219da2(0x149)+_0x2d6c29[_0x219da2(0x19e)]+'\x22\x20class=\x22card-img\x22\x20alt=\x22'+_0x2d6c29['name']+_0x219da2(0x167)+_0x2d6c29['cat']+'\x20'+(_0x2d6c29[_0x219da2(0xe0)]?_0x219da2(0x13f)+_0x2d6c29[_0x219da2(0xe0)]:'')+_0x219da2(0x11f)+_0x2d6c29[_0x219da2(0x166)]+_0x219da2(0xde)+_0x2d6c29[_0x219da2(0x14b)]+_0x219da2(0xf3)+_0x2d6c29['price']+'\x20جنيه</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22number\x22\x20id=\x22qty-'+_0x2d6c29['id']+_0x219da2(0x125)+_0x2d6c29['id']+_0x219da2(0x142);if(_0x2d6c29[_0x219da2(0x13e)])_0x3952f4[_0x219da2(0x10a)]+=_0x5db86f;let _0x26b1b8=![];if(_0x2183ee===_0x219da2(0x170))_0x26b1b8=!![];else{if(_0x16e74a)_0x26b1b8=_0x2d6c29[_0x219da2(0x102)]===_0x2183ee&&_0x2d6c29['sub']===_0x16e74a;else _0x26b1b8=_0x2d6c29[_0x219da2(0x102)]===_0x2183ee;}if(_0x26b1b8)_0x25d717[_0x219da2(0x10a)]+=_0x5db86f;});}function addToCart(_0x474361){const _0x54aa3c=_0x95d443,_0x35cce1=document[_0x54aa3c(0x19a)]('qty-'+_0x474361),_0xe3c084=parseInt(_0x35cce1['value'])||0x1,_0x43fc8a=products['find'](_0x2399d4=>_0x2399d4['id']===_0x474361),_0x54340c=cart[_0x54aa3c(0x198)](_0x2f3ee1=>_0x2f3ee1['id']===_0x474361);if(_0x54340c)_0x54340c[_0x54aa3c(0x148)]+=_0xe3c084;else cart['push']({..._0x43fc8a,'qty':_0xe3c084});updateCartUI();const _0x1242ab=event[_0x54aa3c(0x113)][_0x54aa3c(0x192)]===_0x54aa3c(0xfb)?event['target']:event['target'][_0x54aa3c(0x168)],_0x7147b5=_0x1242ab[_0x54aa3c(0x10a)];_0x1242ab['innerHTML']=_0x54aa3c(0x139),_0x1242ab[_0x54aa3c(0xfd)][_0x54aa3c(0x138)]='var(--secondary)',setTimeout(()=>{const _0x482da6=_0x54aa3c;_0x1242ab[_0x482da6(0x10a)]=_0x7147b5,_0x1242ab[_0x482da6(0xfd)][_0x482da6(0x138)]='';},0x3e8);}function updateCartUI(){const _0x4dc965=_0x95d443;document[_0x4dc965(0x19a)](_0x4dc965(0x105))[_0x4dc965(0xee)]=cart[_0x4dc965(0x11a)]((_0x485986,_0x335869)=>_0x485986+_0x335869[_0x4dc965(0x148)],0x0);const _0x33949b=document[_0x4dc965(0x19a)](_0x4dc965(0x160));_0x33949b[_0x4dc965(0x10a)]='';let _0x25ae5b=0x0;if(cart[_0x4dc965(0x144)]===0x0)_0x33949b['innerHTML']=_0x4dc965(0x180);cart['forEach']((_0x4a0b75,_0x1972dc)=>{const _0x4a724b=_0x4dc965;_0x25ae5b+=_0x4a0b75[_0x4a724b(0x12d)]*_0x4a0b75[_0x4a724b(0x148)],_0x33949b[_0x4a724b(0x10a)]+=_0x4a724b(0xf2)+_0x4a0b75['img']+_0x4a724b(0x12f)+_0x4a0b75[_0x4a724b(0x166)]+_0x4a724b(0x185)+_0x4a0b75[_0x4a724b(0x12d)]+_0x4a724b(0x129)+_0x4a0b75[_0x4a724b(0x148)]+_0x4a724b(0xf7)+_0x4a0b75[_0x4a724b(0x12d)]*_0x4a0b75[_0x4a724b(0x148)]+_0x4a724b(0x199)+_0x1972dc+')\x22\x20style=\x22width:auto;\x20padding:5px\x2012px;\x20border-radius:50%\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';}),document[_0x4dc965(0x19a)](_0x4dc965(0x19d))[_0x4dc965(0xee)]=_0x25ae5b;}function removeFromCart(_0x899d9c){cart['splice'](_0x899d9c,0x1),updateCartUI();}function checkout(_0x153034){const _0x56222d=_0x95d443;_0x153034['preventDefault']();if(cart[_0x56222d(0x144)]===0x0){alert(_0x56222d(0x10f));return;}const _0x370256=(settings[_0x56222d(0xef)]||0x3e8)+0x1;db[_0x56222d(0x164)](_0x56222d(0xe7))[_0x56222d(0x15e)](_0x370256);const _0x511c2c=document[_0x56222d(0x19a)]('cName')[_0x56222d(0x17a)],_0x17d56a=document['getElementById']('cPhone')[_0x56222d(0x17a)],_0x49d25d=document[_0x56222d(0x19a)](_0x56222d(0x118))[_0x56222d(0x17a)],_0x425e33=document[_0x56222d(0x19a)]('cAddress')[_0x56222d(0x17a)],_0x1e7308=document[_0x56222d(0x19a)](_0x56222d(0x19d))[_0x56222d(0xee)],_0x41ecfc={'invId':_0x370256,'date':new Date()['toLocaleDateString'](),'name':_0x511c2c,'phone':_0x17d56a,'gov':_0x49d25d,'address':_0x425e33,'total':_0x1e7308,'items':cart};db[_0x56222d(0x164)](_0x56222d(0x18b)+_0x370256)['set'](_0x41ecfc)[_0x56222d(0xfe)](()=>{const _0x17f635=_0x56222d;let _0x51a518=_0x17f635(0x178);_0x51a518+=_0x17f635(0x15a)+_0x370256+'\x0a',_0x51a518+=_0x17f635(0x120),_0x51a518+='👤\x20*العميل:*\x20'+_0x511c2c+'\x0a',_0x51a518+='📱\x20*هاتف:*\x20'+_0x17d56a+'\x0a',_0x51a518+=_0x17f635(0x16a)+_0x49d25d+_0x17f635(0x157)+_0x425e33+'\x0a',_0x51a518+=_0x17f635(0x120),_0x51a518+='🌱\x20*المنتجات:*\x0a',cart[_0x17f635(0x13a)](_0x2af7fc=>{_0x51a518+='-\x20'+_0x2af7fc['name']+'\x20(عدد\x20'+_0x2af7fc['qty']+')\x0a';}),_0x51a518+=_0x17f635(0x120),_0x51a518+=_0x17f635(0x13d)+_0x1e7308+_0x17f635(0x114);const _0x442782=encodeURIComponent(_0x51a518);cart=[],updateCartUI(),closeModal(_0x17f635(0x18f)),window[_0x17f635(0x11b)]('https://wa.me/'+settings[_0x17f635(0x165)]+_0x17f635(0x147)+_0x442782,_0x17f635(0xe3));})[_0x56222d(0x117)](_0x42d2c0=>alert(_0x56222d(0xf6)+_0x42d2c0[_0x56222d(0x109)]));}function loginAdmin(){const _0x313d06=_0x95d443,_0x5a57da=document[_0x313d06(0x19a)](_0x313d06(0x159))['value'],_0x3bf1e9=document[_0x313d06(0x19a)](_0x313d06(0x14f))[_0x313d06(0x17a)];if(_0x5a57da===_0x313d06(0x145)&&_0x3bf1e9===_0x313d06(0x103))closeModal(_0x313d06(0x16d)),document[_0x313d06(0x19a)]('adminDashboard')[_0x313d06(0xfd)]['display']=_0x313d06(0x17e),renderAdminProductsTable();else alert('بيانات\x20الدخول\x20غير\x20صحيحة');}function logoutAdmin(){const _0x2bfe64=_0x95d443;document[_0x2bfe64(0x19a)](_0x2bfe64(0xd9))['style']['display']=_0x2bfe64(0x181);}function saveSettings(){const _0x278d3f=_0x95d443,_0x44a2c0=document[_0x278d3f(0x19a)](_0x278d3f(0x165))[_0x278d3f(0x17a)];db[_0x278d3f(0x164)]('settings/adminPhone')[_0x278d3f(0x15e)](_0x44a2c0)[_0x278d3f(0xfe)](()=>alert('تم\x20حفظ\x20رقم\x20الواتساب'));}function _0x36f1(_0x497cd6,_0x2b94e5){const _0xe28363=_0xe283();return _0x36f1=function(_0x36f140,_0x2b0c17){_0x36f140=_0x36f140-0xd4;let _0x30aadf=_0xe28363[_0x36f140];return _0x30aadf;},_0x36f1(_0x497cd6,_0x2b94e5);}function handleProductSubmit(_0x13004e){const _0x416a2b=_0x95d443;_0x13004e[_0x416a2b(0x141)]();const _0x12d358={'name':document[_0x416a2b(0x19a)](_0x416a2b(0x10e))['value'],'img':document[_0x416a2b(0x19a)](_0x416a2b(0x12e))[_0x416a2b(0x17a)],'cat':document[_0x416a2b(0x19a)](_0x416a2b(0x179))[_0x416a2b(0x17a)],'sub':document[_0x416a2b(0x19a)](_0x416a2b(0x106))[_0x416a2b(0x17a)],'price':Number(document['getElementById'](_0x416a2b(0x15c))[_0x416a2b(0x17a)]),'offer':document[_0x416a2b(0x19a)](_0x416a2b(0xe8))['value']==='true','desc':document['getElementById'](_0x416a2b(0x123))['value']};if(editingProductId)_0x12d358['id']=editingProductId,db[_0x416a2b(0x164)](_0x416a2b(0x176)+editingProductId)[_0x416a2b(0x15e)](_0x12d358)[_0x416a2b(0xfe)](()=>{const _0xa34bfa=_0x416a2b;alert(_0xa34bfa(0x18e)),cancelEdit();});else{const _0x200764=Date[_0x416a2b(0xdb)]();_0x12d358['id']=_0x200764,db[_0x416a2b(0x164)](_0x416a2b(0x176)+_0x200764)[_0x416a2b(0x15e)](_0x12d358)[_0x416a2b(0xfe)](()=>{const _0x3c7ad8=_0x416a2b;alert('تمت\x20الإضافة'),document[_0x3c7ad8(0x19a)](_0x3c7ad8(0xf5))[_0x3c7ad8(0x12c)]();});}}function deleteProduct(_0x43c4f7){const _0x118028=_0x95d443;if(confirm(_0x118028(0x193)))db[_0x118028(0x164)](_0x118028(0x176)+_0x43c4f7)['remove']()[_0x118028(0xfe)](()=>alert(_0x118028(0x119)));}function startEditProduct(_0x589ff9){const _0x3cc7ef=_0x95d443,_0x1ce175=products[_0x3cc7ef(0x198)](_0x493a93=>_0x493a93['id']===_0x589ff9);if(!_0x1ce175)return;document[_0x3cc7ef(0x19a)](_0x3cc7ef(0x14e))[_0x3cc7ef(0x17a)]=_0x1ce175['id'],document[_0x3cc7ef(0x19a)](_0x3cc7ef(0x10e))[_0x3cc7ef(0x17a)]=_0x1ce175[_0x3cc7ef(0x166)],document[_0x3cc7ef(0x19a)](_0x3cc7ef(0x12e))[_0x3cc7ef(0x17a)]=_0x1ce175[_0x3cc7ef(0x19e)],document[_0x3cc7ef(0x19a)](_0x3cc7ef(0x179))[_0x3cc7ef(0x17a)]=_0x1ce175[_0x3cc7ef(0x102)],document['getElementById'](_0x3cc7ef(0x106))[_0x3cc7ef(0x17a)]=_0x1ce175[_0x3cc7ef(0xe0)]||'',document['getElementById']('pPrice')[_0x3cc7ef(0x17a)]=_0x1ce175[_0x3cc7ef(0x12d)],document['getElementById'](_0x3cc7ef(0xe8))['value']=_0x1ce175[_0x3cc7ef(0x13e)][_0x3cc7ef(0x110)](),document[_0x3cc7ef(0x19a)]('pDesc')[_0x3cc7ef(0x17a)]=_0x1ce175['desc'],editingProductId=_0x589ff9,document[_0x3cc7ef(0x19a)]('formTitle')[_0x3cc7ef(0xee)]=_0x3cc7ef(0xec)+_0x1ce175['name'];const _0x3fc461=document[_0x3cc7ef(0x19a)](_0x3cc7ef(0x136));_0x3fc461['textContent']=_0x3cc7ef(0x132),_0x3fc461['classList']['add'](_0x3cc7ef(0x162)),document[_0x3cc7ef(0x19a)](_0x3cc7ef(0x127))[_0x3cc7ef(0xfd)]['display']=_0x3cc7ef(0xdc),document[_0x3cc7ef(0x19a)]('productForm')[_0x3cc7ef(0xfa)]({'behavior':_0x3cc7ef(0x16e)});}function _0xe283(){const _0x25cc07=['القاهرة','https://green-golden-dad1c-default-rtdb.firebaseio.com','message','innerHTML','إضافة\x20المنتج','بورسعيد','7wULlEZ','pName','السلة\x20فارغة!','toString','error','display','target','\x20جنيه*','book_append_sheet','\x22\x20alt=\x22img\x22></td><td>','catch','cGov','تم\x20الحذف','reduce','open','مبيدات','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td><img\x20src=\x22','1453672sluuZA','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22card-title\x22>','------------------\x0a','green-golden-dad1c.firebaseapp.com','حذف\x20الفئة؟','pDesc','7572eTqtzP','\x22\x20class=\x22qty-input\x22\x20value=\x221\x22\x20min=\x221\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x22\x20onclick=\x22addToCart(','180819WKJwGW','cancelEditBtn','أسوان','\x20×\x20','total','modal','reset','price','pImg','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div><h4>','loader','remove','حفظ\x20التعديلات','سوهاج','تمت\x20الإضافة','green-golden-dad1c','submitBtn','\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','background','<i\x20class=\x22fas\x20fa-check\x22></i>\x20تم\x20الإضافة','forEach',')\x22><i\x20class=\x22fas\x20fa-edit\x22></i></button><button\x20class=\x22btn-danger\x22\x20onclick=\x22deleteProduct(','DUMMY_API_KEY_PASTE_YOURS_HERE','💰\x20*الإجمالي:\x20','offer','\x20>\x20','map','preventDefault',')\x22>إضافة\x20للسلة\x20<i\x20class=\x22fas\x20fa-cart-plus\x22></i></button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','القليوبية','length','admin','onclick','?text=','qty','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','إضافة\x20منتج\x20جديد','desc','1:305717091280:web:d818ffb49e4789675077d5','تأكد\x20من\x20وضع\x20إعدادات\x20فيرباس\x20الصحيحة\x20في\x20الكود','pId','adminPass','649308wzLXvo','\x22\x20onclick=\x22filterProducts(\x27','categories','book_new','201000000000','5XslgDs','بني\x20سويف','\x20-\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22filter-group\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22filter-btn\x20','adminUser','*فاتورة\x20رقم:*\x20#','values','pPrice','شمال\x20سيناء','set','\x27,\x20\x27','cartItems','20669ApjDWc','btn-warning','products','ref','adminPhone','name','\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-cat\x22>','parentElement','settings','📍\x20*عنوان:*\x20','join','دمياط','adminLoginModal','smooth','\x22\x20onclick=\x22filterProducts(\x27all\x27)\x22>عرض\x20الكل</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','all',')\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button></div></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>','contains','1094aoGsjy','الإسماعيلية','\x27)\x22>','products/','adminProductTableBody','*طلب\x20جديد\x20-\x20GREEN\x20GOLDEN*\x0a','pCat','value','apps','GreenGolden_Sales.xlsx','createElement','block','البحر\x20الأحمر','<p\x20style=\x22text-align:center;\x20color:#777;\x20padding:20px;\x22>سلتك\x20فارغة\x20حالياً</p>','none','الشرقية','utils','2268104XaPTOK','</h4><small>','440iIRwlu','val','الأقصر','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','option','orders/','categoryFilters','active','تم\x20التعديل','cartModal','G-TJNV6E7LQG','مطروح','tagName','هل\x20أنت\x20متأكد\x20من\x20حذف\x20هذا\x20المنتج؟','</td><td>','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','<i\x20class=\x22fas\x20fa-chevron-down\x22\x20style=\x22font-size:0.8rem;\x20margin-right:5px;\x22></i>','address','find','</small></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-danger\x22\x20onclick=\x22removeFromCart(','getElementById','الخربية','green-golden-dad1c.firebasestorage.app','cartTotal','img','orders','DOMContentLoaded','isArray','classList','text','adminDashboard','apiKey','now','inline-block','offersContainer','</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22card-desc\x22>','معدات','sub','trim','جنوب\x20سيناء','_blank','appendChild','1676058PMjcwb','initializeApp','settings/lastInvoice','pOffer','productsContainer','filter','<div\x20class=\x22dropdown-menu\x22>','تعديل:\x20','Sales','textContent','lastInvoice','writeFile','json_to_sheet','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22cart-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:flex;\x20align-items:center;\x20gap:10px\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-price\x22>','827mnMPTZ','productForm','خطأ:\x20','\x20=\x20','<span\x20class=\x22offer-tag\x22>عرض\x20ذهبي</span>','المنوفية','scrollIntoView','BUTTON','305717091280','style','then','addEventListener','الجيزة','</div>','cat','gold123','database','cartCount','pSubCat'];_0xe283=function(){return _0x25cc07;};return _0xe283();}function cancelEdit(){const _0x10833d=_0x95d443;document['getElementById']('productForm')[_0x10833d(0x12c)](),editingProductId=null,document[_0x10833d(0x19a)]('formTitle')[_0x10833d(0xee)]=_0x10833d(0x14a);const _0x4657c3=document[_0x10833d(0x19a)]('submitBtn');_0x4657c3[_0x10833d(0xee)]=_0x10833d(0x10b),_0x4657c3[_0x10833d(0xd7)][_0x10833d(0x131)](_0x10833d(0x162)),document[_0x10833d(0x19a)]('cancelEditBtn')[_0x10833d(0xfd)]['display']=_0x10833d(0x181);}function renderAdminProductsTable(){const _0x2ba940=_0x95d443,_0x55a1af=document['getElementById'](_0x2ba940(0x177));_0x55a1af[_0x2ba940(0x10a)]='',products[_0x2ba940(0x13a)](_0xa39fcc=>{const _0x8d51f2=_0x2ba940;_0x55a1af[_0x8d51f2(0x10a)]+=_0x8d51f2(0x11d)+_0xa39fcc['img']+_0x8d51f2(0x116)+_0xa39fcc[_0x8d51f2(0x166)]+_0x8d51f2(0x194)+_0xa39fcc['price']+_0x8d51f2(0x194)+_0xa39fcc[_0x8d51f2(0x102)]+'</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td><div\x20class=\x22action-btns\x22><button\x20class=\x22btn-warning\x22\x20onclick=\x22startEditProduct('+_0xa39fcc['id']+_0x8d51f2(0x13b)+_0xa39fcc['id']+_0x8d51f2(0x171);});}function addNewCategory(){const _0x57038f=_0x95d443,_0x4c996b=prompt('اسم\x20الفئة\x20الجديدة\x20(مثل:\x20بذور،\x20أسمدة):');_0x4c996b&&!categories['includes'](_0x4c996b)&&db[_0x57038f(0x164)](_0x57038f(0x152))[_0x57038f(0x15e)]([...categories,_0x4c996b])[_0x57038f(0xfe)](()=>alert(_0x57038f(0x134)));}function removeCategory(){const _0x8e9cc=_0x95d443,_0x44b833=document[_0x8e9cc(0x19a)](_0x8e9cc(0x179))[_0x8e9cc(0x17a)];confirm(_0x8e9cc(0x122))&&db[_0x8e9cc(0x164)]('categories')[_0x8e9cc(0x15e)](categories['filter'](_0x3d413d=>_0x3d413d!==_0x44b833))['then'](()=>alert(_0x8e9cc(0x119)));}function exportToExcel(){const _0x38e26f=_0x95d443;if(orders['length']===0x0){alert('لا\x20توجد\x20طلبات');return;}const _0x28389c=orders[_0x38e26f(0x140)](_0x18b289=>({'فاتورة':_0x18b289['invId'],'تاريخ':_0x18b289['date'],'عميل':_0x18b289[_0x38e26f(0x166)],'هاتف':_0x18b289['phone'],'عنوان':_0x18b289['gov']+'\x20'+_0x18b289[_0x38e26f(0x197)],'إجمالي':_0x18b289[_0x38e26f(0x12a)],'أصناف':_0x18b289['items']?_0x18b289['items']['map'](_0x3c5e7c=>_0x3c5e7c['name']+'('+_0x3c5e7c[_0x38e26f(0x148)]+')')[_0x38e26f(0x16b)](',\x20'):''})),_0x37e92e=XLSX[_0x38e26f(0x183)][_0x38e26f(0xf1)](_0x28389c),_0x211f28=XLSX[_0x38e26f(0x183)][_0x38e26f(0x153)]();XLSX[_0x38e26f(0x183)][_0x38e26f(0x115)](_0x211f28,_0x37e92e,_0x38e26f(0xed)),XLSX[_0x38e26f(0xf0)](_0x211f28,_0x38e26f(0x17c));}
+        const firebaseConfig = {
+            apiKey: "AIzaSyBMuFJ5U_rYLrB5M3Y-_n_QFF4rJ3zSNLU",
+            authDomain: "green-golden-dad1c.firebaseapp.com",
+            databaseURL: "https://green-golden-dad1c-default-rtdb.firebaseio.com",
+            projectId: "green-golden-dad1c",
+            storageBucket: "green-golden-dad1c.firebasestorage.app",
+            messagingSenderId: "305717091280",
+            appId: "1:305717091280:web:d818ffb49e4789675077d5",
+            measurementId: "G-TJNV6E7LQG"
+        };
+
+        if (!firebase.apps.length) { try { firebase.initializeApp(firebaseConfig); } catch (e) { console.error("Config Error", e); } }
+        const db = firebase.database();
+
+        let products = [];
+        let cart = [];
+        let orders = [];
+        let settings = { adminPhone: "201000000000", lastInvoice: 1000 };
+        let editingProductId = null;
+        let currentFilter = { cat: 'all', sub: null };
+
+        const governorates = ["القاهرة", "الجيزة", "الإسكندرية", "الدقهلية", "الشرقية", "المنوفية", "القليوبية", "البحيرة", "الخربية", "كفر الشيخ", "دمياط", "بورسعيد", "الإسماعيلية", "السويس", "مطروح", "شمال سيناء", "جنوب سيناء", "بني سويف", "الفيوم", "المنيا", "أسيوط", "سوهاج", "قنا", "الأقصر", "أسوان", "البحر الأحمر", "الوادي الجديد"];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initSlider();
+            populateGovernorates();
+
+            if (firebaseConfig.apiKey === "DUMMY_API_KEY_PASTE_YOURS_HERE") { alert("Check Config"); return; }
+            document.getElementById('loader').style.display = 'block';
+
+            db.ref('products').on('value', (snapshot) => {
+                const data = snapshot.val();
+                products = data ? Object.values(data) : [];
+                populateCategories();
+                renderProducts(currentFilter.cat, currentFilter.sub);
+                renderAdminProductsTable();
+                document.getElementById('loader').style.display = 'none';
+            });
+
+            db.ref('settings').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) settings = data; else db.ref('settings').set(settings);
+                document.getElementById('adminPhone').value = settings.adminPhone;
+            });
+            db.ref('orders').on('value', (snapshot) => {
+                const data = snapshot.val();
+                orders = data ? Object.values(data) : [];
+            });
+        });
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = function (event) { if (event.target.classList.contains('modal')) event.target.style.display = 'none'; }
+
+        function populateGovernorates() {
+            const select = document.getElementById('cGov');
+            select.innerHTML = '<option value="">اختر المحافظة</option>';
+            governorates.forEach(gov => {
+                let option = document.createElement('option');
+                option.value = gov; option.textContent = gov; select.appendChild(option);
+            });
+        }
+
+        // (تعديل 2: تحسين عرض الفئات)
+        function populateCategories() {
+            const filterContainer = document.getElementById('categoryFilters');
+            // زر الكل
+            let html = `<div class="filter-group"><button class="filter-btn ${currentFilter.cat === 'all' ? 'active' : ''}" onclick="filterProducts('all')">عرض الكل</button></div>`;
+
+            // استخراج الفئات الفريدة من المنتجات الموجودة فعلياً
+            const uniqueCats = [...new Set(products.map(p => p.cat))].filter(c => c); // filter(c => c) لإزالة القيم الفارغة
+
+            uniqueCats.forEach(cat => {
+                html += `
+                <div class="filter-group">
+                    <button class="filter-btn ${currentFilter.cat === cat ? 'active' : ''}" onclick="filterProducts('${cat}')">
+                        ${cat}
+                    </button>
+                </div>`;
+            });
+
+            filterContainer.innerHTML = html;
+        }
+
+        function initSlider() {
+            const slides = document.querySelectorAll('.slide');
+            let current = 0;
+            setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 5000);
+        }
+
+        function filterProducts(cat, sub = null) {
+            currentFilter = { cat, sub };
+            populateCategories();
+            renderProducts(cat, sub);
+        }
+
+        // (تعديل 3 و 4: تحسين الكارد والوصف)
+        function renderProducts(cat, sub) {
+            const offersContainer = document.getElementById('offersContainer');
+            const productsContainer = document.getElementById('productsContainer');
+            offersContainer.innerHTML = '';
+            productsContainer.innerHTML = '';
+
+            products.forEach(p => {
+                const cardHTML = `
+                    <div class="card">
+                        ${p.offer ? '<span class="offer-tag">عرض ذهبي</span>' : ''}
+                        <img src="${p.img}" class="card-img" alt="${p.name}" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+                        <div class="card-body">
+                            <div class="card-cat">${p.cat}</div>
+                            <h3 class="card-title">${p.name}</h3>
+                            <p class="card-desc">${p.desc}</p>
+                            <div class="card-price">${p.price} جنيه</div>
+                            <div class="card-actions">
+                                <input type="number" id="qty-${p.id}" class="qty-input" value="1" min="1">
+                                <button class="btn" onclick="addToCart(${p.id})">إضافة للسلة <i class="fas fa-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <!-- طبقة الوصف الشفافة -->
+                        <div class="desc-overlay">
+                            <h4>${p.name}</h4>
+                            <p>${p.desc || 'لا يوجد وصف تفصيلي.'}</p>
+                        </div>
+                    </div>
+                `;
+
+                if (p.offer) offersContainer.innerHTML += cardHTML;
+
+                let shouldShow = false;
+                if (cat === 'all') shouldShow = true;
+                else shouldShow = (p.cat === cat);
+
+                if (shouldShow) productsContainer.innerHTML += cardHTML;
+            });
+        }
+
+        // (تعديل 1: منطق إدارة الفئات)
+        function updateCategoryName() {
+            const oldName = document.getElementById('oldCatName').value.trim();
+            const newName = document.getElementById('newCatName').value.trim();
+
+            if (!oldName || !newName) { alert("يرجى كتابة الاسم القديم والجديد"); return; }
+
+            // البحث عن كل المنتجات التي تحمل الاسم القديم وتحديثها
+            const updates = {};
+            let count = 0;
+
+            products.forEach(p => {
+                if (p.cat === oldName) {
+                    updates['/products/' + p.id + '/cat'] = newName;
+                    count++;
+                }
+            });
+
+            if (count > 0) {
+                db.ref().update(updates).then(() => {
+                    alert(`تم تحديث الفئة في ${count} منتجات بنجاح!`);
+                    closeModal('catManagerModal');
+                });
+            } else {
+                alert("لم يتم العثور على منتجات بهذه الفئة");
+            }
+        }
+
+        function deleteCategoryRef() {
+            const catToDelete = document.getElementById('oldCatName').value.trim();
+            if (!catToDelete) { alert("اكتب اسم الفئة للحذف"); return; }
+
+            if (confirm(`هل أنت متأكد؟ سيتم حذف جميع المنتجات في فئة "${catToDelete}"!`)) {
+                let count = 0;
+                products.forEach(p => {
+                    if (p.cat === catToDelete) {
+                        db.ref('products/' + p.id).remove();
+                        count++;
+                    }
+                });
+                alert(`تم حذف ${count} منتجات.`);
+                closeModal('catManagerModal');
+            }
+        }
+
+        function addToCart(id) {
+            const qtyInput = document.getElementById(`qty-${id}`);
+            const qty = parseInt(qtyInput.value) || 1;
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(item => item.id === id);
+            if (existing) existing.qty += qty;
+            else cart.push({ ...product, qty: qty });
+            updateCartUI();
+            const btn = event.target.tagName === 'BUTTON' ? event.target : event.target.parentElement;
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> تم الإضافة';
+            btn.style.background = 'var(--secondary)';
+            setTimeout(() => { btn.innerHTML = originalHTML; btn.style.background = ''; }, 1000);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cartCount').textContent = cart.reduce((acc, item) => acc + item.qty, 0);
+            const cartBox = document.getElementById('cartItems');
+            cartBox.innerHTML = '';
+            let total = 0;
+            if (cart.length === 0) cartBox.innerHTML = '<p style="text-align:center; color:#777; padding:20px;">سلتك فارغة حالياً</p>';
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                cartBox.innerHTML += `
+                    <div class="cart-item">
+                        <div style="display:flex; align-items:center; gap:10px">
+                            <img src="${item.img}">
+                            <div><h4>${item.name}</h4><small>${item.price} × ${item.qty} = ${item.price * item.qty}</small></div>
+                        </div>
+                        <button class="btn-danger" onclick="removeFromCart(${index})" style="width:auto; padding:5px 12px; border-radius:50%"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+            });
+            document.getElementById('cartTotal').textContent = total;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function checkout(e) {
+            e.preventDefault();
+            if (cart.length === 0) { alert("السلة فارغة!"); return; }
+            const newInvId = (settings.lastInvoice || 1000) + 1;
+            db.ref('settings/lastInvoice').set(newInvId);
+            const name = document.getElementById('cName').value;
+            const phone = document.getElementById('cPhone').value;
+            const gov = document.getElementById('cGov').value;
+            const address = document.getElementById('cAddress').value;
+            const total = document.getElementById('cartTotal').textContent;
+            const orderData = { invId: newInvId, date: new Date().toLocaleDateString(), name, phone, gov, address, total, items: cart };
+            db.ref('orders/' + newInvId).set(orderData)
+                .then(() => {
+                    let msgText = `*طلب جديد - GREEN GOLDEN*\n`;
+                    msgText += `*فاتورة رقم:* #${newInvId}\n------------------\n👤 *العميل:* ${name}\n📱 *هاتف:* ${phone}\n📍 *عنوان:* ${gov} - ${address}\n------------------\n🌱 *المنتجات:*\n`;
+                    cart.forEach(item => {
+                        msgText += `- ${item.name} (عدد ${item.qty})\n`;
+                    });
+                    msgText += `------------------\n💰 *الإجمالي: ${total} جنيه*`;
+                    const encodedMsg = encodeURIComponent(msgText);
+                    cart = []; updateCartUI(); closeModal('cartModal');
+                    window.open(`https://wa.me/${settings.adminPhone}?text=${encodedMsg}`, '_blank');
+                })
+                .catch(err => alert("خطأ: " + err.message));
+        }
+
+        function loginAdmin() {
+            const u = document.getElementById('adminUser').value;
+            const p = document.getElementById('adminPass').value;
+            if (u === 'admin' && p === 'gold123') {
+                closeModal('adminLoginModal');
+                document.getElementById('adminDashboard').style.display = 'block';
+                renderAdminProductsTable();
+            } else alert("بيانات الدخول غير صحيحة");
+        }
+
+        function logoutAdmin() { document.getElementById('adminDashboard').style.display = 'none'; }
+
+        function saveSettings() {
+            const newPhone = document.getElementById('adminPhone').value;
+            db.ref('settings/adminPhone').set(newPhone).then(() => alert("تم حفظ رقم الواتساب"));
+        }
+
+        function handleProductSubmit(e) {
+            e.preventDefault();
+            const newProdData = {
+                name: document.getElementById('pName').value,
+                img: document.getElementById('pImg').value,
+                cat: document.getElementById('pCat').value, // Text Input
+                sub: document.getElementById('pSubCat').value,
+                price: Number(document.getElementById('pPrice').value),
+                offer: document.getElementById('pOffer').value === 'true',
+                desc: document.getElementById('pDesc').value
+            };
+
+            if (editingProductId) {
+                newProdData.id = editingProductId;
+                db.ref('products/' + editingProductId).set(newProdData).then(() => { alert("تم التعديل"); cancelEdit(); });
+            } else {
+                const newId = Date.now();
+                newProdData.id = newId;
+                db.ref('products/' + newId).set(newProdData).then(() => { alert("تمت الإضافة"); document.getElementById('productForm').reset(); });
+            }
+        }
+
+        function deleteProduct(id) {
+            if (confirm("هل أنت متأكد من حذف هذا المنتج؟")) db.ref('products/' + id).remove().then(() => alert("تم الحذف"));
+        }
+
+        function startEditProduct(id) {
+            const p = products.find(p => p.id === id);
+            if (!p) return;
+            document.getElementById('pId').value = p.id;
+            document.getElementById('pName').value = p.name;
+            document.getElementById('pImg').value = p.img;
+            document.getElementById('pCat').value = p.cat;
+            document.getElementById('pSubCat').value = p.sub || "";
+            document.getElementById('pPrice').value = p.price;
+            document.getElementById('pOffer').value = p.offer.toString();
+            document.getElementById('pDesc').value = p.desc;
+            editingProductId = id;
+            document.getElementById('formTitle').textContent = "تعديل: " + p.name;
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = "حفظ التعديلات"; btn.classList.add('btn-warning');
+            document.getElementById('cancelEditBtn').style.display = 'inline-block';
+            document.getElementById('productForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function cancelEdit() {
+            document.getElementById('productForm').reset();
+            editingProductId = null;
+            document.getElementById('formTitle').textContent = "إضافة منتج جديد";
+            const btn = document.getElementById('submitBtn');
+            btn.textContent = "إضافة المنتج"; btn.classList.remove('btn-warning');
+            document.getElementById('cancelEditBtn').style.display = 'none';
+        }
+
+        function renderAdminProductsTable() {
+            const tbody = document.getElementById('adminProductTableBody');
+            tbody.innerHTML = '';
+            products.forEach(p => {
+                tbody.innerHTML += `<tr><td><img src="${p.img}" alt="img"></td><td>${p.name}</td><td>${p.price}</td><td>${p.cat}</td><td><div class="action-btns"><button class="btn-warning" onclick="startEditProduct(${p.id})"><i class="fas fa-edit"></i></button><button class="btn-danger" onclick="deleteProduct(${p.id})"><i class="fas fa-trash"></i></button></div></td></tr>`;
+            });
+        }
+
+        function exportToExcel() {
+            if (orders.length === 0) { alert("لا توجد طلبات"); return; }
+            const data = orders.map(o => ({ "فاتورة": o.invId, "تاريخ": o.date, "عميل": o.name, "هاتف": o.phone, "عنوان": o.gov + ' ' + o.address, "إجمالي": o.total, "أصناف": o.items ? o.items.map(i => `${i.name}(${i.qty})`).join(', ') : '' }));
+            const ws = XLSX.utils.json_to_sheet(data);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Sales");
+            XLSX.writeFile(wb, "GreenGolden_Sales.xlsx");
+        }
     </script>
 </body>
 
+</html>
