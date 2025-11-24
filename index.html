@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GREEN GOLDEN - للمنتجات الزراعية</title>
+
+    <!-- (جديد) أيقونة الموقع (الوردة) في التابا -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/628/628283.png" type="image/png">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
@@ -23,146 +27,640 @@
             --shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
-        * { box-sizing: border-box; font-family: 'Calibri', 'Segoe UI', Tahoma, sans-serif; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            font-family: 'Calibri', 'Segoe UI', Tahoma, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
-            background-image: url("https://images.pexels.com/photos/673535/pexels-photo-673535.jpeg");
-            background-size: cover; background-repeat: no-repeat; background-position: center;
-            color: var(--dark); overflow-x: hidden; position: relative; min-height: 100vh;
-            display: flex; flex-direction: column;
+            background-image: url("https://images.pexels.com/photos/5231086/pexels-photo-5231086.jpeg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: var(--dark);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         body::before {
-            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20220910/pngtree-vegetable-display-at-market-prices-shop-agriculture-photo-image_3089795.jpg');
-            background-repeat: no-repeat; background-position: center center; background-size: 400px;
-            opacity: 0.05; z-index: -1; pointer-events: none;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 400px;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
         }
 
         header {
-            background: rgba(255, 255, 255, 0.98); padding: 10px 5%; display: flex;
-            justify-content: space-between; align-items: center; box-shadow: var(--shadow);
-            position: sticky; top: 0; z-index: 1000; border-bottom: 4px solid var(--secondary);
+            background: rgba(255, 255, 255, 0.98);
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 4px solid var(--secondary);
         }
 
-        .logo-container { display: flex; align-items: center; gap: 10px; }
-        .logo-img { height: 55px; width: auto; }
-        .logo-text { font-size: 1.8rem; font-weight: bold; color: var(--primary); text-shadow: 1px 1px 0px var(--accent); }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-        .nav-btn { background: none; border: none; font-size: 1.3rem; cursor: pointer; position: relative; margin-right: 15px; color: var(--primary); transition: 0.3s; }
-        .nav-btn:hover { color: var(--secondary); transform: scale(1.1); }
-        .badge { position: absolute; top: -8px; right: -8px; background: var(--secondary); color: white; border-radius: 50%; padding: 3px 6px; font-size: 0.75rem; border: 1px solid white; }
+        .logo-img {
+            height: 55px;
+            width: auto;
+        }
 
-        .hero-slider { height: 450px; position: relative; overflow: hidden; margin-bottom: 30px; border-bottom: 5px solid var(--secondary); }
-        .slide { position: absolute; width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; }
-        .slide::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.4); }
-        .slide.active { opacity: 1; }
-        .slide-content { background: rgba(255, 255, 255, 0.9); padding: 30px; border-radius: 15px; text-align: center; max-width: 600px; z-index: 2; border: 2px solid var(--secondary); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
-        .slide-content h2 { color: var(--primary); font-size: 2.5rem; margin-bottom: 10px; }
-        .slide-content p { font-size: 1.2rem; color: #555; }
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-shadow: 1px 1px 0px var(--accent);
+        }
 
-        .section-title { text-align: center; margin: 50px auto 30px; font-size: 2rem; color: var(--primary); font-weight: bold; background: rgba(255, 255, 255, 0.9); width: fit-content; padding: 12px 50px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); backdrop-filter: blur(5px); border: 2px solid var(--secondary); }
+        .nav-btn {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            position: relative;
+            margin-right: 15px;
+            color: var(--primary);
+            transition: 0.3s;
+        }
 
-        /* --- الفلاتر (تعديل: عدد غير محدود وسكرول) --- */
+        .nav-btn:hover {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            padding: 3px 6px;
+            font-size: 0.75rem;
+            border: 1px solid white;
+        }
+
+        .hero-slider {
+            height: 450px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border-bottom: 5px solid var(--secondary);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 600px;
+            z-index: 2;
+            border: 2px solid var(--secondary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slide-content h2 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 50px auto 30px;
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.9);
+            width: fit-content;
+            padding: 12px 50px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            border: 2px solid var(--secondary);
+        }
+
+        /* الفلاتر */
         .filters {
-            text-align: center; margin-bottom: 30px; display: flex;
-            justify-content: center; gap: 10px;
-            flex-wrap: nowrap; /* منع نزول السطر */
-            overflow-x: auto; /* سكرول أفقي */
+            text-align: center;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
             padding-bottom: 10px;
             scrollbar-width: thin;
         }
-        .filters::-webkit-scrollbar { height: 6px; }
-        .filters::-webkit-scrollbar-thumb { background: var(--secondary); border-radius: 10px; }
 
-        .filter-group { position: relative; display: inline-block; flex-shrink: 0; }
+        .filters::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .filters::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 10px;
+        }
+
+        .filter-group {
+            position: relative;
+            display: inline-block;
+            flex-shrink: 0;
+        }
 
         .filter-btn {
-            background: white; border: 2px solid #ddd; padding: 10px 25px;
-            border-radius: 25px; cursor: pointer; transition: 0.3s;
-            font-weight: bold; color: var(--primary); font-size: 1.1rem;
-            display: flex; align-items: center; gap: 5px; white-space: nowrap;
+            background: white;
+            border: 2px solid #ddd;
+            padding: 10px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
         }
-        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3); }
 
-        .offers-grid, .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 30px; padding: 0 5%; margin-bottom: 50px; }
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+        }
 
-        /* --- الكارد (تعديل: الصورة والوصف) --- */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 8px;
+            border: 1px solid var(--secondary);
+        }
+
+        .filter-group:hover .dropdown-menu {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .dropdown-item {
+            color: var(--dark);
+            padding: 12px 15px;
+            text-decoration: none;
+            display: block;
+            text-align: right;
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 1px solid #f5f5f5;
+            transition: 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: var(--light);
+            color: var(--primary);
+            padding-right: 20px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .offers-grid,
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+            margin-bottom: 50px;
+        }
+
         .card {
-            background: white; border-radius: 15px; overflow: hidden;
-            box-shadow: var(--shadow); transition: transform 0.3s; border: 1px solid #eee;
-            position: relative; display: flex; flex-direction: column; height: 100%;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            border: 1px solid #eee;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
-        .card:hover { transform: translateY(-7px); border-color: var(--secondary); }
 
-        /* حاوية الصورة */
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: var(--secondary);
+        }
+
         .img-wrapper {
-            position: relative; width: 100%; height: 250px; background: #fff; overflow: hidden; cursor: help;
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: #fff;
+            overflow: hidden;
+            cursor: help;
         }
-        
-        /* الصورة تظهر بالكامل */
-        .card-img { width: 100%; height: 100%; object-fit: contain; padding: 5px; }
 
-        /* طبقة الوصف الشفافة */
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
         .desc-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.96); /* شفافية عالية */
-            color: #333; padding: 20px;
-            opacity: 0; transition: opacity 0.3s ease;
-            overflow-y: auto; z-index: 5;
-            display: flex; flex-direction: column; justify-content: flex-start; text-align: right;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.96);
+            color: #333;
+            padding: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+            z-index: 5;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            text-align: right;
             pointer-events: none;
         }
-        
-        /* التفاعل مع الوصف */
-        .img-wrapper:hover .desc-overlay, .img-wrapper.active .desc-overlay {
-            opacity: 1; pointer-events: auto;
+
+        .img-wrapper:hover .desc-overlay,
+        .img-wrapper.active .desc-overlay {
+            opacity: 1;
+            pointer-events: auto;
         }
 
-        .desc-overlay h4 { color: var(--primary); margin-bottom: 10px; border-bottom: 2px solid var(--secondary); display: inline-block; padding-bottom: 5px; text-align: center; width: 100%; }
-        .desc-overlay p { font-size: 1rem; line-height: 1.6; white-space: pre-wrap; }
+        .desc-overlay h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+            display: inline-block;
+            padding-bottom: 5px;
+            text-align: center;
+            width: 100%;
+        }
 
-        .card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; background: white; position: relative; z-index: 10; }
-        
-        /* عرض الفئة والفئة الفرعية */
-        .cat-badge { font-size: 0.8rem; background: #f0f0f0; padding: 3px 8px; border-radius: 4px; color: #555; display: inline-block; margin-bottom: 5px; width: fit-content; }
+        .desc-overlay p {
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
 
-        .card-title { font-size: 1.4rem; margin: 5px 0; color: var(--primary); font-weight: bold; }
-        .card-price { font-size: 1.5rem; color: var(--dark); font-weight: bold; margin-bottom: 15px; }
-        .offer-tag { position: absolute; top: 15px; right: 15px; background: var(--danger); color: white; padding: 5px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); z-index: 6; }
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background: white;
+            position: relative;
+            z-index: 10;
+        }
 
-        .card-actions { display: flex; gap: 8px; margin-top: auto; }
-        .qty-input { width: 65px; padding: 8px; text-align: center; border: 2px solid var(--light); border-radius: 8px; font-weight: bold; font-size: 1.1rem; }
-        .btn { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.1rem; transition: 0.3s; font-weight: bold; }
-        .btn:hover { background: var(--secondary); }
-        .btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
-        .btn-outline:hover { background: var(--primary); color: white; }
-        .btn-danger { background: var(--danger); }
-        .btn-warning { background: #f39c12; color: white; }
+        .card-cat {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 2000; justify-content: center; align-items: center; overflow-y: auto; backdrop-filter: blur(4px); }
-        .modal-content { background: white; padding: 35px; border-radius: 15px; width: 90%; max-width: 600px; position: relative; max-height: 90vh; overflow-y: auto; border-top: 6px solid var(--secondary); }
-        .close-modal { position: absolute; left: 20px; top: 20px; font-size: 1.5rem; cursor: pointer; color: #aaa; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: var(--dark); }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; background: #fafafa; font-size: 1rem; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 15px 0; }
-        .cart-item img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; border: 1px solid #ddd; }
-        .admin-panel { display: none; padding: 25px; background: white; margin: 20px; border-radius: 15px; border: 1px solid #ddd; box-shadow: var(--shadow); }
-        .admin-header { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px; }
-        .product-table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
-        .product-table th, .product-table td { border: 1px solid #eee; padding: 12px; text-align: center; }
-        .product-table th { background: var(--primary); color: white; }
-        .product-table img { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; }
-        .action-btns { display: flex; justify-content: center; gap: 5px; }
-        .loading-msg { text-align: center; padding: 15px 30px; font-weight: bold; color: var(--primary); display: none; background: white; width: fit-content; margin: 20px auto; border-radius: 50px; box-shadow: var(--shadow); border: 1px solid var(--secondary); }
+        .card-title {
+            font-size: 1.4rem;
+            margin: 5px 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
 
-        footer { background: #1a1a1a; color: #eee; padding: 50px 20px; margin-top: auto; text-align: center; border-top: 6px solid var(--secondary); }
-        .footer-content { max-width: 1000px; margin: 0 auto; }
-        .footer-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 20px; color: var(--secondary); }
-        .footer-info { font-size: 1.2rem; line-height: 2; margin-bottom: 15px; }
-        .footer-info i { margin-left: 10px; color: var(--primary); }
-        .footer-copyright { margin-top: 30px; font-size: 0.9rem; opacity: 0.6; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; }
+        .card-price {
+            font-size: 1.5rem;
+            color: var(--dark);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .offer-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--danger);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            z-index: 6;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .qty-input {
+            width: 65px;
+            padding: 8px;
+            text-align: center;
+            border: 2px solid var(--light);
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-top: 6px solid var(--secondary);
+        }
+
+        .close-modal {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: #fafafa;
+            font-size: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .admin-panel {
+            display: none;
+            padding: 25px;
+            background: white;
+            margin: 20px;
+            border-radius: 15px;
+            border: 1px solid #ddd;
+            box-shadow: var(--shadow);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+
+        .product-table th,
+        .product-table td {
+            border: 1px solid #eee;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .product-table th {
+            background: var(--primary);
+            color: white;
+        }
+
+        .product-table img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .action-btns {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .loading-msg {
+            text-align: center;
+            padding: 15px 30px;
+            font-weight: bold;
+            color: var(--primary);
+            display: none;
+            background: white;
+            width: fit-content;
+            margin: 20px auto;
+            border-radius: 50px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--secondary);
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #eee;
+            padding: 50px 20px;
+            margin-top: auto;
+            text-align: center;
+            border-top: 6px solid var(--secondary);
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-info {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 15px;
+        }
+
+        .footer-info i {
+            margin-left: 10px;
+            color: var(--primary);
+        }
+
+        .footer-copyright {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
     </style>
 </head>
 
@@ -187,19 +685,22 @@
 
     <!-- Slider -->
     <div class="hero-slider" id="slider">
-        <div class="slide active" style="background-image: url('https://mashhourseeds.com/wp-content/uploads/2023/11/%D8%B7%D9%84%D8%A7%D8%A1-%D8%A8%D8%B0%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D9%88%D9%8A-1140x570-1.jpg');">
+        <div class="slide active"
+            style="background-image: url('https://mashhourseeds.com/wp-content/uploads/2023/11/%D8%B7%D9%84%D8%A7%D8%A1-%D8%A8%D8%B0%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D9%88%D9%8A-1140x570-1.jpg');">
             <div class="slide-content">
                 <h2>أفضل البذور الزراعية</h2>
                 <p>إنتاجية عالية ومحاصيل وفيرة بجودة عالمية</p>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://modo3.com/thumbs/fit630x300/271937/1690982594/%D8%A3%D9%86%D9%88%D8%A7%D8%B9_%D8%A7%D9%84%D8%A3%D8%B3%D9%85%D8%AF%D8%A9_%D9%88%D9%81%D9%88%D8%A7%D8%A6%D8%AF%D9%87%D8%A7.jpg');">
+        <div class="slide"
+            style="background-image: url('https://modo3.com/thumbs/fit630x300/271937/1690982594/%D8%A3%D9%86%D9%88%D8%A7%D8%B9_%D8%A7%D9%84%D8%A3%D8%B3%D9%85%D8%AF%D8%A9_%D9%88%D9%81%D9%88%D8%A7%D8%A6%D8%AF%D9%87%D8%A7.jpg');">
             <div class="slide-content">
                 <h2>أسمدة ومغذيات</h2>
                 <p>حلول متكاملة لتربة خصبة ونباتات قوية</p>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://i.ytimg.com/vi/9lwOFgFdCYo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDaKlXGSiQfI6DAkPL4uST-JwVxDw');">
+        <div class="slide"
+            style="background-image: url('https://i.ytimg.com/vi/9lwOFgFdCYo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDaKlXGSiQfI6DAkPL4uST-JwVxDw');">
             <div class="slide-content">
                 <h2>معدات زراعية حديثة</h2>
                 <p>تكنولوجيا متطورة لخدمة المزارع العصري</p>
@@ -214,7 +715,8 @@
         <div class="admin-header">
             <h2><i class="fas fa-tachometer-alt"></i> لوحة تحكم - GREEN GOLDEN</h2>
             <div>
-                <button class="btn" onclick="openModal('catManagerModal')" style="width:auto; background:#007bff; margin-left:5px;">إدارة الفئات</button>
+                <button class="btn" onclick="openModal('catManagerModal')"
+                    style="width:auto; background:#007bff; margin-left:5px;">إدارة الفئات</button>
                 <button class="btn btn-danger" onclick="logoutAdmin()" style="width:auto">خروج</button>
                 <button class="btn" onclick="exportToExcel()" style="width:auto; background:green"><i
                         class="fas fa-file-excel"></i> تصدير المبيعات</button>
@@ -237,27 +739,51 @@
                     <div class="form-group"><label>اسم المنتج</label><input type="text" id="pName" required></div>
                     <div class="form-group"><label>السعر</label><input type="number" id="pPrice" required></div>
                 </div>
-                <div class="form-group"><label>رابط الصورة</label><input type="text" id="pImg" placeholder="https://..." required></div>
-                
-                <!-- (تعديل) إضافة حقل الفئة الفرعية مرة أخرى -->
-                <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
-                    <div>
-                        <label>الفئة الرئيسية</label>
-                        <input type="text" id="pCat" placeholder="مثال: بذور" required>
+                <div class="form-group"><label>رابط الصورة</label><input type="text" id="pImg" placeholder="https://..."
+                        required></div>
+
+                <div class="form-group">
+                    <label>الفئة الرئيسية</label>
+                    <div style="display:flex; gap:5px;">
+                        <select id="pCat" required style="flex:1"></select>
+                        <button type="button" onclick="addNewCategory()" class="btn-outline" style="width:auto;"
+                            title="إضافة فئة جديدة">+</button>
+                        <button type="button" onclick="removeCategory()" class="btn-danger" style="width:auto;"
+                            title="حذف فئة">-</button>
                     </div>
-                    <div>
-                        <label>الفئة الفرعية (اختياري)</label>
-                        <input type="text" id="pSubCat" placeholder="مثال: طماطم">
+                </div>
+                <div class="form-group"><label>فئة فرعية (للقائمة المنسدلة)</label><input type="text" id="pSubCat"
+                        placeholder="مثال: بذور خضروات، أسمدة سائلة..."></div>
+
+                <!-- (تعديل) هنا أضفنا خيار حالة المنتج والعرض -->
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap:15px;">
+                    <div class="form-group">
+                        <label>نوع العرض</label>
+                        <select id="pOffer">
+                            <option value="false">منتج عادي</option>
+                            <option value="true">عرض خاص (Golden Offer)</option>
+                        </select>
+                    </div>
+
+                    <!-- (جديد) حالة الظهور في الموقع -->
+                    <div class="form-group">
+                        <label>حالة المنتج</label>
+                        <select id="pStatus" style="border:2px solid var(--primary);">
+                            <option value="true">✔ متوفر (متاح للبيع)</option>
+                            <option value="false">✖ غير متوفر (نفذت الكمية)</option>
+                        </select>
+                    </div>
+
+                    <!-- (جديد) إمكانية الإخفاء تماماً -->
+                    <div class="form-group">
+                        <label>عرض في الموقع؟</label>
+                        <select id="pVisible">
+                            <option value="true">👁️ ظاهر للعملاء</option>
+                            <option value="false">🙈 مخفي (مسودة)</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>نوع العرض</label>
-                    <select id="pOffer">
-                        <option value="false">منتج عادي</option>
-                        <option value="true">عرض خاص (Golden Offer)</option>
-                    </select>
-                </div>
                 <div class="form-group"><label>الوصف</label><textarea id="pDesc" rows="2" required></textarea></div>
                 <div style="display:flex; gap:10px">
                     <button type="submit" class="btn" id="submitBtn">إضافة المنتج</button>
@@ -274,7 +800,7 @@
                             <th>صورة</th>
                             <th>المنتج</th>
                             <th>السعر</th>
-                            <th>الفئة</th>
+                            <th>الحالة</th> <!-- (تعديل) عمود الحالة -->
                             <th>تحكم</th>
                         </tr>
                     </thead>
@@ -288,7 +814,7 @@
     <h2 class="section-title">عروض GREEN GOLDEN</h2>
     <div class="offers-grid" id="offersContainer"></div>
 
-    <h2 class="section-title" id="productsTitle">جميع المنتجات</h2>
+    <h2 class="section-title">جميع المنتجات</h2>
     <div class="filters" id="categoryFilters"></div>
     <div class="products-grid" id="productsContainer"></div>
 
@@ -302,9 +828,9 @@
             </div>
             <div class="footer-info">
                 <i class="fas fa-phone"></i>
-                المبيعات: 01150009852 <br>
+                المبيعات: 01xxxxxxxxx <br>
                 <i class="fas fa-mobile-alt"></i>
-                الإدارة: 01000602170
+                الإدارة: 01xxxxxxxxx
             </div>
             <div class="footer-copyright">
                 جميع الحقوق محفوظة &copy; 2025 GREEN GOLDEN
@@ -313,29 +839,23 @@
     </footer>
 
     <!-- Cart Modal -->
-   <!-- Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('cartModal')">&times;</span>
             <h2><i class="fas fa-shopping-basket"></i> سلة المشتريات</h2>
-            <div id="cartItems" style="margin:20px 0"></div>
-            <div style="margin-top:20px; font-weight:bold; font-size:1.2rem; color: var(--primary);">الإجمالي: <span id="cartTotal">0</span> جنيه</div>
-            <hr style="margin:15px 0">
+            <div id="cartItems"></div>
+            <div style="margin-top:20px; font-weight:bold; font-size:1.2rem; color: var(--primary);">الإجمالي: <span
+                    id="cartTotal">0</span> جنيه</div>
+            <hr style="margin: 20px 0; border-color: #eee;">
             <h3>بيانات العميل</h3>
-            
-            <!-- الفورم لازم يكون بالشكل ده -->
-            <form onsubmit="checkout(event)">
+            <form id="checkoutForm" onsubmit="checkout(event)">
                 <div class="form-group"><label>الاسم بالكامل</label><input type="text" id="cName" required></div>
                 <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="cPhone" required></div>
-                <div class="form-group"><label>المحافظة</label>
-                    <select id="cGov" required><option value="">اختر المحافظة</option></select>
-                </div>
+                <div class="form-group"><label>المحافظة</label><select id="cGov" required>
+                        <option value="">اختر المحافظة</option>
+                    </select></div>
                 <div class="form-group"><label>العنوان بالتفصيل</label><input type="text" id="cAddress" required></div>
-                
-                <!-- زرار الارسال -->
-                <button type="submit" class="btn-primary" style="background:#f0c14b; color:#111; border:1px solid #a88734; font-weight:bold; width:100%; padding:12px;">
-                    <i class="fab fa-whatsapp"></i> إرسال الطلب فوراً
-                </button>
+                <button type="submit" class="btn"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
             </form>
         </div>
     </div>
@@ -351,33 +871,10 @@
         </div>
     </div>
 
-    <!-- Category Manager Modal (تعديل: نافذة إدارة الفئات) -->
-    <div id="catManagerModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('catManagerModal')">&times;</span>
-            <h2 style="color:var(--primary);">إدارة الفئات</h2>
-            <p style="color:#666; margin-bottom:15px">لتغيير اسم فئة، اكتب الاسم القديم والجديد. سيتم تحديث جميع المنتجات.</p>
-            <div class="form-group">
-                <label>اسم الفئة الحالية</label>
-                <input type="text" id="oldCatName" placeholder="مثلاً: بزور">
-            </div>
-            <div class="form-group">
-                <label>الاسم الجديد</label>
-                <input type="text" id="newCatName" placeholder="مثلاً: بذور">
-            </div>
-            <div style="display:flex; gap:10px">
-                <button class="btn" onclick="updateCategoryName()">تحديث الاسم</button>
-                <button class="btn btn-danger" onclick="deleteCategoryRef()">حذف الفئة</button>
-            </div>
-        </div>
-    </div>
-
     <!-- JavaScript -->
     <script>
-        const _0x30953c=_0x223d;(function(_0x9af333,_0x240dfc){const _0x3e9c08=_0x223d,_0x5e770f=_0x9af333();while(!![]){try{const _0x3789bf=parseInt(_0x3e9c08(0x17f))/0x1+parseInt(_0x3e9c08(0x17e))/0x2+parseInt(_0x3e9c08(0x191))/0x3+-parseInt(_0x3e9c08(0x1b5))/0x4*(-parseInt(_0x3e9c08(0x1b2))/0x5)+parseInt(_0x3e9c08(0x13e))/0x6*(-parseInt(_0x3e9c08(0x11f))/0x7)+parseInt(_0x3e9c08(0x16f))/0x8*(-parseInt(_0x3e9c08(0x1dc))/0x9)+-parseInt(_0x3e9c08(0x15a))/0xa;if(_0x3789bf===_0x240dfc)break;else _0x5e770f['push'](_0x5e770f['shift']());}catch(_0x1f80b8){_0x5e770f['push'](_0x5e770f['shift']());}}}(_0xad38,0xcd790));const firebaseConfig={'apiKey':_0x30953c(0x123),'authDomain':'green-golden-dad1c.firebaseapp.com','databaseURL':'https://green-golden-dad1c-default-rtdb.firebaseio.com','projectId':_0x30953c(0x13c),'storageBucket':_0x30953c(0x163),'messagingSenderId':_0x30953c(0x122),'appId':_0x30953c(0x15c),'measurementId':_0x30953c(0x1e2)};if(!firebase['apps'][_0x30953c(0x1ef)])try{firebase[_0x30953c(0x136)](firebaseConfig);}catch(_0x4a85e8){console['error'](_0x30953c(0x198),_0x4a85e8);}const db=firebase[_0x30953c(0x125)]();let products=[],categories=[],cart=[],orders=[],settings={'adminPhone':_0x30953c(0x151),'lastInvoice':0x3e8},editingProductId=null,currentFilter={'cat':'all','sub':null};const governorates=[_0x30953c(0x134),_0x30953c(0x15f),_0x30953c(0x1d0),_0x30953c(0x19a),_0x30953c(0x193),_0x30953c(0x153),_0x30953c(0x135),_0x30953c(0x1b4),_0x30953c(0x178),_0x30953c(0x1cc),_0x30953c(0x1d1),_0x30953c(0x18e),_0x30953c(0x146),_0x30953c(0x173),'مطروح',_0x30953c(0x141),'جنوب\x20سيناء',_0x30953c(0x1c8),'الفيوم',_0x30953c(0x1c0),_0x30953c(0x1e7),_0x30953c(0x196),_0x30953c(0x1ce),_0x30953c(0x16d),_0x30953c(0x1cd),_0x30953c(0x1a9),_0x30953c(0x18f)];document[_0x30953c(0x1c4)](_0x30953c(0x12f),()=>{const _0x2addae=_0x30953c;initSlider(),populateGovernorates(),document[_0x2addae(0x1f2)](_0x2addae(0x1c1))[_0x2addae(0x1df)][_0x2addae(0x1a2)]='block',db['ref'](_0x2addae(0x1a4))['on'](_0x2addae(0x1bd),_0x4e9fbc=>{const _0x3a7209=_0x2addae,_0xb8bdbb=_0x4e9fbc[_0x3a7209(0x19c)]();products=_0xb8bdbb?Object[_0x3a7209(0x12b)](_0xb8bdbb):[],populateCategories(),renderProducts(currentFilter[_0x3a7209(0x1c5)],currentFilter[_0x3a7209(0x175)]),renderAdminProductsTable(),document['getElementById'](_0x3a7209(0x1c1))['style']['display']=_0x3a7209(0x12c);}),db['ref'](_0x2addae(0x14a))['on']('value',_0x583c30=>{const _0x192859=_0x2addae,_0x22978f=_0x583c30[_0x192859(0x19c)]();if(Array[_0x192859(0x162)](_0x22978f))categories=_0x22978f;else{if(_0x22978f)categories=Object[_0x192859(0x12b)](_0x22978f);else categories=[_0x192859(0x13d),_0x192859(0x114),'مبيدات','معدات'];}populateCategories();}),db[_0x2addae(0x14e)]('settings')['on'](_0x2addae(0x1bd),_0x524afb=>{const _0x5f4b8c=_0x2addae,_0x34cdff=_0x524afb['val']();if(_0x34cdff)settings=_0x34cdff;else db[_0x5f4b8c(0x14e)](_0x5f4b8c(0x154))[_0x5f4b8c(0x1a0)](settings);document[_0x5f4b8c(0x1f2)](_0x5f4b8c(0x1a7))[_0x5f4b8c(0x1bd)]=settings[_0x5f4b8c(0x1a7)];}),db[_0x2addae(0x14e)](_0x2addae(0x1b1))['on'](_0x2addae(0x1bd),_0x2349c0=>{const _0x44e125=_0x2addae,_0x189cae=_0x2349c0[_0x44e125(0x19c)]();orders=_0x189cae?Object[_0x44e125(0x12b)](_0x189cae):[];});});function _0x223d(_0x4158b9,_0x3362f1){const _0xad3894=_0xad38();return _0x223d=function(_0x223d83,_0x4bfd5c){_0x223d83=_0x223d83-0x110;let _0x3f2ec5=_0xad3894[_0x223d83];return _0x3f2ec5;},_0x223d(_0x4158b9,_0x3362f1);}function openModal(_0x341ca8){const _0xcf4e24=_0x30953c;document['getElementById'](_0x341ca8)[_0xcf4e24(0x1df)][_0xcf4e24(0x1a2)]=_0xcf4e24(0x126);}function closeModal(_0x63349e){const _0x56978d=_0x30953c;document[_0x56978d(0x1f2)](_0x63349e)[_0x56978d(0x1df)][_0x56978d(0x1a2)]=_0x56978d(0x12c);}window[_0x30953c(0x186)]=function(_0x4701d1){const _0x130596=_0x30953c;if(_0x4701d1[_0x130596(0x1d9)][_0x130596(0x1e3)]['contains']('modal'))_0x4701d1[_0x130596(0x1d9)][_0x130596(0x1df)]['display']=_0x130596(0x12c);};function populateGovernorates(){const _0x32eefb=_0x30953c,_0x43ed93=document[_0x32eefb(0x1f2)]('cGov');_0x43ed93[_0x32eefb(0x1ea)]=_0x32eefb(0x1c9),governorates[_0x32eefb(0x118)](_0x38968e=>{const _0x4f876=_0x32eefb;let _0x5b1c43=document['createElement']('option');_0x5b1c43[_0x4f876(0x1bd)]=_0x38968e,_0x5b1c43[_0x4f876(0x1c7)]=_0x38968e,_0x43ed93[_0x4f876(0x1b0)](_0x5b1c43);});}function populateCategories(){const _0x1a0e7d=_0x30953c,_0x1ad8f9=document[_0x1a0e7d(0x1f2)](_0x1a0e7d(0x1d4));let _0x3f036b=_0x1a0e7d(0x14f)+(currentFilter[_0x1a0e7d(0x1c5)]==='all'?_0x1a0e7d(0x120):'')+'\x22\x20onclick=\x22filterProducts(\x27all\x27)\x22>عرض\x20الكل</button></div>';const _0x30f96a=[...new Set(products[_0x1a0e7d(0x1c6)](_0x675b1f=>_0x675b1f[_0x1a0e7d(0x1c5)]))][_0x1a0e7d(0x1d8)](_0x253eda=>_0x253eda);_0x30f96a[_0x1a0e7d(0x118)](_0x4b40c6=>{const _0x2145e2=_0x1a0e7d;_0x3f036b+=_0x2145e2(0x14d)+(currentFilter[_0x2145e2(0x1c5)]===_0x4b40c6?_0x2145e2(0x120):'')+_0x2145e2(0x1cf)+_0x4b40c6+_0x2145e2(0x1f3)+_0x4b40c6+'</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>';}),_0x1ad8f9[_0x1a0e7d(0x1ea)]=_0x3f036b;}function initSlider(){const _0x574913=_0x30953c,_0x20fa7d=document[_0x574913(0x188)](_0x574913(0x180));let _0x2a9ad9=0x0;setInterval(()=>{const _0x33f03b=_0x574913;_0x20fa7d[_0x2a9ad9]['classList'][_0x33f03b(0x18a)](_0x33f03b(0x120)),_0x2a9ad9=(_0x2a9ad9+0x1)%_0x20fa7d[_0x33f03b(0x1ef)],_0x20fa7d[_0x2a9ad9]['classList']['add'](_0x33f03b(0x120));},0x1388);}function filterProducts(_0xeaca8,_0x3ca7ff=null){const _0x524676=_0x30953c;currentFilter={'cat':_0xeaca8,'sub':_0x3ca7ff},populateCategories(),renderProducts(_0xeaca8,_0x3ca7ff);if(_0xeaca8==='all')document[_0x524676(0x1f2)]('productsTitle')[_0x524676(0x137)]='أحدث\x20المنتجات';else document[_0x524676(0x1f2)](_0x524676(0x18d))[_0x524676(0x137)]=_0x524676(0x150)+_0xeaca8;}function renderProducts(_0x488a27,_0xe6d6ec){const _0x5b7e66=_0x30953c,_0x4dc7c3=document[_0x5b7e66(0x1f2)](_0x5b7e66(0x112)),_0xc4c7f5=document[_0x5b7e66(0x1f2)]('productsContainer');_0x4dc7c3['innerHTML']='',_0xc4c7f5[_0x5b7e66(0x1ea)]='',products[_0x5b7e66(0x118)](_0xde5b5f=>{const _0x217c72=_0x5b7e66,_0x59df6e=_0xde5b5f[_0x217c72(0x175)]?_0x217c72(0x15b)+_0xde5b5f[_0x217c72(0x175)]:'',_0x126e9b=_0x217c72(0x194)+(_0xde5b5f['offer']?_0x217c72(0x166):'')+_0x217c72(0x1ae)+_0xde5b5f[_0x217c72(0x172)]+'\x22\x20class=\x22card-img\x22\x20alt=\x22'+_0xde5b5f[_0x217c72(0x12e)]+'\x22\x20onerror=\x22this.src=\x27https://via.placeholder.com/200?text=No+Image\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22desc-overlay\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4>'+_0xde5b5f[_0x217c72(0x12e)]+_0x217c72(0x1d2)+(_0xde5b5f[_0x217c72(0x138)]||_0x217c72(0x1e8))+'</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-cat\x22>'+_0xde5b5f[_0x217c72(0x1c5)]+_0x59df6e+_0x217c72(0x127)+_0xde5b5f[_0x217c72(0x12e)]+_0x217c72(0x1bc)+_0xde5b5f[_0x217c72(0x1de)]+'\x20<span>ج.م</span></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<input\x20type=\x22number\x22\x20id=\x22qty-'+_0xde5b5f['id']+_0x217c72(0x124)+_0xde5b5f['id']+_0x217c72(0x1ba);let _0x28e787=![];if(_0x488a27===_0x217c72(0x155))_0x28e787=!![];else _0x28e787=_0xde5b5f[_0x217c72(0x1c5)]===_0x488a27;if(_0x28e787){if(_0xde5b5f[_0x217c72(0x1d3)])_0x4dc7c3[_0x217c72(0x1ea)]+=_0x126e9b;_0xc4c7f5['innerHTML']+=_0x126e9b;}});}function addToCart(_0x30cba0){const _0x1f05a7=_0x30953c,_0xb9b621=document['getElementById'](_0x1f05a7(0x181)+_0x30cba0),_0x4ba09a=parseInt(_0xb9b621[_0x1f05a7(0x1bd)])||0x1,_0x2a4318=products[_0x1f05a7(0x161)](_0x22ddd0=>_0x22ddd0['id']==_0x30cba0);if(!_0x2a4318)return;const _0x42fe0a=cart[_0x1f05a7(0x161)](_0x17f681=>_0x17f681['id']==_0x30cba0);_0x42fe0a?_0x42fe0a[_0x1f05a7(0x16e)]+=_0x4ba09a:cart[_0x1f05a7(0x164)]({'id':_0x2a4318['id'],'name':_0x2a4318['name'],'price':Number(_0x2a4318['price']),'img':_0x2a4318[_0x1f05a7(0x172)],'shopName':_0x2a4318['shopName'],'merchantId':_0x2a4318['merchantId'],'merchantPhone':_0x2a4318[_0x1f05a7(0x11a)],'sub':_0x2a4318[_0x1f05a7(0x175)],'qty':_0x4ba09a});updateCartUI();const _0x49b96e=event[_0x1f05a7(0x1d9)]['tagName']===_0x1f05a7(0x187)?event[_0x1f05a7(0x1d9)]:event[_0x1f05a7(0x1d9)]['parentElement'],_0x3d7ef4=_0x49b96e[_0x1f05a7(0x1ea)];_0x49b96e['innerHTML']=_0x1f05a7(0x1ed),_0x49b96e['style'][_0x1f05a7(0x1d7)]='var(--secondary)',setTimeout(()=>{const _0x67b0e3=_0x1f05a7;_0x49b96e[_0x67b0e3(0x1ea)]=_0x3d7ef4,_0x49b96e[_0x67b0e3(0x1df)][_0x67b0e3(0x1d7)]='';},0x3e8);}function _0xad38(){const _0x4b4f9d=['حذف\x20الفئة؟','total','اكتب\x20الاسم\x20القديم\x20والجديد','open','trim','إضافة\x20المنتج','الأقصر','qty','562984orMOWp','\x20=\x20<strong>','📱\x20*هاتف:*\x20','img','السويس','cartItems','sub','utils','اسم\x20الفئة\x20الجديدة\x20(مثل:\x20بذور،\x20أسمدة):','الخربية','cancelEditBtn','reset','smooth','_blank','then','1995956FpYFNE','202352EpmsHN','.slide','qty-','Green\x20Golden','حفظ\x20التعديلات','pCat','block','onclick','BUTTON','querySelectorAll','pDesc','remove','adminLoginModal','catch','productsTitle','بورسعيد','الوادي\x20الجديد','join','3035448LxaoOe','pId','الشرقية','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x22\x20alt=\x22img\x22></td><td>','سوهاج','Mabe3at','تأكد\x20من\x20وضع\x20إعدادات\x20فيرباس\x20الصحيحة\x20في\x20الكود','invId','الدقهلية','pImg','val','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td><img\x20src=\x22','lastInvoice','https://wa.me/','set','error','display','</td><td>','products','تم\x20الحذف','items','adminPhone','pName','البحر\x20الأحمر','تعديل:\x20','cPhone','<p\x20style=\x22text-align:center;\x20color:#999;\x22>السلة\x20فارغة</p>','now','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<!--\x20حاوية\x20الصورة\x20مع\x20الوصف\x20(Touch/Hover)\x20-->\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22img-wrapper\x22\x20onclick=\x22this.classList.toggle(\x27active\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','settings/adminPhone','appendChild','orders','20HcjKOZ','true','البحيرة','838760LhgwZS','تم\x20تحديث\x20','catManagerModal','\x20منتجات','------------------\x0a','\x27)\x22>إضافة\x20للسلة\x20<i\x20class=\x22fas\x20fa-cart-plus\x22></i></button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','sort','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22price\x22>','value','scrollIntoView','oldCatName','المنيا','loader','shopName','</small>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22font-size:0.9rem\x22>','addEventListener','cat','map','textContent','بني\x20سويف','<option\x20value=\x22\x22>اختر\x20المحافظة</option>','هل\x20أنت\x20متأكد\x20من\x20حذف\x20هذا\x20المنتج؟','productForm','كفر\x20الشيخ','أسوان','قنا','\x22\x20onclick=\x22filterProducts(\x27','الإسكندرية','دمياط','</h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>','offer','categoryFilters','جاري\x20المعالجة...','بيانات\x20الدخول\x20غير\x20صحيحة','background','filter','target','\x22\x20style=\x22width:50px;\x20height:50px;\x20object-fit:cover;\x20border-radius:5px\x22\x20onerror=\x22this.src=\x27logo.jpg\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22font-weight:bold\x22>','date','63jZtmFW',')\x22\x20style=\x22width:auto;\x20padding:2px\x208px;\x20border-radius:50%\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','price','style','message','تم\x20الحفظ\x20بنجاح','G-TJNV6E7LQG','classList','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22cart-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:flex;\x20align-items:center;\x20gap:10px\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','add','newCatName','أسيوط','لا\x20يوجد\x20وصف\x20تفصيلي.','pOffer','innerHTML','toLocaleDateString','💰\x20*الإجمالي:*\x20','<i\x20class=\x22fas\x20fa-check\x22></i>\x20تم','cartCount','length','👤\x20*العميل:*\x20','pPrice','getElementById','\x27)\x22>','منتج\x20غير\x20معروف','#cartModal\x20button[type=\x22submit\x22]','update','replace','offersContainer','GreenGolden_Orders.xlsx','أسمدة','phone','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<small\x20style=\x22color:#666\x22>','btn-warning','forEach','book_new','merchantPhone','📍\x20*العنوان:*\x20','\x20-\x20','/products/','submitBtn','3619LQdnlp','active','products/','305717091280','AIzaSyBMuFJ5U_rYLrB5M3Y-_n_QFF4rJ3zSNLU','\x22\x20class=\x22qty-input\x22\x20value=\x221\x22\x20min=\x221\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn\x22\x20onclick=\x22addToCart(\x27','database','flex','</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-title\x22>','json_to_sheet','*طلب\x20جديد\x20-\x20GREEN\x20GOLDEN*\x0a','adminDashboard','values','none','خطأ\x20حفظ:','name','DOMContentLoaded','cGov','inline-block','preventDefault','splice','القاهرة','القليوبية','initializeApp','innerText','desc','\x20جنيه','cName','منتج','green-golden-dad1c','بذور','14034GUbaMZ','\x20×\x20','cartTotal','شمال\x20سيناء','address','cartModal','disabled','book_append_sheet','الإسماعيلية','/cat','includes','adminUser','categories','adminProductTableBody','لا\x20توجد\x20طلبات\x20مسجلة\x20في\x20قاعدة\x20البيانات','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22filter-group\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22filter-btn\x20','ref','<div\x20class=\x22filter-group\x22><button\x20class=\x22filter-btn\x20','تصنيف:\x20','201000000000','تم\x20فتح\x20الواتساب،\x20ولكن\x20حدث\x20خطأ\x20بسيط\x20في\x20الحفظ:\x20','المنوفية','settings','all','toString','تم\x20التعديل','pSubCat',')\x22><i\x20class=\x22fas\x20fa-edit\x22></i></button><button\x20class=\x22btn-danger\x22\x20onclick=\x22deleteProduct(','5074160VccTMh','\x20>\x20','1:305717091280:web:d818ffb49e4789675077d5','---\x20بيانات\x20قديمة\x20تالفة\x20---','يرجى\x20ملء\x20جميع\x20البيانات\x20(الاسم،\x20الهاتف،\x20المحافظة،\x20العنوان)','الجيزة','---','find','isArray','green-golden-dad1c.firebasestorage.app','push','settings/lastInvoice','<span\x20class=\x22offer-tag\x22>عرض\x20ذهبي</span>'];_0xad38=function(){return _0x4b4f9d;};return _0xad38();}function updateCartUI(){const _0x37feaa=_0x30953c,_0x4fabf9=cart['reduce']((_0x1fd939,_0x79e010)=>_0x1fd939+Number(_0x79e010[_0x37feaa(0x16e)]),0x0);document[_0x37feaa(0x1f2)](_0x37feaa(0x1ee))[_0x37feaa(0x1c7)]=_0x4fabf9;const _0x549dad=document[_0x37feaa(0x1f2)](_0x37feaa(0x174));_0x549dad['innerHTML']='';let _0x3de236=0x0;cart['length']===0x0&&(_0x549dad['innerHTML']=_0x37feaa(0x1ac)),cart[_0x37feaa(0x118)]((_0x4ef963,_0x13dac7)=>{const _0x189d0d=_0x37feaa,_0x31752f=Number(_0x4ef963[_0x189d0d(0x1de)])||0x0,_0x367310=Number(_0x4ef963[_0x189d0d(0x16e)])||0x1,_0x416133=_0x31752f*_0x367310;_0x3de236+=_0x416133,_0x549dad[_0x189d0d(0x1ea)]+=_0x189d0d(0x1e4)+_0x4ef963[_0x189d0d(0x172)]+_0x189d0d(0x1da)+(_0x4ef963['name']||_0x189d0d(0x13b))+_0x189d0d(0x116)+(_0x4ef963['shopName']||'')+_0x189d0d(0x1c3)+_0x31752f+_0x189d0d(0x13f)+_0x367310+_0x189d0d(0x170)+_0x416133+'</strong></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-danger\x22\x20onclick=\x22removeFromCart('+_0x13dac7+_0x189d0d(0x1dd);}),document[_0x37feaa(0x1f2)](_0x37feaa(0x140))['textContent']=_0x3de236;}function removeFromCart(_0x1fc4c8){const _0x38edab=_0x30953c;cart[_0x38edab(0x133)](_0x1fc4c8,0x1),updateCartUI();}function checkout(_0x970d40){const _0x4fe0c5=_0x30953c;_0x970d40['preventDefault']();if(cart[_0x4fe0c5(0x1ef)]===0x0){alert('السلة\x20فارغة!');return;}const _0xbbb9f4=document[_0x4fe0c5(0x1f2)](_0x4fe0c5(0x13a))[_0x4fe0c5(0x1bd)]['trim'](),_0x1b4f9b=document[_0x4fe0c5(0x1f2)](_0x4fe0c5(0x1ab))[_0x4fe0c5(0x1bd)][_0x4fe0c5(0x16b)](),_0x47c06a=document[_0x4fe0c5(0x1f2)](_0x4fe0c5(0x130))['value'],_0xabd7be=document[_0x4fe0c5(0x1f2)]('cAddress')[_0x4fe0c5(0x1bd)][_0x4fe0c5(0x16b)]();if(!_0xbbb9f4||!_0x1b4f9b||!_0xabd7be||_0x47c06a===''){alert(_0x4fe0c5(0x15e));return;}const _0x2215a0=document['querySelector'](_0x4fe0c5(0x1f5)),_0x13c04b=_0x2215a0[_0x4fe0c5(0x137)];_0x2215a0[_0x4fe0c5(0x137)]=_0x4fe0c5(0x1d5),_0x2215a0[_0x4fe0c5(0x144)]=!![];let _0x1c46b3=0x0,_0x2224f9='';const _0x560b50=cart[_0x4fe0c5(0x1c6)](_0x22acd2=>{const _0x59acad=_0x4fe0c5,_0x373803=Number(_0x22acd2['price'])||0x0,_0x2ce006=Number(_0x22acd2[_0x59acad(0x16e)])||0x1;_0x1c46b3+=_0x373803*_0x2ce006;const _0x1c6ab4=_0x22acd2[_0x59acad(0x1c2)]||_0x59acad(0x182),_0x19e1b8=_0x22acd2[_0x59acad(0x175)]||'',_0x48be4c=_0x22acd2['name']||'منتج',_0x57b5c0=_0x22acd2[_0x59acad(0x172)]||'',_0x359fa4=_0x22acd2['merchantId']||'admin';return _0x2224f9+='-\x20'+_0x48be4c+'\x20'+(_0x19e1b8?'('+_0x19e1b8+')':'')+'\x0a\x20\x20\x20الكمية:\x20'+_0x2ce006+'\x20|\x20السعر:\x20'+_0x373803+'\x20|\x20التاجر:\x20['+_0x1c6ab4+']\x0a',{'id':_0x22acd2['id'],'name':_0x48be4c,'price':_0x373803,'qty':_0x2ce006,'img':_0x57b5c0,'shopName':_0x1c6ab4,'sub':_0x19e1b8,'merchantId':_0x359fa4};});let _0x2dd214=_0x4fe0c5(0x129);_0x2dd214+=_0x4fe0c5(0x1b9),_0x2dd214+=_0x4fe0c5(0x1f0)+_0xbbb9f4+'\x0a',_0x2dd214+=_0x4fe0c5(0x171)+_0x1b4f9b+'\x0a',_0x2dd214+=_0x4fe0c5(0x11b)+_0x47c06a+_0x4fe0c5(0x11c)+_0xabd7be+'\x0a',_0x2dd214+=_0x4fe0c5(0x1b9),_0x2dd214+='🛒\x20*الطلبات:*\x0a',_0x2dd214+=_0x2224f9,_0x2dd214+=_0x4fe0c5(0x1b9),_0x2dd214+=_0x4fe0c5(0x1ec)+_0x1c46b3+_0x4fe0c5(0x139);const _0x52de42=(settings['adminPhone']||'01120194940')[_0x4fe0c5(0x111)](/\D/g,'');window[_0x4fe0c5(0x16a)](_0x4fe0c5(0x19f)+_0x52de42+'?text='+encodeURIComponent(_0x2dd214),_0x4fe0c5(0x17c));const _0x4512e5=(settings[_0x4fe0c5(0x19e)]||0xbb7)+0x1;db[_0x4fe0c5(0x14e)](_0x4fe0c5(0x165))['set'](_0x4512e5)['then'](()=>{const _0x41f375=_0x4fe0c5;return db[_0x41f375(0x14e)]('orders/'+_0x4512e5)['set']({'invId':_0x4512e5,'date':new Date()[_0x41f375(0x1eb)](),'name':_0xbbb9f4,'phone':_0x1b4f9b,'gov':_0x47c06a,'address':_0xabd7be,'total':_0x1c46b3,'items':_0x560b50});})[_0x4fe0c5(0x17d)](()=>{const _0x46aeb1=_0x4fe0c5;cart=[],updateCartUI(),closeModal(_0x46aeb1(0x143)),_0x2215a0[_0x46aeb1(0x137)]=_0x13c04b,_0x2215a0['disabled']=![],console['log'](_0x46aeb1(0x1e1));})[_0x4fe0c5(0x18c)](_0x15514e=>{const _0x351c26=_0x4fe0c5;console[_0x351c26(0x1a1)](_0x351c26(0x12d),_0x15514e),_0x2215a0[_0x351c26(0x137)]=_0x13c04b,_0x2215a0[_0x351c26(0x144)]=![],alert(_0x351c26(0x152)+_0x15514e[_0x351c26(0x1e0)]);});}function loginAdmin(){const _0xb637af=_0x30953c,_0x597624=document[_0xb637af(0x1f2)](_0xb637af(0x149))[_0xb637af(0x1bd)],_0xb99c23=document['getElementById']('adminPass')[_0xb637af(0x1bd)];if(_0x597624==='admin'&&_0xb99c23==='gold123')closeModal(_0xb637af(0x18b)),document[_0xb637af(0x1f2)](_0xb637af(0x12a))['style'][_0xb637af(0x1a2)]=_0xb637af(0x185),renderAdminProductsTable();else alert(_0xb637af(0x1d6));}function logoutAdmin(){const _0x70a955=_0x30953c;document['getElementById'](_0x70a955(0x12a))[_0x70a955(0x1df)]['display']='none';}function saveSettings(){const _0x53f169=_0x30953c,_0x4a5f4b=document[_0x53f169(0x1f2)](_0x53f169(0x1a7))[_0x53f169(0x1bd)];db[_0x53f169(0x14e)](_0x53f169(0x1af))[_0x53f169(0x1a0)](_0x4a5f4b)[_0x53f169(0x17d)](()=>alert('تم\x20حفظ\x20رقم\x20الواتساب'));}function handleProductSubmit(_0x34df9c){const _0x1b5013=_0x30953c;_0x34df9c[_0x1b5013(0x132)]();const _0x525058={'name':document[_0x1b5013(0x1f2)](_0x1b5013(0x1a8))['value'],'img':document[_0x1b5013(0x1f2)](_0x1b5013(0x19b))[_0x1b5013(0x1bd)],'cat':document[_0x1b5013(0x1f2)](_0x1b5013(0x184))[_0x1b5013(0x1bd)],'sub':document[_0x1b5013(0x1f2)](_0x1b5013(0x158))[_0x1b5013(0x1bd)],'price':Number(document[_0x1b5013(0x1f2)](_0x1b5013(0x1f1))[_0x1b5013(0x1bd)]),'offer':document[_0x1b5013(0x1f2)](_0x1b5013(0x1e9))['value']===_0x1b5013(0x1b3),'desc':document[_0x1b5013(0x1f2)](_0x1b5013(0x189))[_0x1b5013(0x1bd)]};if(editingProductId)_0x525058['id']=editingProductId,db[_0x1b5013(0x14e)](_0x1b5013(0x121)+editingProductId)[_0x1b5013(0x1a0)](_0x525058)[_0x1b5013(0x17d)](()=>{const _0x14570b=_0x1b5013;alert(_0x14570b(0x157)),cancelEdit();});else{const _0x3d296d=Date[_0x1b5013(0x1ad)]();_0x525058['id']=_0x3d296d,db[_0x1b5013(0x14e)](_0x1b5013(0x121)+_0x3d296d)[_0x1b5013(0x1a0)](_0x525058)['then'](()=>{const _0x2fab57=_0x1b5013;alert('تمت\x20الإضافة'),document[_0x2fab57(0x1f2)](_0x2fab57(0x1cb))[_0x2fab57(0x17a)]();});}}function updateCategoryName(){const _0x3d3d2a=_0x30953c,_0x387048=document[_0x3d3d2a(0x1f2)](_0x3d3d2a(0x1bf))[_0x3d3d2a(0x1bd)]['trim'](),_0xf1d92c=document['getElementById'](_0x3d3d2a(0x1e6))['value'][_0x3d3d2a(0x16b)]();if(!_0x387048||!_0xf1d92c){alert(_0x3d3d2a(0x169));return;}let _0x3b7498={},_0x4dba9b=0x0;products[_0x3d3d2a(0x118)](_0x14c66a=>{const _0x2ef9fb=_0x3d3d2a;_0x14c66a[_0x2ef9fb(0x1c5)]===_0x387048&&(_0x3b7498[_0x2ef9fb(0x11d)+_0x14c66a['id']+_0x2ef9fb(0x147)]=_0xf1d92c,_0x4dba9b++);}),_0x4dba9b>0x0?db[_0x3d3d2a(0x14e)]()[_0x3d3d2a(0x110)](_0x3b7498)[_0x3d3d2a(0x17d)](()=>{const _0x5734ab=_0x3d3d2a;alert(_0x5734ab(0x1b6)+_0x4dba9b+_0x5734ab(0x1b8)),closeModal(_0x5734ab(0x1b7));}):alert('لا\x20توجد\x20منتجات\x20بهذا\x20الاسم');}function deleteCategoryRef(){const _0x419a9c=_0x30953c,_0x308278=document[_0x419a9c(0x1f2)](_0x419a9c(0x1bf))['value'][_0x419a9c(0x16b)]();if(!_0x308278)return;confirm('حذف\x20جميع\x20المنتجات\x20في\x20هذه\x20الفئة؟')&&(products['forEach'](_0x45f031=>{const _0x1bd6ee=_0x419a9c;if(_0x45f031[_0x1bd6ee(0x1c5)]===_0x308278)db['ref'](_0x1bd6ee(0x121)+_0x45f031['id'])[_0x1bd6ee(0x18a)]();}),closeModal(_0x419a9c(0x1b7)));}function deleteProduct(_0x82b618){const _0x31e70f=_0x30953c;if(confirm(_0x31e70f(0x1ca)))db['ref']('products/'+_0x82b618)['remove']()['then'](()=>alert('تم\x20الحذف'));}function startEditProduct(_0x305ef0){const _0x1c79ad=_0x30953c,_0x10773e=products[_0x1c79ad(0x161)](_0x6f3bf8=>_0x6f3bf8['id']===_0x305ef0);if(!_0x10773e)return;document['getElementById'](_0x1c79ad(0x192))[_0x1c79ad(0x1bd)]=_0x10773e['id'],document[_0x1c79ad(0x1f2)](_0x1c79ad(0x1a8))[_0x1c79ad(0x1bd)]=_0x10773e[_0x1c79ad(0x12e)],document[_0x1c79ad(0x1f2)](_0x1c79ad(0x19b))[_0x1c79ad(0x1bd)]=_0x10773e[_0x1c79ad(0x172)],document[_0x1c79ad(0x1f2)](_0x1c79ad(0x184))[_0x1c79ad(0x1bd)]=_0x10773e[_0x1c79ad(0x1c5)],document['getElementById'](_0x1c79ad(0x158))[_0x1c79ad(0x1bd)]=_0x10773e['sub']||'',document[_0x1c79ad(0x1f2)](_0x1c79ad(0x1f1))[_0x1c79ad(0x1bd)]=_0x10773e['price'],document[_0x1c79ad(0x1f2)](_0x1c79ad(0x1e9))['value']=_0x10773e[_0x1c79ad(0x1d3)][_0x1c79ad(0x156)](),document[_0x1c79ad(0x1f2)](_0x1c79ad(0x189))[_0x1c79ad(0x1bd)]=_0x10773e[_0x1c79ad(0x138)],editingProductId=_0x305ef0,document['getElementById']('formTitle')['textContent']=_0x1c79ad(0x1aa)+_0x10773e['name'];const _0x556e5b=document['getElementById']('submitBtn');_0x556e5b[_0x1c79ad(0x1c7)]=_0x1c79ad(0x183),_0x556e5b[_0x1c79ad(0x1e3)][_0x1c79ad(0x1e5)](_0x1c79ad(0x117)),document[_0x1c79ad(0x1f2)]('cancelEditBtn')[_0x1c79ad(0x1df)][_0x1c79ad(0x1a2)]=_0x1c79ad(0x131),document['getElementById'](_0x1c79ad(0x1cb))[_0x1c79ad(0x1be)]({'behavior':_0x1c79ad(0x17b)});}function cancelEdit(){const _0x1c9344=_0x30953c;document[_0x1c9344(0x1f2)]('productForm')[_0x1c9344(0x17a)](),editingProductId=null,document[_0x1c9344(0x1f2)]('formTitle')['textContent']='إضافة\x20منتج\x20جديد';const _0x418ebc=document['getElementById'](_0x1c9344(0x11e));_0x418ebc['textContent']=_0x1c9344(0x16c),_0x418ebc[_0x1c9344(0x1e3)][_0x1c9344(0x18a)](_0x1c9344(0x117)),document[_0x1c9344(0x1f2)](_0x1c9344(0x179))[_0x1c9344(0x1df)][_0x1c9344(0x1a2)]=_0x1c9344(0x12c);}function renderAdminProductsTable(){const _0x4660cf=_0x30953c,_0x27b088=document[_0x4660cf(0x1f2)](_0x4660cf(0x14b));_0x27b088[_0x4660cf(0x1ea)]='',products[_0x4660cf(0x118)](_0x472074=>{const _0xdd9754=_0x4660cf;_0x27b088[_0xdd9754(0x1ea)]+=_0xdd9754(0x19d)+_0x472074[_0xdd9754(0x172)]+_0xdd9754(0x195)+_0x472074[_0xdd9754(0x12e)]+_0xdd9754(0x1a3)+_0x472074[_0xdd9754(0x1de)]+_0xdd9754(0x1a3)+_0x472074[_0xdd9754(0x1c5)]+'</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td><div\x20class=\x22action-btns\x22><button\x20class=\x22btn-warning\x22\x20onclick=\x22startEditProduct('+_0x472074['id']+_0xdd9754(0x159)+_0x472074['id']+')\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button></div></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>';});}function addNewCategory(){const _0x150768=_0x30953c,_0xf95ba=prompt(_0x150768(0x177));_0xf95ba&&!categories[_0x150768(0x148)](_0xf95ba)&&db[_0x150768(0x14e)](_0x150768(0x14a))[_0x150768(0x1a0)]([...categories,_0xf95ba])[_0x150768(0x17d)](()=>alert('تمت\x20الإضافة'));}function removeCategory(){const _0x537412=_0x30953c,_0x2e10db=document[_0x537412(0x1f2)](_0x537412(0x184))[_0x537412(0x1bd)];confirm(_0x537412(0x167))&&db[_0x537412(0x14e)](_0x537412(0x14a))[_0x537412(0x1a0)](categories[_0x537412(0x1d8)](_0x3c1773=>_0x3c1773!==_0x2e10db))['then'](()=>alert(_0x537412(0x1a5)));}function exportToExcel(){const _0x68634f=_0x30953c;if(!orders||orders[_0x68634f(0x1ef)]===0x0){alert(_0x68634f(0x14c));return;}const _0x576b3b=[...orders][_0x68634f(0x1bb)]((_0x23444d,_0x19f019)=>_0x19f019['invId']-_0x23444d[_0x68634f(0x199)]),_0x840817=_0x576b3b[_0x68634f(0x1c6)](_0xedf897=>{const _0x579522=_0x68634f;let _0x17fe58='';_0xedf897['items']&&Array['isArray'](_0xedf897[_0x579522(0x1a6)])&&_0xedf897[_0x579522(0x1a6)][_0x579522(0x1ef)]>0x0?_0x17fe58=_0xedf897[_0x579522(0x1a6)][_0x579522(0x1c6)](_0x4f06f6=>{const _0x4c7ed5=_0x579522,_0x15ca6e=_0x4f06f6[_0x4c7ed5(0x12e)]||_0x4c7ed5(0x1f4),_0x54e57d=_0x4f06f6[_0x4c7ed5(0x16e)]||0x0;return _0x15ca6e+'\x20(عدد\x20'+_0x54e57d+')';})[_0x579522(0x190)]('\x20،\x20'):_0x17fe58=_0x579522(0x15d);let _0x14d834=_0xedf897[_0x579522(0x168)];return(!_0x14d834||isNaN(_0x14d834))&&(_0x14d834=0x0),{'رقم\x20الفاتورة':_0xedf897[_0x579522(0x199)]||_0x579522(0x160),'التاريخ':_0xedf897[_0x579522(0x1db)]||_0x579522(0x160),'اسم\x20العميل':_0xedf897[_0x579522(0x12e)]||_0x579522(0x160),'رقم\x20الهاتف':_0xedf897[_0x579522(0x115)]||_0x579522(0x160),'العنوان':(_0xedf897['gov']||'')+'\x20-\x20'+(_0xedf897[_0x579522(0x142)]||''),'الإجمالي\x20(جنيه)':_0x14d834,'المنتجات\x20المطلوبة':_0x17fe58};}),_0x38d7fc=XLSX[_0x68634f(0x176)][_0x68634f(0x128)](_0x840817),_0x5c00c0=[{'wch':0xa},{'wch':0xf},{'wch':0x14},{'wch':0xf},{'wch':0x28},{'wch':0xa},{'wch':0x3c}];_0x38d7fc['!cols']=_0x5c00c0;const _0x4aae8d=XLSX['utils'][_0x68634f(0x119)]();XLSX[_0x68634f(0x176)][_0x68634f(0x145)](_0x4aae8d,_0x38d7fc,_0x68634f(0x197)),XLSX['writeFile'](_0x4aae8d,_0x68634f(0x113));}
+        const _0x419da1=_0x1c16;(function(_0x470faf,_0x133df9){const _0xc280d0=_0x1c16,_0x1450c3=_0x470faf();while(!![]){try{const _0x323800=parseInt(_0xc280d0(0x17d))/0x1+parseInt(_0xc280d0(0x136))/0x2+parseInt(_0xc280d0(0x123))/0x3*(-parseInt(_0xc280d0(0x157))/0x4)+-parseInt(_0xc280d0(0x16a))/0x5+-parseInt(_0xc280d0(0xdf))/0x6*(-parseInt(_0xc280d0(0x12b))/0x7)+-parseInt(_0xc280d0(0x1a1))/0x8*(-parseInt(_0xc280d0(0x163))/0x9)+-parseInt(_0xc280d0(0x18e))/0xa*(parseInt(_0xc280d0(0x101))/0xb);if(_0x323800===_0x133df9)break;else _0x1450c3['push'](_0x1450c3['shift']());}catch(_0x2e23f1){_0x1450c3['push'](_0x1450c3['shift']());}}}(_0x11d4,0xb161a));const firebaseConfig={'apiKey':_0x419da1(0x11e),'authDomain':_0x419da1(0x142),'databaseURL':_0x419da1(0xde),'projectId':_0x419da1(0x129),'storageBucket':_0x419da1(0x15e),'messagingSenderId':_0x419da1(0x19d),'appId':_0x419da1(0x154),'measurementId':_0x419da1(0x168)};if(!firebase[_0x419da1(0xfe)]['length'])try{firebase[_0x419da1(0x197)](firebaseConfig);}catch(_0x1529ac){console[_0x419da1(0x108)](_0x419da1(0x14c),_0x1529ac);}const db=firebase['database']();let products=[],categories=[],cart=[],orders=[],settings={'adminPhone':_0x419da1(0xff),'lastInvoice':0x3e8},editingProductId=null,currentFilter={'cat':'all','sub':null};const governorates=[_0x419da1(0xec),_0x419da1(0x13d),'الإسكندرية',_0x419da1(0xed),'الشرقية',_0x419da1(0x19b),_0x419da1(0xe7),_0x419da1(0x146),_0x419da1(0x10c),_0x419da1(0xd5),'دمياط','بورسعيد',_0x419da1(0x10d),_0x419da1(0x19c),_0x419da1(0x162),'شمال\x20سيناء',_0x419da1(0x14f),_0x419da1(0x156),_0x419da1(0x115),_0x419da1(0xf2),_0x419da1(0x12c),_0x419da1(0xe2),_0x419da1(0xd7),_0x419da1(0x172),'أسوان',_0x419da1(0x1b6),_0x419da1(0x1af)];document[_0x419da1(0x159)](_0x419da1(0xd0),()=>{const _0x33e786=_0x419da1;initSlider(),populateGovernorates();if(firebaseConfig[_0x33e786(0x185)]===_0x33e786(0x178)){alert(_0x33e786(0x103));return;}document['getElementById'](_0x33e786(0x145))[_0x33e786(0x177)][_0x33e786(0x12d)]=_0x33e786(0x166),db[_0x33e786(0xe3)](_0x33e786(0x105))['on'](_0x33e786(0x121),_0x1eb75a=>{const _0x5093dc=_0x33e786,_0x1c8e69=_0x1eb75a['val']();products=_0x1c8e69?Object[_0x5093dc(0x15c)](_0x1c8e69):[],populateCategories(),renderProducts(currentFilter['cat'],currentFilter[_0x5093dc(0x111)]),renderAdminProductsTable(),document['getElementById'](_0x5093dc(0x145))['style']['display']=_0x5093dc(0xe9);}),db[_0x33e786(0xe3)](_0x33e786(0x1ab))['on']('value',_0x21d0b1=>{const _0x147a36=_0x33e786,_0x543253=_0x21d0b1['val']();if(Array[_0x147a36(0x150)](_0x543253))categories=_0x543253;else{if(_0x543253)categories=Object['values'](_0x543253);else categories=['بذور',_0x147a36(0x1a6),'مبيدات',_0x147a36(0x1aa)];}populateCategories();}),db[_0x33e786(0xe3)](_0x33e786(0x119))['on'](_0x33e786(0x121),_0x1b6e05=>{const _0x1e6c94=_0x33e786,_0x1257b2=_0x1b6e05[_0x1e6c94(0x110)]();if(_0x1257b2)settings=_0x1257b2;else db[_0x1e6c94(0xe3)](_0x1e6c94(0x119))['set'](settings);document[_0x1e6c94(0x138)](_0x1e6c94(0x11d))[_0x1e6c94(0x121)]=settings[_0x1e6c94(0x11d)];}),db[_0x33e786(0xe3)](_0x33e786(0xdd))['on'](_0x33e786(0x121),_0x54470a=>{const _0x6b4347=_0x33e786,_0x1f5cff=_0x54470a[_0x6b4347(0x110)]();orders=_0x1f5cff?Object[_0x6b4347(0x15c)](_0x1f5cff):[];});});function openModal(_0x5b97cc){const _0x3bf94d=_0x419da1;document[_0x3bf94d(0x138)](_0x5b97cc)[_0x3bf94d(0x177)][_0x3bf94d(0x12d)]='flex';}function closeModal(_0x1ad689){const _0x45ff64=_0x419da1;document[_0x45ff64(0x138)](_0x1ad689)[_0x45ff64(0x177)]['display']=_0x45ff64(0xe9);}window[_0x419da1(0x169)]=function(_0x1589ab){const _0x27269a=_0x419da1;if(_0x1589ab[_0x27269a(0x106)]['classList'][_0x27269a(0x13a)](_0x27269a(0x196)))_0x1589ab[_0x27269a(0x106)][_0x27269a(0x177)][_0x27269a(0x12d)]=_0x27269a(0xe9);};function populateGovernorates(){const _0xa9e184=_0x419da1,_0x4019eb=document[_0xa9e184(0x138)](_0xa9e184(0x109));_0x4019eb['innerHTML']=_0xa9e184(0x164),governorates[_0xa9e184(0x1ad)](_0x35ee54=>{const _0x3bbb41=_0xa9e184;let _0x5dbfe1=document[_0x3bbb41(0x18d)]('option');_0x5dbfe1[_0x3bbb41(0x121)]=_0x35ee54,_0x5dbfe1[_0x3bbb41(0x13e)]=_0x35ee54,_0x4019eb[_0x3bbb41(0x117)](_0x5dbfe1);});}function populateCategories(){const _0x1091dc=_0x419da1,_0x1f5f70=document[_0x1091dc(0x138)](_0x1091dc(0x135));_0x1f5f70['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22filter-group\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22filter-btn\x20'+(currentFilter[_0x1091dc(0xea)]==='all'?'active':'')+_0x1091dc(0x1a0);const _0x10f079=document[_0x1091dc(0x138)](_0x1091dc(0x15a));_0x10f079[_0x1091dc(0x167)]='';if(categories['length']===0x0){let _0x44ac1e=document['createElement']('option');_0x44ac1e[_0x1091dc(0x180)]='لا\x20توجد\x20فئات',_0x10f079[_0x1091dc(0x117)](_0x44ac1e);}categories[_0x1091dc(0x1ad)](_0x43a663=>{const _0x3b9b33=_0x1091dc;let _0xd55e3a=document[_0x3b9b33(0x18d)](_0x3b9b33(0x14a));_0xd55e3a[_0x3b9b33(0x121)]=_0x43a663,_0xd55e3a[_0x3b9b33(0x13e)]=_0x43a663,_0x10f079[_0x3b9b33(0x117)](_0xd55e3a);const _0x3c72f2=[...new Set(products['filter'](_0x1f94bc=>_0x1f94bc['cat']===_0x43a663&&_0x1f94bc[_0x3b9b33(0x111)]&&_0x1f94bc[_0x3b9b33(0x111)]['trim']()!=='')[_0x3b9b33(0x10f)](_0x4a5726=>_0x4a5726[_0x3b9b33(0x111)]))];let _0x27469a='',_0x1c6ed1=_0x3c72f2[_0x3b9b33(0x128)]>0x0,_0x19de10=_0x1c6ed1?_0x3b9b33(0x173):'';_0x1c6ed1&&(_0x27469a=_0x3b9b33(0xd2),_0x3c72f2['forEach'](_0x37eafc=>{const _0x51f38b=_0x3b9b33;_0x27469a+='<div\x20class=\x22dropdown-item\x22\x20onclick=\x22filterProducts(\x27'+_0x43a663+_0x51f38b(0x107)+_0x37eafc+_0x51f38b(0x16e)+_0x37eafc+_0x51f38b(0xef);}),_0x27469a+=_0x3b9b33(0xef)),_0x1f5f70['innerHTML']+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22filter-group\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22filter-btn\x20'+(currentFilter['cat']===_0x43a663?_0x3b9b33(0xdb):'')+'\x22\x20onclick=\x22filterProducts(\x27'+_0x43a663+_0x3b9b33(0x1ae)+_0x43a663+'\x20'+_0x19de10+_0x3b9b33(0x116)+_0x27469a+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20';});if(categories[_0x1091dc(0x128)]>0x0&&_0x10f079[_0x1091dc(0x121)]==='')_0x10f079[_0x1091dc(0x121)]=categories[0x0];}function initSlider(){const _0x4bc92a=_0x419da1,_0x5f2524=document[_0x4bc92a(0x19e)](_0x4bc92a(0xf9));let _0xb1dc4b=0x0;setInterval(()=>{const _0x3f7e89=_0x4bc92a;_0x5f2524[_0xb1dc4b]['classList'][_0x3f7e89(0x124)]('active'),_0xb1dc4b=(_0xb1dc4b+0x1)%_0x5f2524[_0x3f7e89(0x128)],_0x5f2524[_0xb1dc4b][_0x3f7e89(0x189)][_0x3f7e89(0x141)](_0x3f7e89(0xdb));},0x1388);}function filterProducts(_0x1dbcd8,_0x1cb869=null){currentFilter={'cat':_0x1dbcd8,'sub':_0x1cb869},populateCategories(),renderProducts(_0x1dbcd8,_0x1cb869);}function renderProducts(_0x3f6b61,_0x16845a){const _0x12f614=_0x419da1,_0x3ac841=document[_0x12f614(0x138)]('offersContainer'),_0x3d7e80=document[_0x12f614(0x138)](_0x12f614(0x120));_0x3ac841['innerHTML']='',_0x3d7e80[_0x12f614(0x167)]='',products['forEach'](_0xafc7d4=>{const _0x485c06=_0x12f614;if(_0xafc7d4['isVisible']===![])return;const _0x1cfd00=_0xafc7d4['isAvailable']===undefined?!![]:_0xafc7d4[_0x485c06(0x12a)];let _0x5b9539='';_0x1cfd00?_0x5b9539=_0x485c06(0xfa)+_0xafc7d4['id']+_0x485c06(0x161):_0x5b9539=_0x485c06(0x139);const _0x4a47c6=_0x485c06(0x187)+(_0xafc7d4['offer']?'<span\x20class=\x22offer-tag\x22>عرض\x20ذهبي</span>':'')+_0x485c06(0xeb)+_0xafc7d4[_0x485c06(0xf5)]+_0x485c06(0x17a)+_0xafc7d4[_0x485c06(0x160)]+_0x485c06(0x13b)+_0xafc7d4[_0x485c06(0x160)]+'</h4>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p>'+(_0xafc7d4[_0x485c06(0x16f)]||_0x485c06(0x15f))+_0x485c06(0x1a5)+_0xafc7d4[_0x485c06(0xea)]+'\x20'+(_0xafc7d4['sub']?_0x485c06(0xf7)+_0xafc7d4[_0x485c06(0x111)]:'')+'</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h3\x20class=\x22card-title\x22>'+_0xafc7d4[_0x485c06(0x160)]+_0x485c06(0x152)+_0xafc7d4[_0x485c06(0x16f)]+_0x485c06(0x1a7)+_0xafc7d4['price']+_0x485c06(0x186)+(_0x1cfd00?_0x485c06(0x12e)+_0xafc7d4['id']+_0x485c06(0x18a):'')+_0x485c06(0x11f)+_0x5b9539+_0x485c06(0x10e);if(_0xafc7d4[_0x485c06(0x113)])_0x3ac841[_0x485c06(0x167)]+=_0x4a47c6;let _0x838cf1=![];if(_0x3f6b61===_0x485c06(0x15b))_0x838cf1=!![];else{if(_0x16845a)_0x838cf1=_0xafc7d4['cat']===_0x3f6b61&&_0xafc7d4[_0x485c06(0x111)]===_0x16845a;else _0x838cf1=_0xafc7d4[_0x485c06(0xea)]===_0x3f6b61;}if(_0x838cf1)_0x3d7e80[_0x485c06(0x167)]+=_0x4a47c6;});}function addToCart(_0x55da24){const _0x12ed6e=_0x419da1,_0x716891=document[_0x12ed6e(0x138)](_0x12ed6e(0xfc)+_0x55da24),_0x29295c=parseInt(_0x716891['value'])||0x1,_0x37177a=products[_0x12ed6e(0x16d)](_0x3f917b=>_0x3f917b['id']===_0x55da24),_0x18b190=cart['find'](_0x47b913=>_0x47b913['id']===_0x55da24);if(_0x18b190)_0x18b190[_0x12ed6e(0x17e)]+=_0x29295c;else cart[_0x12ed6e(0x102)]({..._0x37177a,'qty':_0x29295c});updateCartUI();const _0x47ee31=event[_0x12ed6e(0x106)][_0x12ed6e(0xd4)]===_0x12ed6e(0x12f)?event['target']:event[_0x12ed6e(0x106)][_0x12ed6e(0x13c)],_0x3dafde=_0x47ee31[_0x12ed6e(0x167)];_0x47ee31[_0x12ed6e(0x167)]='<i\x20class=\x22fas\x20fa-check\x22></i>\x20تم\x20الإضافة',_0x47ee31['style'][_0x12ed6e(0xe5)]=_0x12ed6e(0x17f),setTimeout(()=>{const _0x46b56e=_0x12ed6e;_0x47ee31[_0x46b56e(0x167)]=_0x3dafde,_0x47ee31[_0x46b56e(0x177)][_0x46b56e(0xe5)]='';},0x3e8);}function updateCartUI(){const _0x3ed403=_0x419da1;document[_0x3ed403(0x138)](_0x3ed403(0x18b))[_0x3ed403(0x13e)]=cart[_0x3ed403(0x13f)]((_0x4b5daf,_0x355846)=>_0x4b5daf+_0x355846[_0x3ed403(0x17e)],0x0);const _0xa5c6bd=document[_0x3ed403(0x138)](_0x3ed403(0x144));_0xa5c6bd[_0x3ed403(0x167)]='';let _0x3d7262=0x0;if(cart[_0x3ed403(0x128)]===0x0)_0xa5c6bd['innerHTML']=_0x3ed403(0xcf);cart['forEach']((_0x18dcc2,_0x162cd5)=>{const _0x2b8ef4=_0x3ed403;_0x3d7262+=_0x18dcc2[_0x2b8ef4(0x174)]*_0x18dcc2[_0x2b8ef4(0x17e)],_0xa5c6bd['innerHTML']+=_0x2b8ef4(0x18f)+_0x18dcc2[_0x2b8ef4(0xf5)]+'\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div><h4>'+_0x18dcc2[_0x2b8ef4(0x160)]+_0x2b8ef4(0x14e)+_0x18dcc2[_0x2b8ef4(0x174)]+_0x2b8ef4(0x15d)+_0x18dcc2[_0x2b8ef4(0x17e)]+_0x2b8ef4(0x181)+_0x18dcc2[_0x2b8ef4(0x174)]*_0x18dcc2['qty']+_0x2b8ef4(0x137)+_0x162cd5+_0x2b8ef4(0x19a);}),document[_0x3ed403(0x138)](_0x3ed403(0x1b4))['textContent']=_0x3d7262;}function removeFromCart(_0x5791f3){const _0x243283=_0x419da1;cart[_0x243283(0x114)](_0x5791f3,0x1),updateCartUI();}function checkout(_0x1fc51e){const _0x5de14a=_0x419da1;_0x1fc51e[_0x5de14a(0xf4)]();if(cart[_0x5de14a(0x128)]===0x0){alert(_0x5de14a(0xfb));return;}const _0x569d40=(settings[_0x5de14a(0x100)]||0x3e8)+0x1;db[_0x5de14a(0xe3)]('settings/lastInvoice')[_0x5de14a(0xdc)](_0x569d40);const _0x409b80=document[_0x5de14a(0x138)]('cName')[_0x5de14a(0x121)],_0x192d70=document[_0x5de14a(0x138)](_0x5de14a(0x126))['value'],_0x1b8595=document['getElementById']('cGov')['value'],_0x4bb903=document[_0x5de14a(0x138)](_0x5de14a(0xee))[_0x5de14a(0x121)],_0x466b26=document['getElementById'](_0x5de14a(0x1b4))[_0x5de14a(0x13e)],_0x575458={'invId':_0x569d40,'date':new Date()[_0x5de14a(0x193)](),'name':_0x409b80,'phone':_0x192d70,'gov':_0x1b8595,'address':_0x4bb903,'total':_0x466b26,'items':cart};db['ref'](_0x5de14a(0xf0)+_0x569d40)[_0x5de14a(0xdc)](_0x575458)[_0x5de14a(0x130)](()=>{const _0x19104a=_0x5de14a;let _0x25043a=_0x19104a(0x10a);_0x25043a+='*فاتورة\x20رقم:*\x20#'+_0x569d40+'\x0a',_0x25043a+=_0x19104a(0x122),_0x25043a+=_0x19104a(0x14b)+_0x409b80+'\x0a',_0x25043a+=_0x19104a(0x165)+_0x192d70+'\x0a',_0x25043a+=_0x19104a(0x1a2)+_0x1b8595+_0x19104a(0x1b2)+_0x4bb903+'\x0a',_0x25043a+=_0x19104a(0x122),_0x25043a+=_0x19104a(0x195),cart[_0x19104a(0x1ad)](_0x1ad623=>{const _0x2a31d6=_0x19104a;_0x25043a+='-\x20'+_0x1ad623[_0x2a31d6(0x160)]+'\x20(عدد\x20'+_0x1ad623[_0x2a31d6(0x17e)]+')\x0a';}),_0x25043a+=_0x19104a(0x122),_0x25043a+=_0x19104a(0x1a9)+_0x466b26+_0x19104a(0x16c);const _0x4f7255=encodeURIComponent(_0x25043a);cart=[],updateCartUI(),closeModal(_0x19104a(0x149)),window['open'](_0x19104a(0x183)+settings[_0x19104a(0x11d)]+_0x19104a(0xe1)+_0x4f7255,_0x19104a(0xd6));})[_0x5de14a(0x132)](_0x630f1=>alert(_0x5de14a(0x182)+_0x630f1['message']));}function loginAdmin(){const _0x11d7c7=_0x419da1,_0x2e92b5=document[_0x11d7c7(0x138)]('adminUser')[_0x11d7c7(0x121)],_0x5ad08d=document[_0x11d7c7(0x138)](_0x11d7c7(0x1a4))[_0x11d7c7(0x121)];if(_0x2e92b5===_0x11d7c7(0x131)&&_0x5ad08d==='gold123')closeModal(_0x11d7c7(0x11c)),document['getElementById']('adminDashboard')[_0x11d7c7(0x177)][_0x11d7c7(0x12d)]=_0x11d7c7(0x166),renderAdminProductsTable();else alert(_0x11d7c7(0x16b));}function logoutAdmin(){const _0x252e2a=_0x419da1;document[_0x252e2a(0x138)]('adminDashboard')[_0x252e2a(0x177)]['display']=_0x252e2a(0xe9);}function _0x1c16(_0x33404a,_0x5937ea){const _0x11d440=_0x11d4();return _0x1c16=function(_0x1c16c5,_0x43251f){_0x1c16c5=_0x1c16c5-0xcf;let _0x78092a=_0x11d440[_0x1c16c5];return _0x78092a;},_0x1c16(_0x33404a,_0x5937ea);}function saveSettings(){const _0x5d8cc2=_0x419da1,_0x3728da=document[_0x5d8cc2(0x138)](_0x5d8cc2(0x11d))[_0x5d8cc2(0x121)];db['ref'](_0x5d8cc2(0xf3))[_0x5d8cc2(0xdc)](_0x3728da)[_0x5d8cc2(0x130)](()=>alert('تم\x20حفظ\x20رقم\x20الواتساب'));}function handleProductSubmit(_0xd5d849){const _0x59d11e=_0x419da1;_0xd5d849[_0x59d11e(0xf4)]();const _0x288b47=document[_0x59d11e(0x138)]('pStatus')[_0x59d11e(0x121)]===_0x59d11e(0x155),_0x369f9c=document['getElementById'](_0x59d11e(0x1ac))[_0x59d11e(0x121)]==='true',_0x21bc37={'name':document['getElementById'](_0x59d11e(0x19f))['value'],'img':document[_0x59d11e(0x138)](_0x59d11e(0x148))['value'],'cat':document[_0x59d11e(0x138)](_0x59d11e(0x15a))[_0x59d11e(0x121)],'sub':document[_0x59d11e(0x138)](_0x59d11e(0x194))[_0x59d11e(0x121)],'price':Number(document[_0x59d11e(0x138)](_0x59d11e(0x17c))[_0x59d11e(0x121)]),'offer':document[_0x59d11e(0x138)](_0x59d11e(0x199))[_0x59d11e(0x121)]==='true','isAvailable':_0x288b47,'isVisible':_0x369f9c,'desc':document[_0x59d11e(0x138)]('pDesc')[_0x59d11e(0x121)]};if(editingProductId)_0x21bc37['id']=editingProductId,db[_0x59d11e(0xe3)](_0x59d11e(0x151)+editingProductId)[_0x59d11e(0xdc)](_0x21bc37)[_0x59d11e(0x130)](()=>{const _0x287d89=_0x59d11e;alert(_0x287d89(0x17b)),cancelEdit();});else{const _0x41b58e=Date[_0x59d11e(0xd1)]();_0x21bc37['id']=_0x41b58e,db[_0x59d11e(0xe3)]('products/'+_0x41b58e)['set'](_0x21bc37)[_0x59d11e(0x130)](()=>{const _0x56dbca=_0x59d11e;alert(_0x56dbca(0x133)),document[_0x56dbca(0x138)](_0x56dbca(0xda))[_0x56dbca(0x11b)]();});}}function deleteProduct(_0x2d8f1f){const _0x4e308f=_0x419da1;if(confirm('هل\x20أنت\x20متأكد\x20من\x20حذف\x20هذا\x20المنتج؟'))db[_0x4e308f(0xe3)](_0x4e308f(0x151)+_0x2d8f1f)[_0x4e308f(0x124)]()['then'](()=>alert(_0x4e308f(0x176)));}function toggleAvailability(_0x36b5a8,_0xf9d8f7){const _0x2a7765=_0x419da1;db[_0x2a7765(0xe3)](_0x2a7765(0x151)+_0x36b5a8)[_0x2a7765(0x153)]({'isAvailable':!_0xf9d8f7});}function toggleVisibility(_0x6de81e,_0x472ddb){const _0x4ad0ae=_0x419da1;db[_0x4ad0ae(0xe3)](_0x4ad0ae(0x151)+_0x6de81e)[_0x4ad0ae(0x153)]({'isVisible':!_0x472ddb});}function startEditProduct(_0x1fb091){const _0x36a267=_0x419da1,_0x5f15b7=products[_0x36a267(0x16d)](_0x160940=>_0x160940['id']===_0x1fb091);if(!_0x5f15b7)return;document[_0x36a267(0x138)](_0x36a267(0x191))[_0x36a267(0x121)]=_0x5f15b7['id'],document['getElementById'](_0x36a267(0x19f))['value']=_0x5f15b7[_0x36a267(0x160)],document[_0x36a267(0x138)](_0x36a267(0x148))[_0x36a267(0x121)]=_0x5f15b7[_0x36a267(0xf5)],document[_0x36a267(0x138)](_0x36a267(0x15a))[_0x36a267(0x121)]=_0x5f15b7[_0x36a267(0xea)],document[_0x36a267(0x138)](_0x36a267(0x194))[_0x36a267(0x121)]=_0x5f15b7[_0x36a267(0x111)]||'',document[_0x36a267(0x138)]('pPrice')[_0x36a267(0x121)]=_0x5f15b7['price'],document[_0x36a267(0x138)](_0x36a267(0x199))[_0x36a267(0x121)]=_0x5f15b7[_0x36a267(0x113)][_0x36a267(0x198)](),document[_0x36a267(0x138)]('pStatus')[_0x36a267(0x121)]=(_0x5f15b7[_0x36a267(0x12a)]!==![])['toString'](),document[_0x36a267(0x138)](_0x36a267(0x1ac))['value']=(_0x5f15b7[_0x36a267(0x127)]!==![])['toString'](),document[_0x36a267(0x138)](_0x36a267(0xfd))[_0x36a267(0x121)]=_0x5f15b7[_0x36a267(0x16f)],editingProductId=_0x1fb091,document['getElementById'](_0x36a267(0xf8))[_0x36a267(0x13e)]=_0x36a267(0x112)+_0x5f15b7[_0x36a267(0x160)];const _0x38ba18=document['getElementById'](_0x36a267(0x125));_0x38ba18[_0x36a267(0x13e)]=_0x36a267(0x14d),_0x38ba18[_0x36a267(0x189)][_0x36a267(0x141)](_0x36a267(0x18c)),document[_0x36a267(0x138)](_0x36a267(0x184))['style']['display']=_0x36a267(0x175),document[_0x36a267(0x138)](_0x36a267(0xda))[_0x36a267(0xe4)]({'behavior':_0x36a267(0x1a8)});}function cancelEdit(){const _0x2581dd=_0x419da1;document[_0x2581dd(0x138)](_0x2581dd(0xda))['reset'](),editingProductId=null,document[_0x2581dd(0x138)](_0x2581dd(0xf8))[_0x2581dd(0x13e)]='إضافة\x20منتج\x20جديد';const _0x212382=document[_0x2581dd(0x138)](_0x2581dd(0x125));_0x212382[_0x2581dd(0x13e)]=_0x2581dd(0xd8),_0x212382[_0x2581dd(0x189)][_0x2581dd(0x124)](_0x2581dd(0x18c)),document[_0x2581dd(0x138)]('cancelEditBtn')[_0x2581dd(0x177)][_0x2581dd(0x12d)]='none';}function renderAdminProductsTable(){const _0x5c5496=_0x419da1,_0x2277ab=document[_0x5c5496(0x138)](_0x5c5496(0x1b3));_0x2277ab[_0x5c5496(0x167)]='',products[_0x5c5496(0x1ad)](_0x3ae56a=>{const _0x1bdb28=_0x5c5496,_0x3cb34a=_0x3ae56a[_0x1bdb28(0x12a)]!==![],_0x4b9ab5=_0x3ae56a[_0x1bdb28(0x127)]!==![],_0x23c470=_0x3cb34a?_0x1bdb28(0x134):_0x1bdb28(0xd9),_0x43c6f3=_0x4b9ab5?_0x1bdb28(0x158):'grey';_0x2277ab[_0x1bdb28(0x167)]+=_0x1bdb28(0xd3)+_0x3ae56a[_0x1bdb28(0xf5)]+_0x1bdb28(0x118)+_0x3ae56a['name']+_0x1bdb28(0x104)+_0x3ae56a[_0x1bdb28(0x174)]+_0x1bdb28(0x147)+_0x3ae56a['id']+',\x20'+_0x3cb34a+_0x1bdb28(0x1b5)+_0x23c470+_0x1bdb28(0x1b1)+_0x3ae56a['id']+',\x20'+_0x4b9ab5+')\x22\x20style=\x22color:'+_0x43c6f3+_0x1bdb28(0x188)+_0x3ae56a['id']+_0x1bdb28(0x192)+_0x3ae56a['id']+')\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</tr>';});}function _0x11d4(){const _0x148eb0=['none','cat','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<!--\x20حاوية\x20الصورة\x20+\x20الوصف\x20-->\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22img-wrapper\x22\x20onclick=\x22this.classList.toggle(\x27active\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','القاهرة','الدقهلية','cAddress','</div>','orders/','total','المنيا','settings/adminPhone','preventDefault','img','items','\x20>\x20','formTitle','.slide','<button\x20class=\x22btn\x22\x20onclick=\x22addToCart(','السلة\x20فارغة!','qty-','pDesc','apps','201000000000','lastInvoice','44zGWolm','push','تنبيه\x20هام:\x20يرجى\x20وضع\x20كود\x20firebaseConfig\x20الخاص\x20بمشروعك\x20في\x20الكود\x20لكي\x20يعمل\x20الموقع.','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','products','target','\x27,\x20\x27','error','cGov','*طلب\x20جديد\x20-\x20GREEN\x20GOLDEN*\x0a','join','الخربية','الإسماعيلية','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','map','val','sub','تعديل:\x20','offer','splice','الفيوم','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','appendChild','\x22\x20alt=\x22img\x22></td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>','settings','book_append_sheet','reset','adminLoginModal','adminPhone','AIzaSyBMuFJ5U_rYLrB5M3Y-_n_QFF4rJ3zSNLU','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','productsContainer','value','------------------\x0a','16710hynRbK','remove','submitBtn','cPhone','isVisible','length','green-golden-dad1c','isAvailable','837718ZNUoAw','أسيوط','display','<input\x20type=\x22number\x22\x20id=\x22qty-','BUTTON','then','admin','catch','تمت\x20الإضافة','green','categoryFilters','1600338xJfhaS','</small></div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22btn-danger\x22\x20onclick=\x22removeFromCart(','getElementById','<button\x20class=\x22btn\x22\x20style=\x22background:#ccc;\x20cursor:not-allowed;\x22\x20disabled>نفذت\x20الكمية</button>','contains','\x22\x20onerror=\x22this.src=\x27https://via.placeholder.com/200?text=No+Image\x27\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22desc-overlay\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<h4>','parentElement','الجيزة','textContent','reduce','اسم\x20الفئة\x20الجديدة\x20(مثل:\x20بذور،\x20أسمدة):','add','green-golden-dad1c.firebaseapp.com','json_to_sheet','cartItems','loader','البحيرة','</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td\x20style=\x22font-size:1.2rem\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-shopping-cart\x22\x20onclick=\x22toggleAvailability(','pImg','cartModal','option','👤\x20*العميل:*\x20','تأكد\x20من\x20وضع\x20إعدادات\x20فيرباس\x20الصحيحة\x20في\x20الكود','حفظ\x20التعديلات','</h4><small>','جنوب\x20سيناء','isArray','products/','</h3>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<p\x20class=\x22card-desc\x22>','update','1:305717091280:web:d818ffb49e4789675077d5','true','بني\x20سويف','412zJMPJJ','blue','addEventListener','pCat','all','values','\x20×\x20','green-golden-dad1c.firebasestorage.app','لا\x20يوجد\x20وصف\x20تفصيلي.','name',')\x22>إضافة\x20للسلة\x20<i\x20class=\x22fas\x20fa-cart-plus\x22></i></button>','مطروح','2339757dLsnYy','<option\x20value=\x22\x22>اختر\x20المحافظة</option>','📱\x20*هاتف:*\x20','block','innerHTML','G-TJNV6E7LQG','onclick','6433660VumkAF','بيانات\x20الدخول\x20غير\x20صحيحة','\x20جنيه*','find','\x27)\x22>','desc','Sales','invId','الأقصر','<i\x20class=\x22fas\x20fa-chevron-down\x22\x20style=\x22font-size:0.8rem;\x20margin-right:5px;\x22></i>','price','inline-block','تم\x20الحذف','style','DUMMY_API_KEY_PASTE_YOURS_HERE','حذف\x20الفئة؟','\x22\x20class=\x22card-img\x22\x20alt=\x22','تم\x20التعديل','pPrice','1244208SgFxkN','qty','var(--secondary)','text','\x20=\x20','خطأ:\x20','https://wa.me/','cancelEditBtn','apiKey','\x20جنيه</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-actions\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20',';\x20cursor:pointer;\x20margin:0\x205px;\x22\x20title=\x22عرض/إخفاء\x20في\x20الموقع\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22action-btns\x22><button\x20class=\x22btn-warning\x22\x20onclick=\x22startEditProduct(','classList','\x22\x20class=\x22qty-input\x22\x20value=\x221\x22\x20min=\x221\x22>','cartCount','btn-warning','createElement','190940PxQqnH','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22cart-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22display:flex;\x20align-items:center;\x20gap:10px\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<img\x20src=\x22','filter','pId',')\x22><i\x20class=\x22fas\x20fa-edit\x22></i></button><button\x20class=\x22btn-danger\x22\x20onclick=\x22deleteProduct(','toLocaleDateString','pSubCat','🌱\x20*المنتجات:*\x0a','modal','initializeApp','toString','pOffer',')\x22\x20style=\x22width:auto;\x20padding:5px\x2012px;\x20border-radius:50%\x22><i\x20class=\x22fas\x20fa-trash\x22></i></button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','المنوفية','السويس','305717091280','querySelectorAll','pName','\x22\x20onclick=\x22filterProducts(\x27all\x27)\x22>عرض\x20الكل</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','8EszVgb','📍\x20*عنوان:*\x20','phone','adminPass','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-body\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-cat\x22>','أسمدة','</p>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22card-price\x22>','smooth','💰\x20*الإجمالي:\x20','معدات','categories','pVisible','forEach','\x27)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','الوادي\x20الجديد','book_new',';\x20cursor:pointer;\x20margin:0\x205px;\x22\x20title=\x22توفر\x20المخزون\x22></i>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<i\x20class=\x22fas\x20fa-eye\x22\x20onclick=\x22toggleVisibility(','\x20-\x20','adminProductTableBody','cartTotal',')\x22\x20style=\x22color:','البحر\x20الأحمر','<p\x20style=\x22text-align:center;\x20color:#777;\x20padding:20px;\x22>سلتك\x20فارغة\x20حالياً</p>','DOMContentLoaded','now','<div\x20class=\x22dropdown-menu\x22>','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<tr>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<td><img\x20src=\x22','tagName','كفر\x20الشيخ','_blank','قنا','إضافة\x20المنتج','red','productForm','active','set','orders','https://green-golden-dad1c-default-rtdb.firebaseio.com','18XNphjP','date','?text=','سوهاج','ref','scrollIntoView','background','لا\x20توجد\x20طلبات','القليوبية','utils'];_0x11d4=function(){return _0x148eb0;};return _0x11d4();}function addNewCategory(){const _0x37fdef=_0x419da1,_0x46e3a9=prompt(_0x37fdef(0x140));_0x46e3a9&&!categories['includes'](_0x46e3a9)&&db[_0x37fdef(0xe3)](_0x37fdef(0x1ab))[_0x37fdef(0xdc)]([...categories,_0x46e3a9])[_0x37fdef(0x130)](()=>alert(_0x37fdef(0x133)));}function removeCategory(){const _0x464490=_0x419da1,_0x14763b=document[_0x464490(0x138)](_0x464490(0x15a))[_0x464490(0x121)];confirm(_0x464490(0x179))&&db[_0x464490(0xe3)](_0x464490(0x1ab))[_0x464490(0xdc)](categories[_0x464490(0x190)](_0x29a668=>_0x29a668!==_0x14763b))['then'](()=>alert(_0x464490(0x176)));}function exportToExcel(){const _0x291309=_0x419da1;if(orders[_0x291309(0x128)]===0x0){alert(_0x291309(0xe6));return;}const _0x2db52b=orders[_0x291309(0x10f)](_0x44006e=>({'فاتورة':_0x44006e[_0x291309(0x171)],'تاريخ':_0x44006e[_0x291309(0xe0)],'عميل':_0x44006e[_0x291309(0x160)],'هاتف':_0x44006e[_0x291309(0x1a3)],'عنوان':_0x44006e['gov']+'\x20'+_0x44006e['address'],'إجمالي':_0x44006e[_0x291309(0xf1)],'أصناف':_0x44006e[_0x291309(0xf6)]?_0x44006e[_0x291309(0xf6)]['map'](_0x1c86af=>_0x1c86af[_0x291309(0x160)]+'('+_0x1c86af[_0x291309(0x17e)]+')')[_0x291309(0x10b)](',\x20'):''})),_0x2eeef4=XLSX[_0x291309(0xe8)][_0x291309(0x143)](_0x2db52b),_0x552a7d=XLSX[_0x291309(0xe8)][_0x291309(0x1b0)]();XLSX['utils'][_0x291309(0x11a)](_0x552a7d,_0x2eeef4,_0x291309(0x170)),XLSX['writeFile'](_0x552a7d,'GreenGolden_Sales.xlsx');}
     </script>
 </body>
 
-
 </html>
-
