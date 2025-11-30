@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المتجر الإلكتروني</title>
-    <meta name="description" content="جرين جولدن (Green Golden) - متجر متخصص في بيع أجود أنواع البذور الزراعية، الأسمدة، المبيدات، وأصص الزرع. توصيل لجميع المحافظات.">
-    <meta name="keywords" content="زراعة, بذور, أسمدة, جرين جولدن, Green Golden, مبيدات, أصص, شوالي, مشتل, زراعة منزلية">
+    <meta name="description"
+        content="جرين جولدن (Green Golden) - متجر متخصص في بيع أجود أنواع البذور الزراعية، الأسمدة، المبيدات، وأصص الزرع. توصيل لجميع المحافظات.">
+    <meta name="keywords"
+        content="زراعة, بذور, أسمدة, جرين جولدن, Green Golden, مبيدات, أصص, شوالي, مشتل, زراعة منزلية">
     <meta name="google-site-verification" content="M4AVPnmakVfGb3OU5CIqN--Dqi4C-6KYQn-MhFM0ymU" />
 
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/628/628283.png" type="image/png">
@@ -19,39 +21,39 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script type="application/ld+json">
-        {
-            "@context": "https://schema.org",
-            "@type": "GardenStore",
-            "name": "GREEN GOLDEN",
-            "image": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
-            "description": "متجر جرين جولدن للمنتجات الزراعية، نوفر أفضل البذور، الأسمدة، المبيدات، ومعدات الزراعة الحديثة مع توصيل للمنزل.",
-            "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "القاهرة",
-                "addressLocality": "القاهرة",
-                "addressCountry": "EG"
-            },
-            "telephone": "+201150009852",
-            "priceRange": "$$",
-            "openingHoursSpecification": {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                    "Sunday"
-                ],
-                "opens": "09:00",
-                "closes": "22:00"
-            },
-            "url": "رابط_موقعك_هنا_اذا_وجد"
-        }
+{
+    "@context": "https://schema.org",
+    "@type": "GardenStore",
+    "name": "GREEN GOLDEN",
+    "image": "https://cdn-icons-png.flaticon.com/512/628/628283.png",
+    "description": "متجر جرين جولدن للمنتجات الزراعية، نوفر أفضل البذور، الأسمدة، المبيدات، ومعدات الزراعة الحديثة مع توصيل للمنزل.",
+    "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "القاهرة",
+    "addressLocality": "القاهرة",
+    "addressCountry": "EG"
+    },
+    "telephone": "+201150009852",
+    "priceRange": "$$",
+    "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+    ],
+    "opens": "09:00",
+    "closes": "22:00"
+    },
+    "url": "رابط_موقعك_هنا_اذا_وجد"
+}
     </script>
     <style>
-         :root {
+        :root {
             --primary: #2e7d32;
             --secondary: #b7950b;
             --glass-bg: rgba(255, 255, 255, 0.75);
@@ -60,14 +62,14 @@
             --text-main: #1a1a1a;
             --danger: #c62828;
         }
-        
+
         * {
             box-sizing: border-box;
             font-family: 'Tajawal', sans-serif;
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             background-image: url("https://images.pexels.com/photos/5231086/pexels-photo-5231086.jpeg");
             background-size: cover;
@@ -78,7 +80,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         body::before {
             content: "";
             position: fixed;
@@ -91,7 +93,7 @@
             z-index: -1;
             pointer-events: none;
         }
-        
+
         header {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(15px);
@@ -107,24 +109,24 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             transition: all 0.3s ease;
         }
-        
+
         .logo-container {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
+
         .logo-img {
             height: 60px;
             width: auto;
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
-        
+
         .logo-text-box {
             display: flex;
             flex-direction: column;
         }
-        
+
         .logo-text {
             font-size: 1.6rem;
             font-weight: 800;
@@ -132,13 +134,13 @@
             text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
             line-height: 1.2;
         }
-        
+
         .logo-sub {
             font-size: 0.85rem;
             color: #555;
             font-weight: 600;
         }
-        
+
         .nav-btn {
             background: white;
             border: 1px solid #ddd;
@@ -153,13 +155,13 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: relative;
         }
-        
+
         .nav-btn:hover {
             background: var(--primary);
             color: white;
             transform: translateY(-3px);
         }
-        
+
         .badge {
             position: absolute;
             top: -5px;
@@ -172,7 +174,7 @@
             border: 2px solid white;
             font-weight: bold;
         }
-        
+
         .hero-slider {
             height: 400px;
             position: relative;
@@ -180,7 +182,7 @@
             border-bottom: 5px solid var(--secondary);
             background: #000;
         }
-        
+
         .slide {
             position: absolute;
             top: 0;
@@ -192,11 +194,9 @@
             background-size: cover;
             background-position: center;
         }
-        
-        .slide.active {
-            opacity: 1;
-        }
-        
+
+        .slide.active { opacity: 1; }
+
         .slide::before {
             content: '';
             position: absolute;
@@ -206,7 +206,7 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.4);
         }
-        
+
         .slide-content {
             position: absolute;
             top: 50%;
@@ -220,22 +220,21 @@
             padding: 20px 40px;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.3);
-            width: 80%;
-            /* للموبايل */
+            width: 80%; 
             max-width: 600px;
         }
-        
+
         .slide-content h2 {
             font-size: 2.5rem;
             margin-bottom: 10px;
             text-shadow: 0 2px 5px black;
         }
-        
+
         .slide-content p {
             font-size: 1.2rem;
             font-weight: bold;
         }
-        
+
         .card {
             background: var(--glass-bg);
             backdrop-filter: blur(10px);
@@ -248,13 +247,13 @@
             flex-direction: column;
             position: relative;
         }
-        
+
         .card:hover {
             transform: translateY(-8px);
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
         }
-        
+
         .img-wrapper {
             height: 200px;
             overflow: hidden;
@@ -262,7 +261,7 @@
             background: #fff;
             cursor: help;
         }
-        
+
         .card-img {
             width: 100%;
             height: 100%;
@@ -270,11 +269,9 @@
             padding: 10px;
             transition: 0.5s;
         }
-        
-        .card:hover .card-img {
-            transform: scale(1.08);
-        }
-        
+
+        .card:hover .card-img { transform: scale(1.08); }
+
         .desc-overlay {
             position: absolute;
             top: 0;
@@ -293,51 +290,50 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .img-wrapper:hover .desc-overlay,
         .img-wrapper.active .desc-overlay {
             opacity: 1;
             pointer-events: auto;
         }
-        
+
         .card-body {
             padding: 15px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         .card-cat {
             font-size: 0.75rem;
             color: #777;
             font-weight: bold;
             letter-spacing: 0.5px;
         }
-        
+
         .card-title {
             font-size: 1.2rem;
             font-weight: 800;
             margin: 5px 0;
             color: var(--text-main);
-            /* لضبط العناوين الطويلة */
-            white-space: nowrap;
+            white-space: nowrap; 
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        
+
         .card-price {
             font-size: 1.3rem;
             color: var(--primary);
             font-weight: bold;
             margin-bottom: 10px;
         }
-        
+
         .card-actions {
             display: flex;
             gap: 8px;
             margin-top: auto;
         }
-        
+
         .qty-input {
             width: 50px;
             text-align: center;
@@ -346,7 +342,7 @@
             font-weight: bold;
             font-size: 1rem;
         }
-        
+
         .btn {
             background: var(--primary);
             color: white;
@@ -359,21 +355,15 @@
             transition: 0.3s;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
-        
+
         .btn:hover {
             filter: brightness(1.1);
             transform: translateY(-2px);
         }
-        
-        .btn-danger {
-            background: var(--danger);
-        }
-        
-        .btn-warning {
-            background: #f39c12;
-            color: #fff;
-        }
-        
+
+        .btn-danger { background: var(--danger); }
+        .btn-warning { background: #f39c12; color: #fff; }
+
         .sticky-filter-container {
             position: sticky;
             top: 85px;
@@ -384,14 +374,14 @@
             padding: 10px 0;
             margin-bottom: 20px;
         }
-        
+
         .filters {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 8px;
         }
-        
+
         .filter-btn {
             background: white;
             border: 1px solid #ddd;
@@ -403,14 +393,14 @@
             transition: 0.3s;
             font-size: 0.95rem;
         }
-        
+
         .filter-btn.active,
         .filter-btn:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
         }
-        
+
         .sub-filters {
             display: none;
             justify-content: center;
@@ -418,7 +408,7 @@
             margin-top: 8px;
             flex-wrap: wrap;
         }
-        
+
         .sub-filter-btn {
             font-size: 0.85rem;
             padding: 4px 12px;
@@ -428,12 +418,12 @@
             color: var(--secondary);
             cursor: pointer;
         }
-        
+
         .sub-filter-btn.active {
             background: var(--secondary);
             color: white;
         }
-        
+
         .offers-grid,
         .products-grid {
             display: grid;
@@ -443,7 +433,7 @@
             margin: 0 auto 40px auto;
             max-width: 1200px;
         }
-        
+
         .section-title {
             text-align: center;
             margin: 40px auto 30px;
@@ -457,7 +447,7 @@
             width: fit-content;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .modal {
             display: none;
             position: fixed;
@@ -471,7 +461,7 @@
             justify-content: center;
             backdrop-filter: blur(4px);
         }
-        
+
         .modal-content {
             background: white;
             width: 95%;
@@ -483,7 +473,7 @@
             position: relative;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
-        
+
         .close-modal {
             position: absolute;
             left: 20px;
@@ -492,7 +482,7 @@
             cursor: pointer;
             color: #999;
         }
-        
+
         .admin-panel {
             display: none;
             margin: 20px auto;
@@ -503,24 +493,24 @@
             border-radius: 15px;
             box-shadow: var(--shadow);
         }
-        
+
         .form-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
         }
-        
+
         .form-group {
             margin-bottom: 10px;
         }
-        
+
         .form-group label {
             display: block;
             font-weight: bold;
             margin-bottom: 5px;
             font-size: 0.9rem;
         }
-        
+
         .form-group input,
         .form-group select,
         .form-group textarea {
@@ -529,14 +519,14 @@
             border: 1px solid #ccc;
             border-radius: 8px;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
             background: white;
         }
-        
+
         th,
         td {
             border: 1px solid #eee;
@@ -544,12 +534,12 @@
             text-align: center;
             font-size: 0.9rem;
         }
-        
+
         th {
             background: var(--primary);
             color: white;
         }
-        
+
         footer {
             margin-top: auto;
             background: rgba(20, 20, 20, 0.95);
@@ -559,30 +549,30 @@
             text-align: center;
             border-top: 5px solid var(--secondary);
         }
-        
+
         .footer-content {
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         .footer-title {
             font-size: 2rem;
             font-weight: 800;
             margin-bottom: 20px;
             color: var(--secondary);
         }
-        
+
         .footer-info {
             font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 10px;
         }
-        
+
         .footer-info i {
             color: var(--primary);
             margin-left: 10px;
         }
-        
+
         .footer-copyright {
             margin-top: 30px;
             border-top: 1px solid #444;
@@ -590,167 +580,82 @@
             font-size: 0.9rem;
             opacity: 0.7;
         }
-        /* =========================================
-           تحسينات الموبايل (Responsive Design)
-           ========================================= */
-        
+
         @media (max-width: 768px) {
-            /* الهيدر */
             header {
                 padding: 10px 15px;
                 height: auto;
                 min-height: 70px;
                 flex-wrap: wrap;
             }
-            .logo-img {
-                height: 45px;
-                width: 45px;
-            }
-            .logo-text {
-                font-size: 1.2rem;
-            }
-            .logo-sub {
-                display: none;
-            }
-            /* إخفاء النص الفرعي لتوفير مساحة */
-            .nav-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-                margin-right: 5px;
-            }
-            /* السلايدر */
-            .hero-slider {
-                height: 220px;
-            }
-            .slide-content {
-                width: 95%;
-                padding: 10px;
-                border-radius: 10px;
-            }
-            .slide-content h2 {
-                font-size: 1.4rem;
-                margin-bottom: 5px;
-            }
-            .slide-content p {
-                font-size: 0.9rem;
-            }
-            /* العناوين الرئيسية */
+            .logo-img { height: 45px; width: 45px; }
+            .logo-text { font-size: 1.2rem; }
+            .logo-sub { display: none; }
+            .nav-btn { width: 40px; height: 40px; font-size: 1rem; margin-right: 5px; }
+
+            .hero-slider { height: 220px; }
+            .slide-content { width: 95%; padding: 10px; border-radius: 10px; }
+            .slide-content h2 { font-size: 1.4rem; margin-bottom: 5px; }
+            .slide-content p { font-size: 0.9rem; }
+
             .section-title {
                 font-size: 1.4rem;
                 padding: 6px 25px;
                 margin: 25px auto 15px;
             }
-            /* شبكة المنتجات (عمودين للموبايل) */
-            .offers-grid,
-            .products-grid {
+
+            .offers-grid, .products-grid {
                 grid-template-columns: repeat(2, 1fr);
-                /* عمودين */
                 gap: 10px;
                 padding: 0 10px;
             }
-            /* كارت المنتج */
-            .img-wrapper {
-                height: 140px;
-            }
-            .card-body {
-                padding: 10px;
-            }
-            .card-cat {
-                font-size: 0.65rem;
-            }
-            .card-title {
-                font-size: 0.95rem;
-                margin: 3px 0;
-            }
-            .card-price {
-                font-size: 1rem;
-                margin-bottom: 5px;
-            }
-            /* أزرار الكارت */
-            .card-actions {
+
+            .img-wrapper { height: 140px; }
+            .card-body { padding: 10px; }
+            .card-cat { font-size: 0.65rem; }
+            .card-title { font-size: 0.95rem; margin: 3px 0; }
+            .card-price { font-size: 1rem; margin-bottom: 5px; }
+            
+            .card-actions { 
                 flex-direction: column;
-                /* الأزرار فوق بعض */
-                gap: 5px;
+                gap: 5px; 
             }
-            .qty-input {
-                width: 100%;
-                height: 30px;
-                font-size: 0.9rem;
-            }
-            .btn {
-                padding: 5px;
-                font-size: 0.9rem;
-                height: 35px;
-            }
-            /* الفلاتر */
-            .sticky-filter-container {
-                top: 70px;
-            }
-            .filter-btn {
-                padding: 4px 12px;
-                font-size: 0.8rem;
-            }
-            /* المودال */
-            .modal-content {
-                padding: 20px;
-                width: 95%;
-                margin: 10px;
-            }
-            .close-modal {
-                top: 10px;
-                left: 10px;
-            }
-            /* لوحة التحكم */
-            .admin-panel {
-                padding: 15px;
-                width: 95%;
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            /* الحقول تحت بعضها */
-            .product-table th,
-            .product-table td {
-                padding: 5px;
-                font-size: 0.8rem;
-            }
-            .product-table img {
-                width: 30px;
-                height: 30px;
-            }
-            /* الفوتر */
-            footer {
-                padding: 30px 15px;
-            }
-            .footer-title {
-                font-size: 1.5rem;
-            }
-            .footer-info {
-                font-size: 0.95rem;
-            }
+            .qty-input { width: 100%; height: 30px; font-size: 0.9rem; }
+            .btn { padding: 5px; font-size: 0.9rem; height: 35px; }
+
+            .sticky-filter-container { top: 70px; }
+            .filter-btn { padding: 4px 12px; font-size: 0.8rem; }
+
+            .modal-content { padding: 20px; width: 95%; margin: 10px; }
+            .close-modal { top: 10px; left: 10px; }
+
+            .admin-panel { padding: 15px; width: 95%; }
+            .form-grid { grid-template-columns: 1fr; }
+            .product-table th, .product-table td { padding: 5px; font-size: 0.8rem; }
+            .product-table img { width: 30px; height: 30px; }
+
+            footer { padding: 30px 15px; }
+            .footer-title { font-size: 1.5rem; }
+            .footer-info { font-size: 0.95rem; }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header -->
     <header>
-        <!-- تم تحويل الحاوية إلى رابط للعودة للرئيسية وهذا يعزز الأرشفة -->
         <a href="?page=main" class="logo-container" style="text-decoration: none;">
-            <!-- تحسين وصف الصورة ليقرأه جوجل بدقة -->
-            <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" id="headerLogo" alt="شعار جرين جولدن - Green Golden للمنتجات الزراعية والأسمدة والبذور" class="logo-img" width="60" height="60">
+            <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" id="headerLogo"
+                alt="شعار جرين جولدن" class="logo-img" width="60"
+                height="60">
 
             <div class="logo-text-box">
-                <!-- الـ h1 هو أهم عنوان في الصفحة، حافظنا عليه -->
                 <h1 class="logo-text" id="storeName">GREEN GOLDEN</h1>
                 <p class="logo-sub">للمنتجات الزراعية المميزة (بذور، أسمدة، معدات)</p>
             </div>
         </a>
 
         <div>
-            <!-- تم إضافة aria-label لمساعدة محركات البحث في فهم وظيفة الأزرار -->
             <button class="nav-btn" onclick="openModal('cartModal')" aria-label="سلة المشتريات">
                 <i class="fas fa-shopping-basket"></i>
                 <span class="badge" id="cartCount">0</span>
@@ -761,33 +666,37 @@
         </div>
     </header>
 
-    <!-- Slider -->
     <div class="hero-slider" id="mainSlider">
-        <div class="slide active" style="background-image: url('https://mashhourseeds.com/wp-content/uploads/2023/11/%D8%B7%D9%84%D8%A7%D8%A1-%D8%A8%D8%B0%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D9%88%D9%8A-1140x570-1.jpg');">
+        <div class="slide active"
+            style="background-image: url('https://mashhourseeds.com/wp-content/uploads/2023/11/%D8%B7%D9%84%D8%A7%D8%A1-%D8%A8%D8%B0%D9%88%D8%B1-%D8%A7%D9%84%D8%AA%D9%82%D8%A7%D9%88%D9%8A-1140x570-1.jpg');">
             <div class="slide-content">
                 <h2>أفضل البذور الزراعية</h2>
                 <p>إنتاجية عالية ومحاصيل وفيرة</p>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://modo3.com/thumbs/fit630x300/271937/1690982594/%D8%A3%D9%86%D9%88%D8%A7%D8%B9_%D8%A7%D9%84%D8%A3%D8%B3%D9%85%D8%AF%D8%A9_%D9%88%D9%81%D9%88%D8%A7%D8%A6%D8%AF%D9%87%D8%A7.jpg');">
+        <div class="slide"
+            style="background-image: url('https://modo3.com/thumbs/fit630x300/271937/1690982594/%D8%A3%D9%86%D9%88%D8%A7%D8%B9_%D8%A7%D9%84%D8%A3%D8%B3%D9%85%D8%AF%D8%A9_%D9%88%D9%81%D9%88%D8%A7%D8%A6%D8%AF%D9%87%D8%A7.jpg');">
             <div class="slide-content">
                 <h2>أسمدة ومغذيات</h2>
                 <p>حلول متكاملة لتربة خصبة</p>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://i.ytimg.com/vi/9lwOFgFdCYo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDaKlXGSiQfI6DAkPL4uST-JwVxDw');">
+        <div class="slide"
+            style="background-image: url('https://i.ytimg.com/vi/9lwOFgFdCYo/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDaKlXGSiQfI6DAkPL4uST-JwVxDw');">
             <div class="slide-content">
                 <h2>معدات حديثة</h2>
                 <p>تكنولوجيا لخدمة المزارع</p>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://images.pexels.com/photos/4503269/pexels-photo-4503269.jpeg');">
+        <div class="slide"
+            style="background-image: url('https://images.pexels.com/photos/4503269/pexels-photo-4503269.jpeg');">
             <div class="slide-content">
                 <h2>أصص وشوالي</h2>
                 <p>ديكورات حدائق مميزة</p>
             </div>
         </div>
-        <div class="slide" style="background-image: url('https://images.pexels.com/photos/2255935/pexels-photo-2255935.jpeg');">
+        <div class="slide"
+            style="background-image: url('https://images.pexels.com/photos/2255935/pexels-photo-2255935.jpeg');">
             <div class="slide-content">
                 <h2>محاصيل طبيعية</h2>
                 <p>جودة تستحق الثقة</p>
@@ -795,7 +704,6 @@
         </div>
     </div>
 
-    <!-- Filters -->
     <div class="sticky-filter-container">
         <div class="filters-wrapper">
             <div class="filters" id="categoryFilters"></div>
@@ -803,36 +711,42 @@
         </div>
     </div>
 
-    <div id="loader" style="text-align:center; padding:20px; font-weight:bold; color:var(--primary);">جاري تحميل المنتجات...
-    </div>
+    <div id="loader" style="text-align:center; padding:20px; font-weight:bold; color:var(--primary);">جاري تحميل
+        المنتجات...</div>
 
     <!-- Admin Panel -->
     <div id="adminDashboard" class="admin-panel">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:15px; flex-wrap:wrap; gap:10px;">
+        <div
+            style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:15px; flex-wrap:wrap; gap:10px;">
             <h2 style="color:var(--primary);">لوحة التحكم</h2>
 
             <div style="display:flex; gap:5px; flex-wrap:wrap;">
-                <!-- أزرار الوظائف -->
-                <button class="btn" onclick="openModal('catManagerModal')" style="width:auto; background:#007bff; font-size:0.9rem;">الفئات</button>
-                <button class="btn" onclick="exportToExcelDetailed()" style="width:auto; background:green; font-size:0.9rem;"><i class="fas fa-file-excel"></i>
+                <button class="btn" onclick="openModal('catManagerModal')"
+                    style="width:auto; background:#007bff; font-size:0.9rem;">الفئات</button>
+                <button class="btn" onclick="exportToExcelDetailed()"
+                    style="width:auto; background:green; font-size:0.9rem;"><i class="fas fa-file-excel"></i>
                     تصدير</button>
 
-                <!-- أزرار الصفحات -->
-                <button class="btn" onclick="window.open('?page=main', '_blank')" style="width:auto; background:#2e7d32; font-size:0.9rem; border:1px solid white;">Green Golden <i
+                <button class="btn" onclick="window.open('?page=main', '_blank')"
+                    style="width:auto; background:#2e7d32; font-size:0.9rem; border:1px solid white;">Green Golden <i
                         class="fas fa-external-link-alt"></i></button>
-                <button class="btn" onclick="window.open('?page=anas', '_blank')" style="width:auto; background:#d32f2f; font-size:0.9rem; border:1px solid white;">Anas Garden <i
+                <button class="btn" onclick="window.open('?page=anas', '_blank')"
+                    style="width:auto; background:#d32f2f; font-size:0.9rem; border:1px solid white;">Anas Garden <i
                         class="fas fa-external-link-alt"></i></button>
-                <button class="btn" onclick="window.open('?page=asas', '_blank')" style="width:auto; background:#795548; font-size:0.9rem; border:1px solid white;">أصص <i
+                <button class="btn" onclick="window.open('?page=asas', '_blank')"
+                    style="width:auto; background:#795548; font-size:0.9rem; border:1px solid white;">أصص <i
                         class="fas fa-external-link-alt"></i></button>
             </div>
         </div>
 
         <div style="margin-bottom: 20px; background: #f8f9fa; padding: 15px; border-radius: 10px;">
-            <h3><i class="fab fa-whatsapp"></i> رقم الواتساب (الإدارة)</h3>
-            <div style="display:flex; gap:10px; max-width:400px; margin-top:10px;">
-                <input type="text" id="adminPhone" placeholder="201xxxxxxxxx">
-                <button class="btn" onclick="saveSettings()" style="width:auto;">حفظ</button>
+            <h3><i class="fab fa-whatsapp"></i> أرقام الواتساب (لكل متجر رقم)</h3>
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-top:10px;">
+                <div><label>Green Golden</label><input type="text" id="phoneMain" placeholder="201xxxx"></div>
+                <div><label>Anas Garden</label><input type="text" id="phoneAnas" placeholder="201xxxx"></div>
+                <div><label>أصص وشوالي</label><input type="text" id="phoneAsas" placeholder="201xxxx"></div>
             </div>
+            <button class="btn" onclick="saveSettings()" style="width:auto; margin-top:10px;">حفظ الأرقام</button>
         </div>
 
         <h3 id="formTitle">إضافة / تعديل منتج</h3>
@@ -841,11 +755,15 @@
             <div class="form-grid">
                 <div class="form-group"><label>اسم المنتج</label><input type="text" id="pName" required></div>
                 <div class="form-group"><label>السعر (ج.م)</label><input type="number" id="pPrice" required></div>
-                <div class="form-group"><label>الوزن (كجم)</label><input type="number" id="pWeight" step="0.01" required></div>
-                <div class="form-group"><label style="color:var(--danger)">الربح (ج.م)</label><input type="number" id="pProfit" step="0.01" placeholder="ربح القطعة الواحدة" required style="border-color:var(--danger)"></div>
+                <div class="form-group"><label>الوزن (كجم)</label><input type="number" id="pWeight" step="0.01"
+                        required></div>
+                <div class="form-group"><label style="color:var(--danger)">الربح (ج.م)</label><input type="number"
+                        id="pProfit" step="0.01" placeholder="ربح القطعة الواحدة" required
+                        style="border-color:var(--danger)"></div>
             </div>
 
-            <div class="form-group"><label>رابط الصورة</label><input type="text" id="pImg" placeholder="https://..." required></div>
+            <div class="form-group"><label>رابط الصورة</label><input type="text" id="pImg" placeholder="https://..."
+                    required></div>
 
             <div class="form-grid">
                 <div class="form-group"><label>الفئة الرئيسية</label><select id="pCat" required></select></div>
@@ -871,7 +789,8 @@
 
             <div style="display:flex; gap:10px">
                 <button type="submit" class="btn" id="submitBtn">حفظ المنتج</button>
-                <button type="button" class="btn btn-danger" id="cancelEditBtn" onclick="cancelEdit()" style="display:none;">إلغاء</button>
+                <button type="button" class="btn btn-danger" id="cancelEditBtn" onclick="cancelEdit()"
+                    style="display:none;">إلغاء</button>
             </div>
         </form>
 
@@ -895,14 +814,12 @@
         </div>
     </div>
 
-    <!-- Products Areas -->
     <h2 class="section-title">العروض المميزة</h2>
     <div class="offers-grid" id="offersContainer"></div>
 
     <h2 class="section-title" id="productsTitle">جميع المنتجات</h2>
     <div class="products-grid" id="productsContainer"></div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-title" id="footerTitle">GREEN GOLDEN</div>
@@ -939,11 +856,15 @@
                 </div>
                 <div class="form-group"><label>العنوان</label><input type="text" id="cAddress" required></div>
 
-                <div style="background:#f1f8e9; padding:15px; border-radius:10px; border:1px solid var(--primary); margin-bottom:15px;">
-                    <div style="display:flex; justify-content:space-between;"><span>المنتجات:</span><span id="subTotalDisplay">0</span></div>
-                    <div style="display:flex; justify-content:space-between;"><span>الشحن:</span><span id="shippingDisplay">0</span></div>
+                <div
+                    style="background:#f1f8e9; padding:15px; border-radius:10px; border:1px solid var(--primary); margin-bottom:15px;">
+                    <div style="display:flex; justify-content:space-between;"><span>المنتجات:</span><span
+                            id="subTotalDisplay">0</span></div>
+                    <div style="display:flex; justify-content:space-between;"><span>الشحن:</span><span
+                            id="shippingDisplay">0</span></div>
                     <hr>
-                    <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; color:var(--primary);">
+                    <div
+                        style="display:flex; justify-content:space-between; font-weight:bold; font-size:1.2rem; color:var(--primary);">
                         <span>الإجمالي:</span><span id="grandTotalDisplay">0</span>
                     </div>
                 </div>
@@ -957,8 +878,10 @@
         <div class="modal-content" style="text-align:center; max-width:400px;">
             <span class="close-modal" onclick="closeModal('adminLoginModal')">&times;</span>
             <h2 style="color:var(--primary); margin-bottom:20px;">الإدارة</h2>
-            <input type="text" id="adminUser" placeholder="User" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
-            <input type="password" id="adminPass" placeholder="Pass" style="width:100%; padding:10px; margin-bottom:20px; border:1px solid #ccc; border-radius:5px;">
+            <input type="text" id="adminUser" placeholder="User"
+                style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ccc; border-radius:5px;">
+            <input type="password" id="adminPass" placeholder="Pass"
+                style="width:100%; padding:10px; margin-bottom:20px; border:1px solid #ccc; border-radius:5px;">
             <button class="btn" onclick="loginAdmin()">دخول</button>
         </div>
     </div>
@@ -969,12 +892,15 @@
             <span class="close-modal" onclick="closeModal('catManagerModal')">&times;</span>
             <h2>إدارة الفئات</h2>
             <div style="display:flex; gap:10px; margin-bottom:20px;">
-                <input type="text" id="newCatInput" placeholder="فئة جديدة" style="flex:1; padding:10px; border:1px solid #ddd; border-radius:5px;">
+                <input type="text" id="newCatInput" placeholder="فئة جديدة"
+                    style="flex:1; padding:10px; border:1px solid #ddd; border-radius:5px;">
                 <button class="btn" onclick="addNewCategoryFromModal()" style="width:auto">إضافة</button>
             </div>
             <div style="background:#f9f9f9; padding:15px; border-radius:10px;">
-                <select id="editCatSelect" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;"></select>
-                <input type="text" id="editCatNameInput" placeholder="تعديل الاسم" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+                <select id="editCatSelect"
+                    style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;"></select>
+                <input type="text" id="editCatNameInput" placeholder="تعديل الاسم"
+                    style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
                 <div style="display:flex; gap:10px;">
                     <button class="btn btn-warning" onclick="updateCategoryName()">تعديل</button>
                     <button class="btn btn-danger" onclick="deleteCategoryRef()">حذف</button>
@@ -1032,44 +958,17 @@
         let categories = [];
         let cart = [];
         let orders = [];
-        let settings = {
-            adminPhone: "201xxxxxxxxx",
-            lastInvoice: 1000
-        };
+        let settings = { phones: { main: "", anas: "", asas: "" }, lastInvoice: 1000 };
         let editingProductId = null;
-        let currentFilter = {
-            cat: 'all',
-            sub: null
-        };
+        let currentFilter = { cat: 'all', sub: null };
 
         const shippingRatesHome = {
-            "الإسكندرية": 55,
-            "البحيرة": 50,
-            "الجيزة": 50,
-            "الدقهلية": 50,
-            "الشرقية": 50,
-            "الغربية": 50,
-            "القاهرة": 50,
-            "القليوبية": 50,
-            "المنوفية": 50,
-            "المنيا": 75,
-            "الفيوم": 55,
-            "بورسعيد": 60,
-            "دمياط": 60,
-            "قنا": 100,
-            "كفر الشيخ": 55,
-            "الوادي الجديد": 100,
-            "أسوان": 100,
-            "أسيوط": 85,
-            "بني سويف": 55,
-            "مطروح": 85,
-            "جنوب سيناء": 85,
-            "الإسماعيلية": 55,
-            "سوهاج": 95,
-            "شمال سيناء": 75,
-            "الأقصر": 100,
-            "البحر الأحمر": 95,
-            "السويس": 55
+            "الإسكندرية": 55, "البحيرة": 50, "الجيزة": 50, "الدقهلية": 50, "الشرقية": 50,
+            "الغربية": 50, "القاهرة": 50, "القليوبية": 50, "المنوفية": 50, "المنيا": 75,
+            "الفيوم": 55, "بورسعيد": 60, "دمياط": 60, "قنا": 100, "كفر الشيخ": 55,
+            "الوادي الجديد": 100, "أسوان": 100, "أسيوط": 85, "بني سويف": 55, "مطروح": 85,
+            "جنوب سيناء": 85, "الإسماعيلية": 55, "سوهاج": 95, "شمال سيناء": 75,
+            "الأقصر": 100, "البحر الأحمر": 95, "السويس": 55
         };
         const governorates = Object.keys(shippingRatesHome).sort();
 
@@ -1098,9 +997,13 @@
             });
 
             db.ref('settings').on('value', snap => {
-                if (snap.val()) {
-                    settings = snap.val();
-                    document.getElementById('adminPhone').value = settings.adminPhone;
+                if (snap.val()) { 
+                    settings = snap.val(); 
+                    if(settings.phones) {
+                        document.getElementById('phoneMain').value = settings.phones.main || '';
+                        document.getElementById('phoneAnas').value = settings.phones.anas || '';
+                        document.getElementById('phoneAsas').value = settings.phones.asas || '';
+                    }
                 }
             });
         });
@@ -1117,42 +1020,23 @@
         }
 
         // === الواجهة والمساعدات ===
-        function openModal(id) {
-            document.getElementById(id).style.display = 'flex';
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-        }
-        window.onclick = e => {
-            if (e.target.classList.contains('modal')) e.target.style.display = 'none';
-        }
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = e => { if (e.target.classList.contains('modal')) e.target.style.display = 'none'; }
 
         function populateGovernorates() {
             const sel = document.getElementById('cGov');
             sel.innerHTML = '<option value="">اختر المحافظة</option>';
-            governorates.forEach(g => {
-                let o = document.createElement('option');
-                o.value = g;
-                o.textContent = g;
-                sel.appendChild(o);
-            });
+            governorates.forEach(g => { let o = document.createElement('option'); o.value = g; o.textContent = g; sel.appendChild(o); });
         }
 
         function updateCategorySelects() {
             const pCat = document.getElementById('pCat');
             const eCat = document.getElementById('editCatSelect');
-            pCat.innerHTML = '';
-            eCat.innerHTML = '';
+            pCat.innerHTML = ''; eCat.innerHTML = '';
             categories.forEach(c => {
-                let o1 = document.createElement('option');
-                o1.value = c;
-                o1.textContent = c;
-                pCat.appendChild(o1);
-                let o2 = document.createElement('option');
-                o2.value = c;
-                o2.textContent = c;
-                eCat.appendChild(o2);
+                let o1 = document.createElement('option'); o1.value = c; o1.textContent = c; pCat.appendChild(o1);
+                let o2 = document.createElement('option'); o2.value = c; o2.textContent = c; eCat.appendChild(o2);
             });
         }
 
@@ -1170,39 +1054,25 @@
                 if (subs.length) {
                     let sHtml = `<div class="sub-filter-btn ${currentFilter.sub === null ? 'active' : ''}" onclick="setSubFilter(null, this)">الكل</div>`;
                     subs.forEach(s => sHtml += `<div class="sub-filter-btn ${currentFilter.sub === s ? 'active' : ''}" onclick="setSubFilter('${s}', this)">${s}</div>`);
-                    subBox.innerHTML = sHtml;
-                    subBox.style.display = 'flex';
+                    subBox.innerHTML = sHtml; subBox.style.display = 'flex';
                 } else subBox.style.display = 'none';
             }
         }
-
-        function setFilter(c, el) {
-            currentFilter.cat = c;
-            currentFilter.sub = null;
-            updateDynamicFilters();
-            renderProducts(c, null);
-        }
-
-        function setSubFilter(s, el) {
-            currentFilter.sub = s;
-            document.querySelectorAll('.sub-filter-btn').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-            renderProducts(currentFilter.cat, s);
-        }
+        function setFilter(c, el) { currentFilter.cat = c; currentFilter.sub = null; updateDynamicFilters(); renderProducts(c, null); }
+        function setSubFilter(s, el) { currentFilter.sub = s; document.querySelectorAll('.sub-filter-btn').forEach(b => b.classList.remove('active')); el.classList.add('active'); renderProducts(currentFilter.cat, s); }
 
         // === المنتجات ===
         function renderProducts(cat, sub) {
             const offCon = document.getElementById('offersContainer');
             const proCon = document.getElementById('productsContainer');
-            offCon.innerHTML = '';
-            proCon.innerHTML = '';
+            offCon.innerHTML = ''; proCon.innerHTML = '';
 
             products.forEach(p => {
-                        if (p.isVisible === false) return;
-                        if (cat !== 'all' && p.cat !== cat) return;
-                        if (sub && p.sub !== sub) return;
+                if (p.isVisible === false) return;
+                if (cat !== 'all' && p.cat !== cat) return;
+                if (sub && p.sub !== sub) return;
 
-                        const card = `
+                const card = `
                 <div class="card">
                     ${p.offer ? '<span style="position:absolute; top:10px; right:10px; background:var(--danger); color:white; padding:3px 10px; border-radius:15px; font-size:0.8rem; z-index:5; font-weight:bold">عرض خاص</span>' : ''}
                     <div class="img-wrapper" onclick="this.classList.toggle('active')">
@@ -1315,7 +1185,10 @@
                 msg += `\n💰 منتجات: ${pTotal} + شحن: ${ship} = *${total} ج.م*`;
 
                 cart = []; updateCartUI(); closeModal('cartModal');
-                window.open(`https://wa.me/${settings.adminPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+                
+                // تحديد رقم الواتساب بناءً على الصفحة الحالية
+                const targetPhone = (settings.phones && settings.phones[currentPageKey]) ? settings.phones[currentPageKey] : "201150009852";
+                window.open(`https://wa.me/${targetPhone}?text=${encodeURIComponent(msg)}`, '_blank');
             });
         }
 
@@ -1326,7 +1199,16 @@
             } else alert('خطأ');
         }
         function logoutAdmin() { document.getElementById('adminDashboard').style.display = 'none'; }
-        function saveSettings() { db.ref('settings/adminPhone').set(document.getElementById('adminPhone').value); alert('تم'); }
+        
+        function saveSettings() {
+            const phones = {
+                main: document.getElementById('phoneMain').value,
+                anas: document.getElementById('phoneAnas').value,
+                asas: document.getElementById('phoneAsas').value
+            };
+            db.ref('settings/phones').set(phones);
+            alert('تم حفظ الأرقام');
+        }
 
         function handleProductSubmit(e) {
             e.preventDefault();
