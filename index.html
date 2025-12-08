@@ -14,6 +14,25 @@
     <!-- مكتبات فيرباس -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <!-- ربط ملف المانيفيست -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- تحديد لون شريط الحالة في الموبايل -->
+    <meta name="theme-color" content="#2e7d32">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/628/628283.png">
+
+    <!-- تسجيل ملف الخدمة -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('Service Worker Registered'))
+                    .catch(err => console.log('Service Worker Error', err));
+            });
+        }
+    </script>
 
     <style>
         /* التنسيق الكلاسيكي الأصلي */
@@ -943,7 +962,8 @@
                     <hr>
                     <div
                         style="display:flex; justify-content:space-between; font-weight:bold; color:var(--primary); font-size:1.2rem;">
-                        <span>الإجمالي:</span><span id="grandTotalDisplay">0</span></div>
+                        <span>الإجمالي:</span><span id="grandTotalDisplay">0</span>
+                    </div>
                 </div>
                 <button type="submit" class="btn"><i class="fab fa-whatsapp"></i> إتمام الطلب</button>
             </form>
