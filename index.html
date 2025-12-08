@@ -626,6 +626,29 @@
             color: var(--primary);
         }
 
+        /* إشعار التوست الجديد */
+        .toast-notification {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            z-index: 2000;
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            top: 100px;
+        }
+
         footer {
             margin-top: auto;
             background: rgba(20, 20, 20, 0.95);
@@ -713,6 +736,9 @@
 
 <body>
 
+    <!-- إشعار التوست -->
+    <div id="toast" class="toast-notification">تمت الإضافة للسلة بنجاح ✅</div>
+
     <header>
         <a href="?page=main" class="logo-container">
             <img src="https://cdn-icons-png.flaticon.com/512/628/628283.png" id="headerLogo" alt="شعار جرين جولدن"
@@ -778,7 +804,6 @@
 
     <!-- Admin Panel -->
     <div id="adminDashboard" class="admin-panel">
-        <!-- الأزرار في الأعلى (التصميم الكلاسيكي في المنتصف) -->
         <div class="admin-top-bar">
             <h2 style="color:var(--primary); margin-bottom:10px;">لوحة التحكم</h2>
             <div class="admin-buttons-container">
@@ -881,8 +906,10 @@
         <div class="footer-content">
             <div class="footer-title" id="footerTitle">GREEN GOLDEN</div>
             <div class="footer-info"><i class="fas fa-map-marker-alt"></i> العنوان: القاهرة</div>
-            <div class="footer-info"><i class="fas fa-phone"></i> مبيعات ومتابعة: </div>
-            <div class="footer-info"><i class="fas fa-user-tie"></i> الإدارة: </div>
+            <div class="footer-info"><i class="fas fa-phone"></i> مبيعات ومتابعة: <span
+                    id="footerPhoneSales">01150009852</span></div>
+            <div class="footer-info"><i class="fas fa-user-tie"></i> الإدارة: <span
+                    id="footerPhoneAdmin">01150009852</span></div>
             <div class="footer-copyright">جميع الحقوق محفوظة &copy; 2025</div>
         </div>
     </footer>
@@ -1147,6 +1174,12 @@
             db.ref('settings').on('value', snap => {
                 if (snap.val()) {
                     settings = snap.val();
+                    // تحديث أرقام الواتساب في الفوتر حسب الصفحة
+                    const pagePhone = (settings.phones && settings.phones[currentPageKey]) ? settings.phones[currentPageKey] : "01150009852";
+                    document.getElementById('footerPhoneSales').innerText = pagePhone;
+                    document.getElementById('footerPhoneAdmin').innerText = pagePhone;
+
+                    // تحديث خانات الإدخال في لوحة التحكم
                     if (settings.phones) {
                         document.getElementById('phoneMain').value = settings.phones.main || '';
                         document.getElementById('phoneAnas').value = settings.phones.anas || '';
@@ -1155,7 +1188,7 @@
                 }
             });
 
-            // تفعيل زر Enter لتسجيل الدخول
+            // تفعيل زر Enter
             document.getElementById("adminPass").addEventListener("keypress", function (event) { if (event.key === "Enter") loginAdmin(); });
             document.getElementById("ordPass").addEventListener("keypress", function (event) { if (event.key === "Enter") loginOrders(); });
         });
@@ -1190,7 +1223,6 @@
         function renderProducts(cat, sub) {
             const oc = document.getElementById('offersContainer'), pc = document.getElementById('productsContainer'); oc.innerHTML = ''; pc.innerHTML = '';
 
-            // ترتيب المنتجات أبجدياً
             const sortedProducts = [...products].sort((a, b) => (a.name || "").localeCompare((b.name || ""), 'ar'));
 
             sortedProducts.forEach(p => {
@@ -1209,23 +1241,47 @@
         }
 
         // السلة
-        function addToCart(id) { const p = products.find(x => x.id == id); const q = parseInt(document.getElementById(`qty-${id}`).value) || 1; const ex = cart.find(x => x.id == id); if (ex) ex.qty += q; else cart.push({ ...p, qty: q }); updateCartUI(); }
+        function addToCart(id) {
+            const p = products.find(x => x.id == id);
+            const q = parseInt(document.getElementById(`qty-${id}`).value) || 1;
+            const ex = cart.find(x => x.id == id);
+            if (ex) ex.qty += q; else cart.push({ ...p, qty: q });
+            updateCartUI();
+            showToast("تمت الإضافة للسلة بنجاح ✅");
+        }
+
         function updateCartUI() {
             document.getElementById('cartCount').textContent = cart.reduce((a, c) => a + c.qty, 0);
             const b = document.getElementById('cartItems'); b.innerHTML = '';
             cart.forEach((i, x) => b.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding:5px;"><img src="${i.img}" width="40">${i.name} (${i.qty})<button class="btn-danger" onclick="cart.splice(${x},1);updateCartUI()" style="width:auto; padding:2px 8px;">x</button></div>`);
             calculateTotals();
         }
+
+        function showToast(msg) {
+            let toast = document.createElement("div");
+            toast.className = "toast-notification";
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.classList.add("show"); }, 100);
+            setTimeout(() => { toast.classList.remove("show"); setTimeout(() => toast.remove(), 300); }, 3000);
+        }
+
         function calculateTotals() {
-            let p = 0, w = 0; cart.forEach(i => { p += i.price * i.qty; w += (i.weight || 0) * i.qty; });
-            const g = document.getElementById('cGov').value, m = document.getElementById('cShipMethod').value;
+            let p = 0, w_grams = 0;
+            cart.forEach(i => {
+                p += i.price * i.qty;
+                w_grams += (Number(i.weight) || 0) * i.qty; // الوزن بالجرام
+            });
+
+            const g = document.getElementById('cGov').value;
+            const m = document.getElementById('cShipMethod').value;
             let s = 0;
+
             if (g) {
-                // تحويل الوزن من جرام إلى كيلو (مهم جداً)
-                let weightInKg = w / 1000;
+                // تحويل الوزن من جرام إلى كيلو
+                let weightInKg = w_grams / 1000;
 
                 if (m === 'post') {
-                    // شحن البريد (بالكيلو)
                     if (weightInKg < 3) s = 40;
                     else if (weightInKg < 5) s = 50;
                     else if (weightInKg < 7) s = 65;
@@ -1233,7 +1289,6 @@
                     else if (weightInKg < 20) s = 95;
                     else s = 120;
                 } else {
-                    // شحن المنزل: الأساس + (كل كيلو زيادة عن 2 كيلو بـ 6 جنيه)
                     const base = shippingRatesHome[g] || 0;
                     let extra = 0;
                     if (weightInKg > 2) {
@@ -1242,16 +1297,18 @@
                     s = base + extra;
                 }
             }
+
             document.getElementById('subTotalDisplay').textContent = p + ' ج.م';
             document.getElementById('shippingDisplay').textContent = s + ' ج.م';
             document.getElementById('grandTotalDisplay').textContent = (p + s) + ' ج.م';
             return { p, s, t: p + s };
         }
+
         function checkout(e) {
             e.preventDefault(); if (!cart.length) return alert("السلة فارغة");
             const { p, s, t } = calculateTotals();
             const invId = (settings.lastInvoice || 1000) + 1;
-            let profit = 0; cart.forEach(i => profit += (i.profit || 0) * i.qty);
+            let profit = 0; cart.forEach(i => profit += (Number(i.profit) || 0) * i.qty);
             const o = { invId, date: new Date().toLocaleDateString('en-GB'), name: document.getElementById('cName').value, phone: document.getElementById('cPhone').value, gov: document.getElementById('cGov').value, method: document.getElementById('cShipMethod').value, address: document.getElementById('cAddress').value, pTotal: p, shipping: s, total: t, profit: profit, deposit: 0, status: 'جديد', items: cart, storeSource: currentStore.name };
 
             db.ref('settings/lastInvoice').set(invId);
@@ -1260,12 +1317,13 @@
                 cart.forEach(i => m += `- ${i.name} (${i.qty})\n`);
                 m += `\n💰 الإجمالي: ${t} ج.م`;
                 cart = []; updateCartUI(); closeModal('cartModal');
-                const ph = (settings.phones && settings.phones[currentPageKey]) ? settings.phones[currentPageKey] : "201150009852";
-                window.open(`https://wa.me/${ph}?text=${encodeURIComponent(m)}`, '_blank');
+
+                // استخدام الرقم الخاص بالصفحة الحالية
+                const pagePhone = (settings.phones && settings.phones[currentPageKey]) ? settings.phones[currentPageKey] : "201150009852";
+                window.open(`https://wa.me/${pagePhone}?text=${encodeURIComponent(m)}`, '_blank');
             });
         }
 
-        // ======================= دوال نظام الفواتير (المنطق السليم) =======================
         function loginAdmin() { if (document.getElementById('adminUser').value === 'admin' && document.getElementById('adminPass').value === 'gold123') { closeModal('adminLoginModal'); openModal('adminDashboard'); renderAdminProductsTable(); } else alert('خطأ'); }
         function loginOrders() { if (document.getElementById('ordUser').value === 'admin' && document.getElementById('ordPass').value === 'gold123') { closeModal('ordersLoginModal'); openModal('ordersSystemModal'); renderOrdersTable(); renderFinancialTable(); } else alert('خطأ'); }
         function saveSettings() {
@@ -1276,7 +1334,7 @@
             }); alert('تم');
         }
 
-        // جدول 1: العمليات (تم الإصلاح)
+        // جدول 1
         function renderOrdersTable() {
             const b = document.getElementById('ordersTableBody'); b.innerHTML = '';
             [...orders].sort((a, b) => b.invId - a.invId).forEach(o => {
@@ -1298,7 +1356,6 @@
             });
         }
 
-        // التحديث الفوري (Immediate & Optimistic Updates)
         function updateStatus(id, val) {
             db.ref('orders/' + id + '/status').set(val);
             const row = orders.find(x => x.invId == id);
@@ -1310,7 +1367,7 @@
             if (row) {
                 row.deposit = Number(val);
                 document.getElementById(`rem-${id}`).innerText = (row.total || 0) - row.deposit;
-                renderFinancialTable(); // تحديث الجدول السفلي فوراً وأنت تكتب
+                renderFinancialTable();
             }
         }
 
@@ -1342,7 +1399,7 @@
             updateTrackingLocal(id, val);
         }
 
-        // جدول 2: المحاسبة
+        // جدول 2
         function renderFinancialTable() {
             const seller = document.getElementById('filterSeller').value;
             const checkedBoxes = document.querySelectorAll('.checkbox-group input:checked');
@@ -1383,7 +1440,7 @@
                 const statusMatch = statusFilters.includes(o.status || 'جديد');
                 if (sellerMatch && statusMatch) {
                     updates['orders/' + o.invId + '/status'] = 'خالص';
-                    o.status = 'خالص'; // تحديث محلي
+                    o.status = 'خالص';
                 }
             });
 
@@ -1397,7 +1454,6 @@
             }
         }
 
-        // === باقي دوال النظام ===
         function handleProductSubmit(e) {
             e.preventDefault();
             const data = { name: document.getElementById('pName').value, price: Number(document.getElementById('pPrice').value), weight: Number(document.getElementById('pWeight').value), profit: Number(document.getElementById('pProfit').value), img: document.getElementById('pImg').value, cat: document.getElementById('pCat').value, sub: document.getElementById('pSubCat').value, offer: document.getElementById('pOffer').value === 'true', isAvailable: document.getElementById('pStatus').value === 'true', isVisible: document.getElementById('pVisible').value === 'true', desc: document.getElementById('pDesc').value };
@@ -1420,7 +1476,41 @@
         function updateCategoryName() { const old = document.getElementById('editCatSelect').value, nw = document.getElementById('editCatNameInput').value.trim(); if (old && nw) { let cats = [...categories]; cats[cats.indexOf(old)] = nw; db.ref('categories').set(cats); products.forEach(p => { if (p.cat === old) db.ref('products/' + p.id + '/cat').set(nw) }); alert('تم التعديل'); } }
         function deleteCategoryRef() { const v = document.getElementById('editCatSelect').value; if (confirm('حذف الفئة والمنتجات؟')) { db.ref('categories').set(categories.filter(c => c !== v)); products.forEach(p => { if (p.cat === v) db.ref('products/' + p.id).remove() }); alert('تم الحذف'); } }
     </script>
+
+    <style>
+        /* إشعار التوست */
+        .toast-notification {
+            position: fixed;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            z-index: 3000;
+            opacity: 0;
+            transition: 0.3s;
+            pointer-events: none;
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            top: 100px;
+        }
+    </style>
+    <div id="toast" class="toast-notification">تمت الإضافة للسلة بنجاح ✅</div>
+
+    <script>
+        function showToast(msg) {
+            let toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => { toast.classList.remove("show"); }, 2000);
+        }
+    </script>
 </body>
 
 </html>
-
